@@ -1,3 +1,1 @@
-# Velo
-
-Short for Vehicle Logo
+# AdConnect
