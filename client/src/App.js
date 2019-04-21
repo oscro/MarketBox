@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Navbar, Jumbotron } from "./components";
+import { Navbar } from "./components";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Home, NoMatch } from "./pages";
 
