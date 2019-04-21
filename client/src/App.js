@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { Navbar, Jumbotron, SideNav } from "./components";
+import { Navbar, Jumbotron } from "./components";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Home, NoMatch } from "./pages";
 
-// import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 
@@ -17,10 +18,17 @@ class App extends Component {
   render() {
     return (
       <div>
-      <MuiThemeProvider theme={theme}>
-        <Navbar />
-        <Jumbotron />
-      </MuiThemeProvider>
+        <MuiThemeProvider theme={theme}>
+          <Navbar />
+          <Router>
+            <div>
+              <Switch>
+                <Route exact path="/" component={Home} />
+                <Route component={NoMatch} />
+              </Switch>
+            </div>
+          </Router>
+        </MuiThemeProvider>
       </div>
     );
   }

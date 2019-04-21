@@ -7,7 +7,8 @@ import Typography from "./Typography";
 import ProductHeroLayout from "./ProductHeroLayout";
 
 const backgroundImage =
-  "https://www.3m.com/wps/wcm/connect/59e1ecb4-7aca-4bcd-a2f9-b0acd36fc5e2/carWraps_1200.jpg?MOD=AJPERES&CACHEID=ROOTWORKSPACE-59e1ecb4-7aca-4bcd-a2f9-b0acd36fc5e2-mjhFien";
+  // "https://images.pexels.com/photos/1024613/pexels-photo-1024613.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940";
+  "https://images.pexels.com/photos/374016/pexels-photo-374016.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940";
 
 const styles = theme => ({
   background: {
@@ -37,6 +38,7 @@ function Jumbotron(props) {
     <ProductHeroLayout backgroundClassName={classes.background}>
       {/* Increase the network loading priority of the background image. */}
       <img style={{ display: "none" }} src={backgroundImage} alt="" />
+      
       <Typography color="inherit" align="center" variant="h2" marked="center">
         AdConnect
       </Typography>
