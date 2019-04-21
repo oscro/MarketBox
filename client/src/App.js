@@ -20,7 +20,6 @@ class App extends Component {
       <MuiThemeProvider theme={theme}>
         <Navbar />
         <Jumbotron />
-        <SideNav />
       </MuiThemeProvider>
       </div>
     );
