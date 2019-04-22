@@ -1,8 +1,8 @@
 # AdConnect
 Connecting Ad Space to Ad Content
 
-# Users
+## Users
 - List available space to place Ads
 
-# Businesses 
+## Businesses 
 - List your Ad Campaigns to garner attention for your company or product
