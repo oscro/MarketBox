@@ -78,7 +78,7 @@ function AppFooter(props) {
               className={classes.iconsWrapper}
               spacing={16}
             >
-              
+              {/* <Grid item><img src="../../../public/assets/appFooterFacebook.png"></img></Grid> */}
               <Grid item>© 2019 AdConnect</Grid>
             </Grid>
           </Grid>
