@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
-import LayoutBody from "./LayoutBody";
+import LayoutBody from "../modules/components/LayoutBody";
 
 const styles = theme => ({
   root: {

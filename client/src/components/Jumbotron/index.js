@@ -2,8 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Link from "@material-ui/core/Link";
-import Button from "./Button";
-import Typography from "./Typography";
+import Button from "../modules/components/Button";
+import Typography from "../modules/components/Typography";
 import ProductHeroLayout from "./ProductHeroLayout";
 
 const backgroundImage =
@@ -17,7 +17,8 @@ const styles = theme => ({
     backgroundPosition: "center"
   },
   button: {
-    minWidth: 200
+    minWidth: 200,
+    margin: theme.spacing.unit
   },
   h5: {
     marginBottom: theme.spacing.unit * 4,
@@ -53,17 +54,32 @@ function Jumbotron(props) {
       <Button
         color="secondary"
         variant="contained"
-        size="large"
+        size="small"
         className={classes.button}
         component={linkProps => (
           <Link
             {...linkProps}
-            href="/premium-themes/onepirate/sign-up"
+            href="/signup"
             variant="button"
           />
         )}
       >
-        Register
+        Business Sign Up
+      </Button>
+      <Button
+        color="secondary"
+        variant="contained"
+        size="small"
+        className={classes.button}
+        component={linkProps => (
+          <Link
+            {...linkProps}
+            href="/signup"
+            variant="button"
+          />
+        )}
+      >
+        User Sign Up
       </Button>
       <Typography variant="body2" color="inherit" className={classes.more}>
         Discover the experience

@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { Navbar } from "./components";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { Home, NoMatch } from "./pages";
+import { Home, NoMatch, SignIn, SignUp } from "./pages";
 
-
+// Theme for the website with a primary and secondary color set in the theme constant below
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 
 const theme = createMuiTheme({
@@ -24,6 +24,8 @@ class App extends Component {
             <div>
               <Switch>
                 <Route exact path="/" component={Home} />
+                <Route exact path="/signin" component={SignIn} />
+                <Route exact path="/signup" component={SignUp} />
                 <Route component={NoMatch} />
               </Switch>
             </div>

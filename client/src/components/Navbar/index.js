@@ -1,4 +1,5 @@
 import React from "react";
+import Link from '@material-ui/core/Link';
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
@@ -30,9 +31,16 @@ function Navbar(props) {
         <Toolbar>
           <SideNav />
           <Typography variant="h6" color="inherit" className={classes.grow}>
+          <Link href ="/"
+          variant="h6"
+          underline="none"
+          color="inherit">
             AdConnect
+          </Link>
           </Typography>
-          <Button color="inherit">Login</Button>
+          <Button color="inherit">View Ad Space</Button>
+          <Button color="inherit">View Company Listings</Button>
+          <Button color="inherit" href="/signin">Login</Button>
         </Toolbar>
       </AppBar>
     </div>
