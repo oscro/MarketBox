@@ -14,7 +14,7 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // Connect to the Mongo DB
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/adConnet";
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/adConnect";
 mongoose.connect(MONGODB_URI, { useCreateIndex: true, useNewUrlParser: true });
 
 // Define API routes here
