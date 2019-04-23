@@ -6,7 +6,7 @@ const companySchema = new Schema({
   phone: Number,
   email: {type: String, unique: true, required: true, },
   password: {type: String, required: true, minlenght: [6, 'Password is to short']},
-  adress: String,
+  address: String,
   picture: String,
   rating: Number,
   discription: String,
