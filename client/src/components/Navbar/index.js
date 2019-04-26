@@ -35,7 +35,7 @@ function Navbar(props) {
           variant="h6"
           underline="none"
           color="inherit">
-            AdConnect
+            ORYUS
           </Link>
           </Typography>
           <Button color="inherit">View Ad Space</Button>
