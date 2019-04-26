@@ -41,7 +41,7 @@ function Jumbotron(props) {
       <img style={{ display: "none" }} src={backgroundImage} alt="" />
       
       <Typography color="inherit" align="center" variant="h2" marked="center">
-        AdConnect
+        ORYUS
       </Typography>
       <Typography
         color="inherit"
