@@ -24,7 +24,7 @@ const styles = {
 
 function Navbar(props) {
   const { classes } = props;
-
+  
   return (
     <div className={classes.root}>
       <AppBar position="static">
