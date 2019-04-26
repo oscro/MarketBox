@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Navbar } from "./components";
+// import { Navbar } from "./components";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Home, NoMatch, SignIn, SignUp } from "./pages";
 
@@ -19,7 +19,6 @@ class App extends Component {
     return (
       <div>
         <MuiThemeProvider theme={theme}>
-          <Navbar />
           <Router>
             <div>
               <Switch>

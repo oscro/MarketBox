@@ -79,7 +79,7 @@ function AppFooter(props) {
               spacing={16}
             >
               {/* <Grid item><img src="../../../public/assets/appFooterFacebook.png"></img></Grid> */}
-              <Grid item>© 2019 AdConnect</Grid>
+              <Grid item>© 2019 Oryus</Grid>
             </Grid>
           </Grid>
           <Grid item xs={6} sm={4} md={2}>
