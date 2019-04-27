@@ -55,7 +55,7 @@ class SignInCom extends React.Component {
 
     return (
       <React.Fragment>
-        
+        <PermNav />
         <AppForm>
           <React.Fragment>
             <Typography variant="h3" gutterBottom marked="center" align="center">
