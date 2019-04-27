@@ -59,7 +59,7 @@ function Jumbotron(props) {
         component={linkProps => (
           <Link
             {...linkProps}
-            href="/signup"
+            href="/signup/company"
             variant="button"
           />
         )}
@@ -74,7 +74,7 @@ function Jumbotron(props) {
         component={linkProps => (
           <Link
             {...linkProps}
-            href="/signup"
+            href="/signup/user"
             variant="button"
           />
         )}
