@@ -70,8 +70,25 @@ const styles = theme => ({
 });
 
 class LoggedContainer extends React.Component {
+    state = {
+      current: ""
+    };
+
+    
+
   render() {
     const { classes } = this.props;
+    const componentUse = () => {
+      switch(this.state.current){
+        case "dashboardheader":
+          return [<DashboardHeader />,
+          <VysContent /> ];
+        case "ratings":
+          return <RatingsPage />;
+        default:
+          return <UserProfile />;
+      }
+    }
 
     return (
       <div className={classes.root}>
@@ -79,6 +96,9 @@ class LoggedContainer extends React.Component {
         <PermNav />
         <main className={classes.content}>
           <div className={classes.toolbar} />
+        <div>
+          {componentUse()}
+        </div>
 
           {/* VYS */}
           {/* <DashboardHeader />
@@ -88,7 +108,7 @@ class LoggedContainer extends React.Component {
           {/* <UserProfile /> */}
 
           {/* RATINGS */}
-          <RatingsPage />
+          {/* <RatingsPage /> */}
         </main>
       </div>
     );
