@@ -1,7 +1,9 @@
 import Navbar from "./Navbar";
 import Jumbotron from "./Jumbotron";
-import SideNav from "./SideNav";
-import ImageGridList from "./ImageGrid";
 import PermNav from "./PermNav";
+import DashboardHeader from "./DashboardHeader";
+import RatingsPage from "./RatingsPage";
+import UserProfile from "./UserProfile";
+import VysContent from "./VysContent";
 
-export { Navbar, Jumbotron, SideNav, ImageGridList, PermNav };
+export { Navbar, Jumbotron, PermNav, DashboardHeader, RatingsPage, UserProfile, VysContent };

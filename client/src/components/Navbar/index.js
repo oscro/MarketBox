@@ -6,7 +6,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import SideNav from "../SideNav";
+
 
 
 const styles = {
@@ -29,13 +29,12 @@ function Navbar(props) {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <SideNav />
           <Typography variant="h6" color="inherit" className={classes.grow}>
           <Link href ="/"
           variant="h6"
           underline="none"
           color="inherit">
-            ORYUS
+            MarketBox
           </Link>
           </Typography>
           <Button color="inherit">View Ad Space</Button>
