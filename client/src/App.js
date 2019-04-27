@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 // import { Navbar } from "./components";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { Home, NoMatch, SignIn, SignUp, SignInCom, SignUpCom } from "./pages";
+import { Home, NoMatch, SignIn, SignUp, SignInCom, SignUpCom, LoggedIn } from "./pages";
 
 // Theme for the website with a primary and secondary color set in the theme constant below
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
@@ -27,6 +27,7 @@ class App extends Component {
                 <Route exact path="/signincompany" component={SignInCom} />
                 <Route exact path="/signup/user" component={SignUp} />
                 <Route exact path="/signup/company" component={SignUpCom} />
+                <Route exact path="/dashboard/user" component={LoggedIn} />
                 <Route component={NoMatch} />
               </Switch>
             </div>
