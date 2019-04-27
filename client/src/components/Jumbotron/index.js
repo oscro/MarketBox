@@ -2,8 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Link from "@material-ui/core/Link";
-import Button from "../modules/components/Button";
-import Typography from "../modules/components/Typography";
+import Button from "../Material/modules/components/Button";
+import Typography from "../Material/modules/components/Typography";
 import ProductHeroLayout from "./ProductHeroLayout";
 
 const backgroundImage =
@@ -41,7 +41,7 @@ function Jumbotron(props) {
       <img style={{ display: "none" }} src={backgroundImage} alt="" />
       
       <Typography color="inherit" align="center" variant="h2" marked="center">
-        AdConnect
+        ORYUS
       </Typography>
       <Typography
         color="inherit"

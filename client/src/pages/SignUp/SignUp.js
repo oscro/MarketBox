@@ -8,13 +8,14 @@ import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
 import { Field, Form, FormSpy } from 'react-final-form';
-import Typography from '../../components/modules/components/Typography';
-import AppFooter from '../../components/modules/views/AppFooter';
-import AppForm from '../../components/modules/views/AppForm';
-import { email, required } from '../../components/modules/form/validation';
-import RFTextField from '../../components/modules/form/RFTextField';
-import FormButton from '../../components/modules/form/FormButton';
-import FormFeedback from '../../components/modules/form/FormFeedback';
+import Typography from '../../components/Material/modules/components/Typography';
+import AppFooter from '../../components/Material/modules/views/AppFooter';
+import AppForm from '../../components/Material/modules/views/AppForm';
+import { email, required } from '../../components/Material/modules/form/validation';
+import RFTextField from '../../components/Material/modules/form/RFTextField';
+import FormButton from '../../components/Material/modules/form/FormButton';
+import FormFeedback from '../../components/Material/modules/form/FormFeedback';
+import PermNav from "../../components/PermNav";
 
 const styles = theme => ({
   form: {
@@ -55,7 +56,7 @@ class SignUp extends React.Component {
 
     return (
       <React.Fragment>
-        
+        <PermNav />
         <AppForm>
           <React.Fragment>
             <Typography variant="h3" gutterBottom marked="center" align="center">

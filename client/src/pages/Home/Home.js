@@ -1,14 +1,15 @@
 import React, { Component } from "react";
-import {Jumbotron} from "../../components/index";
-import ProductValues from "../../components/modules/views/ProductValues";
-import ProductCategories from "../../components/modules/views/ProductCategories";
-import AppFooter from "../../components/modules/views/AppFooter";
+import {Jumbotron, PermNav} from "../../components/index";
+import ProductValues from "../../components/Material/modules/views/ProductValues";
+import ProductCategories from "../../components/Material/modules/views/ProductCategories";
+import AppFooter from "../../components/Material/modules/views/AppFooter";
 
 class Home extends Component {
 
     render() {
         return (
             <div>
+                <PermNav />
                 <Jumbotron />
                 <ProductValues />
                 <ProductCategories />
