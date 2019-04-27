@@ -73,6 +73,8 @@ class LoggedContainer extends React.Component {
   render() {
     const { classes } = this.props;
 
+
+
     return (
       <div className={classes.root}>
         <CssBaseline />
@@ -81,14 +83,14 @@ class LoggedContainer extends React.Component {
           <div className={classes.toolbar} />
 
           {/* VYS */}
-          {/* <DashboardHeader />
-          <VysContent /> */}
+          <DashboardHeader />
+          <VysContent />
 
           {/* PROFILE */}
           {/* <UserProfile /> */}
 
           {/* RATINGS */}
-          <RatingsPage />
+          {/* <RatingsPage /> */}
         </main>
       </div>
     );
