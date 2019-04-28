@@ -206,13 +206,17 @@ class SideBarNav extends React.Component {
                   button
                   dense
                   key={childId}
+                  pageText={childId}
+                  onClick={this.props.sideNavClick()}
                   className={classNames(
                     classes.item,
                     classes.itemActionable,
                     active && classes.itemActiveItem
                   )}
                 >
-                  <ListItemIcon>{icon}</ListItemIcon>
+                  <ListItemIcon
+                  pageText={childId}
+                  >{icon}</ListItemIcon>
                   <ListItemText
                     classes={{
                       primary: classes.itemPrimary,

@@ -6,6 +6,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
+import LoginMenuButton from "../LoginMenuButton"; 
 
 
 
@@ -37,9 +38,10 @@ function Navbar(props) {
             MarketBox
           </Link>
           </Typography>
-          <Button color="inherit">View Ad Space</Button>
+          <LoginMenuButton/>
+          {/* <Button color="inherit">View Ad Space</Button>
           <Button color="inherit">View Company Listings</Button>
-          <Button color="inherit" href="/signin">Login</Button>
+          <Button color="inherit" href="/signin">Login</Button> */}
         </Toolbar>
       </AppBar>
     </div>
