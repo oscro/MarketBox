@@ -80,10 +80,12 @@ class LoggedContainer extends React.Component {
     this.setState({ current: pageText });
   };
 
+
   render() {
     const { classes } = this.props;
     const componentUse = () => {
       switch(this.state.current){
+
         case "View Your Spaces":
           return [<DashboardHeader />,
           <VysContent /> ];
@@ -91,6 +93,7 @@ class LoggedContainer extends React.Component {
           return <RatingsPage />;
         case "Profile": 
           return <UserProfile />;
+
         default:
           return <UserProfile />;
       }
@@ -103,18 +106,13 @@ class LoggedContainer extends React.Component {
         sideNavClick={()=>this.handleSideNavClick}/>
         <main className={classes.content}>
           <div className={classes.toolbar} />
+        <div>
+          {componentUse()}
+        </div>
 
           <div>
           {componentUse()}
           </div>
-
-          {/* VYS */}
-          {/* <DashboardHeader />
-          <VysContent /> */}
-          {/* PROFILE */}
-          {/* <UserProfile /> */}
-          {/* RATINGS */}
-          {/* <RatingsPage /> */}
 
         </main>
       </div>
