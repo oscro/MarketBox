@@ -70,21 +70,30 @@ const styles = theme => ({
 });
 
 class LoggedContainer extends React.Component {
-    state = {
-      current: ""
-    };
 
-    
+  state = {
+    current: ""
+  };
+
+  handleSideNavClick = (event) => {
+    let pageText = event.currentTarget.getAttribute("pageText");
+    this.setState({ current: pageText });
+  };
+
 
   render() {
     const { classes } = this.props;
     const componentUse = () => {
       switch(this.state.current){
-        case "dashboardheader":
+
+        case "View Your Spaces":
           return [<DashboardHeader />,
           <VysContent /> ];
-        case "ratings":
+        case "Ratings":
           return <RatingsPage />;
+        case "Profile": 
+          return <UserProfile />;
+
         default:
           return <UserProfile />;
       }
@@ -93,22 +102,18 @@ class LoggedContainer extends React.Component {
     return (
       <div className={classes.root}>
         <CssBaseline />
-        <PermNav />
+        <PermNav 
+        sideNavClick={()=>this.handleSideNavClick}/>
         <main className={classes.content}>
           <div className={classes.toolbar} />
         <div>
           {componentUse()}
         </div>
 
-          {/* VYS */}
-          {/* <DashboardHeader />
-          <VysContent /> */}
+          <div>
+          {componentUse()}
+          </div>
 
-          {/* PROFILE */}
-          {/* <UserProfile /> */}
-
-          {/* RATINGS */}
-          {/* <RatingsPage /> */}
         </main>
       </div>
     );
