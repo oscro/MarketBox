@@ -170,9 +170,6 @@ class SideBarNav extends React.Component {
               View Ad Space
             </Button>
             <Button color="inherit">View Company Listings</Button>
-            <Button color="inherit" href="/signin">
-              Login
-            </Button>
           </Toolbar>
         </AppBar>
         <Drawer

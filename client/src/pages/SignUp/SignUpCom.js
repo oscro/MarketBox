@@ -15,7 +15,7 @@ import { email, required } from '../../components/Material/modules/form/validati
 import RFTextField from '../../components/Material/modules/form/RFTextField';
 import FormButton from '../../components/Material/modules/form/FormButton';
 import FormFeedback from '../../components/Material/modules/form/FormFeedback';
-import PermNav from "../../components/PermNav";
+import { Navbar } from '../../components';
 
 const styles = theme => ({
   form: {
@@ -56,7 +56,7 @@ class SignUpCom extends React.Component {
 
     return (
       <React.Fragment>
-        <PermNav />
+        <Navbar />
         <AppForm>
           <React.Fragment>
             <Typography variant="h3" gutterBottom marked="center" align="center">
