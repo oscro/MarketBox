@@ -110,10 +110,6 @@ class LoggedContainer extends React.Component {
           {componentUse()}
         </div>
 
-          <div>
-          {componentUse()}
-          </div>
-
         </main>
       </div>
     );
