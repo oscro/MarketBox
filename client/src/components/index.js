@@ -5,5 +5,6 @@ import DashboardHeader from "./DashboardHeader";
 import RatingsPage from "./RatingsPage";
 import UserProfile from "./UserProfile";
 import VysContent from "./VysContent";
+import Subscriptions from "./Subscriptions";
 
-export { Navbar, Jumbotron, PermNav, DashboardHeader, RatingsPage, UserProfile, VysContent };
+export { Navbar, Jumbotron, PermNav, DashboardHeader, RatingsPage, UserProfile, VysContent, Subscriptions };

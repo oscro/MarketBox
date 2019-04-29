@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import { PermNav, DashboardHeader, VysContent, UserProfile, RatingsPage } from "../../components/index";
+import { PermNav, DashboardHeader, VysContent, UserProfile, RatingsPage, Subscriptions } from "../../components/index";
 
 
 const drawerWidth = 240;
@@ -93,7 +93,8 @@ class LoggedContainer extends React.Component {
           return <RatingsPage />;
         case "Profile": 
           return <UserProfile />;
-
+        case "Subscriptions":
+          return <Subscriptions />;
         default:
           return <UserProfile />;
       }
