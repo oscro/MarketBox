@@ -16,6 +16,7 @@ import RFTextField from '../../components/Material/modules/form/RFTextField';
 import FormButton from '../../components/Material/modules/form/FormButton';
 import FormFeedback from '../../components/Material/modules/form/FormFeedback';
 import { Navbar } from '../../components';
+import UserCompanyRadioButton from "../../components/Material/modules/components/UserCompanyRadioButton";
 
 const styles = theme => ({
   form: {
@@ -119,6 +120,7 @@ class SignUp extends React.Component {
                   type="password"
                   margin="normal"
                 />
+                <UserCompanyRadioButton />
                 <FormSpy subscription={{ submitError: true }}>
                   {({ submitError }) =>
                     submitError ? (
