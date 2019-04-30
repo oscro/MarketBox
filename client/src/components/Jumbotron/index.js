@@ -59,27 +59,12 @@ function Jumbotron(props) {
         component={linkProps => (
           <Link
             {...linkProps}
-            href="/signup/company"
-            variant="button"
-          />
-        )}
-      >
-        Business Sign Up
-      </Button>
-      <Button
-        color="secondary"
-        variant="contained"
-        size="small"
-        className={classes.button}
-        component={linkProps => (
-          <Link
-            {...linkProps}
             href="/signup"
             variant="button"
           />
         )}
       >
-        User Sign Up
+        Sign Up
       </Button>
       <Typography variant="body2" color="inherit" className={classes.more}>
         Discover the experience
