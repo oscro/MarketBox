@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 // import { Navbar } from "./components";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { Home, NoMatch, SignIn, SignUp, SignInCom, SignUpCom, LoggedIn } from "./pages";
+import { Home, NoMatch, SignIn, SignUp, LoggedIn } from "./pages";
 
 // Theme for the website with a primary and secondary color set in the theme constant below
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
