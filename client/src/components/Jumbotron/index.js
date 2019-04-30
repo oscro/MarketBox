@@ -74,7 +74,7 @@ function Jumbotron(props) {
         component={linkProps => (
           <Link
             {...linkProps}
-            href="/signup/user"
+            href="/signup"
             variant="button"
           />
         )}
