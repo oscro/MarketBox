@@ -39,8 +39,9 @@ const styles = theme => ({
   }
 });
 
-function Header(props) {
-  const { classes, onDrawerToggle } = props;
+function RatingsHeader(props) {
+  // const { classes, onDrawerToggle } = props;
+  const { classes } = props;
 
   return (
     <React.Fragment>
@@ -52,7 +53,7 @@ function Header(props) {
                 <IconButton
                   color="inherit"
                   aria-label="Open drawer"
-                  onClick={onDrawerToggle}
+                  // onClick={onDrawerToggle}
                   className={classes.menuButton}
                 >
                   <MenuIcon />
@@ -135,9 +136,9 @@ function Header(props) {
   );
 }
 
-Header.propTypes = {
-  classes: PropTypes.object.isRequired,
-  onDrawerToggle: PropTypes.func.isRequired
+RatingsHeader.propTypes = {
+  classes: PropTypes.object.isRequired
+  // onDrawerToggle: PropTypes.func.isRequired
 };
 
-export default withStyles(styles)(Header);
+export default withStyles(styles)(RatingsHeader);

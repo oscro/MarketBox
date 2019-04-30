@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import { PermNav, DashboardHeader, VysContent, UserProfile, RatingsPage, Subscriptions } from "../../components/index";
+import { PermNav, VysHeader, VysContent, UserProfile, RatingsPage, Subscriptions } from "../../components/index";
 
 
 const drawerWidth = 240;
@@ -76,8 +76,8 @@ class LoggedContainer extends React.Component {
   };
 
   handleSideNavClick = (event) => {
-    let pageText = event.currentTarget.getAttribute("pageText");
-    this.setState({ current: pageText });
+    let pagecontent = event.currentTarget.getAttribute("pagecontent");
+    this.setState({ current: pagecontent });
   };
 
 
@@ -87,16 +87,16 @@ class LoggedContainer extends React.Component {
       switch(this.state.current){
 
         case "View Your Spaces":
-          return [<DashboardHeader />,
-          <VysContent /> ];
+          return [<VysHeader key="VysHeader" />,
+          <VysContent key="VysContent" /> ];
         case "Ratings":
-          return <RatingsPage />;
+          return <RatingsPage key={this.state.current} />;
         case "Profile": 
-          return <UserProfile />;
+          return <UserProfile key={this.state.current} />;
         case "Subscriptions":
-          return <Subscriptions />;
+          return <Subscriptions key={this.state.current} />;
         default:
-          return <UserProfile />;
+          return <UserProfile key={this.state.current} />;
       }
     }
 
