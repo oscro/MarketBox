@@ -21,7 +21,7 @@ import Link from "@material-ui/core/Link";
 //ICONS
 import DnsRoundedIcon from "@material-ui/icons/DnsRounded";
 import PeopleIcon from "@material-ui/icons/People";
-import PermMediaOutlinedIcon from "@material-ui/icons/PhotoSizeSelectActual";
+import Chat from "@material-ui/icons/Chat"
 import Grade from "@material-ui/icons/Grade";
 import Payment from "@material-ui/icons/Payment";
 import Autorenew from "@material-ui/icons/Autorenew";
@@ -102,7 +102,7 @@ const categories = [
     children: [
       { id: "Profile", icon: <PeopleIcon />, active: true },
       { id: "View Your Spaces", icon: <DnsRoundedIcon /> },
-      { id: "Messages", icon: <PermMediaOutlinedIcon /> },
+      { id: "Messages", icon: <Chat /> },
       { id: "Ratings", icon: <Grade /> }
       // ,
       // { id: "Functions", icon: <SettingsEthernetIcon /> },
