@@ -48,8 +48,8 @@ class SignIn extends React.Component {
     return errors;
   };
 
-  handleSubmit = () => {
-    const user = {email: 'email', password: 'password'};
+  handleSubmit = values => {
+    const user = {email: values.email, password: values.password};
     console.log(user);
     API.login(user)
       .then(res => this.props.history.push('/'))

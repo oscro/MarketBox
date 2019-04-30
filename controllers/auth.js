@@ -1,6 +1,6 @@
 const express = require("express")
 const router = express.Router()
-const User = require("../models")
+const User = require("../models/user")
 const passport = require("../passport")
 
 router.get("/user", (req, res, next) => {
@@ -54,8 +54,7 @@ router.post("/signup", (req, res) => {
 		}
 		const newUser = new User({
 			"local.email": email,
-            "local.password": password,
-            "local.name" : name
+            "local.password": password
 		})
 		newUser.save((err, savedUser) => {
 			if (err) return res.json(err)
