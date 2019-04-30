@@ -63,7 +63,7 @@ function VysHeader(props) {
             <Grid item xs />
             <Grid item>
               <Typography className={classes.link} component="a" href="#">
-                #USERNAME#
+                John.Smith24
               </Typography>
             </Grid>
             <Grid item>
@@ -77,7 +77,7 @@ function VysHeader(props) {
               <IconButton color="inherit" className={classes.iconButtonAvatar}>
                 <Avatar
                   className={classes.avatar}
-                  src="/static/images/avatar/1.jpg"
+                  src="../assets/AvatarPlaceHolder/avatarPlaceHolder.jpg"
                 />
               </IconButton>
             </Grid>
