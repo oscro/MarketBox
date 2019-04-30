@@ -15,6 +15,7 @@ import RFTextField from '../../components/Material/modules/form/RFTextField';
 import FormButton from '../../components/Material/modules/form/FormButton';
 import FormFeedback from '../../components/Material/modules/form/FormFeedback';
 import { Navbar } from '../../components';
+import API from "../../utils/API";
 
 const styles = theme => ({
   form: {
@@ -47,7 +48,13 @@ class SignIn extends React.Component {
     return errors;
   };
 
-  handleSubmit = () => {};
+  handleSubmit = () => {
+    const user = {email: 'email', password: 'password'};
+    console.log(user);
+    API.login(user)
+      .then(res => this.props.history.push('/'))
+      .catch(err => console.log(err));
+  };
 
   render() {
     const { classes } = this.props;
