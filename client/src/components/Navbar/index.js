@@ -38,10 +38,10 @@ function Navbar(props) {
             MarketBox
           </Link>
           </Typography>
-          <LoginMenuButton/>
+          {/* <LoginMenuButton/> */}
           {/* <Button color="inherit">View Ad Space</Button>
-          <Button color="inherit">View Company Listings</Button>
-          <Button color="inherit" href="/signin">Login</Button> */}
+          <Button color="inherit">View Company Listings</Button> */}
+          <Button color="inherit" href="/signin">Login</Button>
         </Toolbar>
       </AppBar>
     </div>
