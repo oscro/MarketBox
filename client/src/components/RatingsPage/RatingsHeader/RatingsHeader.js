@@ -39,8 +39,9 @@ const styles = theme => ({
   }
 });
 
-function Header(props) {
-  const { classes, onDrawerToggle } = props;
+function RatingsHeader(props) {
+  // const { classes, onDrawerToggle } = props;
+  const { classes } = props;
 
   return (
     <React.Fragment>
@@ -52,7 +53,7 @@ function Header(props) {
                 <IconButton
                   color="inherit"
                   aria-label="Open drawer"
-                  onClick={onDrawerToggle}
+                  // onClick={onDrawerToggle}
                   className={classes.menuButton}
                 >
                   <MenuIcon />
@@ -62,7 +63,7 @@ function Header(props) {
             <Grid item xs />
             <Grid item>
               <Typography className={classes.link} component="a" href="#">
-                #USERNAME#
+                John.Smith24
               </Typography>
             </Grid>
             <Grid item>
@@ -76,7 +77,7 @@ function Header(props) {
               <IconButton color="inherit" className={classes.iconButtonAvatar}>
                 <Avatar
                   className={classes.avatar}
-                  src="/static/images/avatar/1.jpg"
+                  src="../assets/AvatarPlaceHolder/avatarPlaceHolder.jpg"
                 />
               </IconButton>
             </Grid>
@@ -94,7 +95,7 @@ function Header(props) {
           <Grid container alignItems="center" spacing={8}>
             <Grid item xs>
               <Typography color="inherit" variant="h5">
-                Stored Spaces
+                Ratings And Reviews
               </Typography>
             </Grid>
             {/* <Grid item>
@@ -125,19 +126,20 @@ function Header(props) {
         elevation={0}
       >
         <Tabs value={0} textColor="inherit">
-          <Tab textColor="inherit" label="Active" />
-          <Tab textColor="inherit" label="Inactive" />
-          {/* <Tab textColor="inherit" label="Templates" />
-          <Tab textColor="inherit" label="Usage" /> */}
+          <Tab textColor="inherit" label="5 Star" />
+          <Tab textColor="inherit" label="4 Star" />
+          <Tab textColor="inherit" label="3 Star" />
+          <Tab textColor="inherit" label="2 Star" />
+          <Tab textColor="inherit" label="1 Star" />
         </Tabs>
       </AppBar>
     </React.Fragment>
   );
 }
 
-Header.propTypes = {
-  classes: PropTypes.object.isRequired,
-  onDrawerToggle: PropTypes.func.isRequired
+RatingsHeader.propTypes = {
+  classes: PropTypes.object.isRequired
+  // onDrawerToggle: PropTypes.func.isRequired
 };
 
-export default withStyles(styles)(Header);
+export default withStyles(styles)(RatingsHeader);
