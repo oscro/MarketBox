@@ -52,7 +52,6 @@ class SignUp extends React.Component {
 
   handleSubmit = (values) => {
     const user = {email: values.email, password: values.password};
-    console.log(user);
     API.newUser(user)
       .then(res => this.props.history.push('/signin'))
       .catch(err => console.log(err));

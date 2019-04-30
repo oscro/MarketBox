@@ -50,7 +50,6 @@ class SignIn extends React.Component {
 
   handleSubmit = values => {
     const user = {email: values.email, password: values.password};
-    console.log(user);
     API.login(user)
       .then(res => this.props.history.push('/'))
       .catch(err => console.log(err));
