@@ -14,23 +14,19 @@ router.get("/user", (req, res, next) => {
 })
 
 router.post(
-	"/login",
-	function(req, res, next) {
-		console.log(req.body)
-		console.log("================")
-		next()
-	},
-	passport.authenticate("local"),
-	(req, res) => {
-		console.log("POST to /login")
-		const user = JSON.parse(JSON.stringify(req.user))
-		const cleanUser = Object.assign({}, user)
-		if (cleanUser.local) {
-			console.log(`Deleting ${cleanUser.local.password}`)
-			delete cleanUser.local.password
-		}
-		res.json({ user: cleanUser })
-	}
+    '/login',
+    function (req, res, next) {
+        
+        next()
+    },
+    passport.authenticate('local'),
+    (req, res) => {
+        console.log('logged in', req.user);
+        var userInfo = {
+            username: req.user.email
+        };
+        res.send(userInfo);
+    }
 )
 
 router.post("/logout", (req, res) => {
@@ -46,19 +42,19 @@ router.post("/logout", (req, res) => {
 router.post("/signup", (req, res) => {
 	const { email, password } = req.body
 	
-	User.findOne({ "local.email": email }, (err, userMatch) => {
+	User.findOne({ email: email }, (err, userMatch) => {
 		if (userMatch) {
 			return res.json({
 				error: `Sorry, already a user with the Email: ${email}`
 			})
 		}
 		const newUser = new User({
-			"local.email": email,
-            "local.password": password
+			email: email,
+            password: password
 		})
 		newUser.save((err, savedUser) => {
 			if (err) return res.json(err)
-			return res.json(savedUser)
+			res.json(savedUser)
 		})
 	})
 })
