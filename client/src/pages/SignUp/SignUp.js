@@ -68,12 +68,10 @@ class SignUp extends React.Component {
     this.setState({
       group: value.target.value
     })
-    console.log(this.state.group);
   }
 
   handleSubmit = (values) => {
     const user = { name: values.name, email: values.email, password: values.password, group: this.state.group };
-    console.log(user);
     API.newUser(user)
       .then(res => this.props.history.push('/signin'))
       .catch(err => console.log(err));
