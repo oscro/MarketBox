@@ -8,13 +8,14 @@ import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import ExpansionPanelActions from "@material-ui/core/ExpansionPanelActions";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import Chip from "@material-ui/core/Chip";
+import TextField from '@material-ui/core/TextField';
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
 
 const styles = theme => ({
   root: {
-    width: "100%"
+    width: "100%",
+    marginTop: "2%"
   },
   heading: {
     fontSize: theme.typography.pxToRem(15)
@@ -29,7 +30,8 @@ const styles = theme => ({
     width: 20
   },
   details: {
-    alignItems: "center"
+    alignItems: "center",
+    display: "block"
   },
   column: {
     flexBasis: "33.33%"
@@ -51,27 +53,34 @@ function DetailedExpansionPanel(props) {
   const { classes } = props;
   return (
     <div className={classes.root}>
-      <ExpansionPanel defaultExpanded>
+      <ExpansionPanel defaultExpanded={false}>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
           <div className={classes.column}>
-            <Typography className={classes.heading}>Location</Typography>
+            <Typography className={classes.heading}>{props.settingslabel}</Typography>
           </div>
           <div className={classes.column}>
             <Typography className={classes.secondaryHeading}>
-              Select trip destination
+              {props.settingsdescription}
             </Typography>
           </div>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails className={classes.details}>
-          <div className={classes.column} />
-          <div className={classes.column}>
-            <Chip
-              label="Barbados"
-              className={classes.chip}
-              onDelete={() => {}}
-            />
-          </div>
-          <div className={classNames(classes.column, classes.helper)}>
+        <form  noValidate autoComplete="off">
+        <TextField
+          id="outlined-full-width"
+          label="Enter Your Info Here"
+          style={{ margin: 8 }}
+          placeholder="Click Me to Begin Writing"
+          // helperText="Full width!"
+          fullWidth
+          margin="normal"
+          variant="outlined"
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
+        </form>
+          {/* <div className={classNames(classes.column, classes.helper)}>
             <Typography variant="caption">
               Select your destination of choice
               <br />
@@ -79,7 +88,7 @@ function DetailedExpansionPanel(props) {
                 Learn more
               </a>
             </Typography>
-          </div>
+          </div> */}
         </ExpansionPanelDetails>
         <Divider />
         <ExpansionPanelActions>
