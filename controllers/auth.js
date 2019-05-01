@@ -4,8 +4,6 @@ const User = require("../models/user")
 const passport = require("../passport")
 
 router.get("/user", (req, res, next) => {
-	console.log("===== user!!======")
-	console.log(req)
 	if (req.user) {
 		return res.json({ user: req.user })
 	} else {
@@ -21,7 +19,6 @@ router.post(
     },
     passport.authenticate('local'),
     (req, res) => {
-        console.log('logged in', req.user);
         var userInfo = {
 			username: req.user.email
         };
@@ -40,8 +37,7 @@ router.post("/logout", (req, res) => {
 })
 
 router.post("/signup", (req, res) => {
-	const { email, password } = req.body
-	
+	const { email, password, name, group } = req.body;
 	User.findOne({ email: email }, (err, userMatch) => {
 		if (userMatch) {
 			return res.json({
@@ -50,7 +46,9 @@ router.post("/signup", (req, res) => {
 		}
 		const newUser = new User({
 			email: email,
-            password: password
+			password: password,
+			name: name,
+			group, group
 		})
 		newUser.save((err, savedUser) => {
 			if (err) return res.json(err)

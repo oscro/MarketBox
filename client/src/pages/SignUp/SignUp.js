@@ -5,7 +5,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
 import { Field, Form, FormSpy } from 'react-final-form';
 import Typography from '../../components/Material/modules/components/Typography';
@@ -16,7 +15,12 @@ import RFTextField from '../../components/Material/modules/form/RFTextField';
 import FormButton from '../../components/Material/modules/form/FormButton';
 import FormFeedback from '../../components/Material/modules/form/FormFeedback';
 import { Navbar } from '../../components';
-import UserCompanyRadioButton from "../../components/Material/modules/components/UserCompanyRadioButton";
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
 import API from "../../utils/API";
 
 const styles = theme => ({
@@ -30,15 +34,25 @@ const styles = theme => ({
   feedback: {
     marginTop: theme.spacing.unit * 2,
   },
+  root: {
+    display: 'flex',
+  },
+  formControl: {
+    margin: theme.spacing.unit * 3,
+  },
+  group: {
+    margin: `${theme.spacing.unit}px 0`,
+  },
 });
 
 class SignUp extends React.Component {
   state = {
     sent: false,
+    group: ""
   };
 
   validate = values => {
-    const errors = required(['firstName', 'lastName', 'email', 'password'], values, this.props);
+    const errors = required(['name', 'email', 'password'], values, this.props);
 
     if (!errors.email) {
       const emailError = email(values.email, values, this.props);
@@ -50,8 +64,14 @@ class SignUp extends React.Component {
     return errors;
   };
 
+  handleGroup = (value) => {
+    this.setState({
+      group: value.target.value
+    })
+  }
+
   handleSubmit = (values) => {
-    const user = {email: values.email, password: values.password};
+    const user = { name: values.name, email: values.email, password: values.password, group: this.state.group };
     API.newUser(user)
       .then(res => this.props.history.push('/signin'))
       .catch(err => console.log(err));
@@ -82,29 +102,15 @@ class SignUp extends React.Component {
           >
             {({ handleSubmit, submitting }) => (
               <form onSubmit={handleSubmit} className={classes.form} noValidate>
-                <Grid container spacing={16}>
-                  <Grid item xs={12} sm={6}>
-                    <Field
-                      autoFocus
-                      component={RFTextField}
-                      autoComplete="fname"
-                      fullWidth
-                      label="First name"
-                      name="firstName"
-                      required
-                    />
-                  </Grid>
-                  <Grid item xs={12} sm={6}>
-                    <Field
-                      component={RFTextField}
-                      autoComplete="lname"
-                      fullWidth
-                      label="Last name"
-                      name="lastName"
-                      required
-                    />
-                  </Grid>
-                </Grid>
+                <Field
+                  autoFocus
+                  component={RFTextField}
+                  autoComplete="fname"
+                  fullWidth
+                  label="Full Name or Business"
+                  name="name"
+                  required
+                />
                 <Field
                   autoComplete="email"
                   component={RFTextField}
@@ -126,7 +132,30 @@ class SignUp extends React.Component {
                   type="password"
                   margin="normal"
                 />
-                <UserCompanyRadioButton />
+                <FormControl component="fieldset" className={classes.formControl}>
+                  <FormLabel component="legend">Select the type of account you would like to make</FormLabel>
+                  <RadioGroup
+                    aria-label="Account Selection"
+                    name="Account Selection"
+                    className={classes.group}
+                    value={this.state.value}
+                    onChange={this.handleGroup}
+                  >
+                    <FormControlLabel
+                      value="provider"
+                      control={<Radio color="primary" />}
+                      label="Individual"
+                      labelPlacement="end"
+                    />
+                    <FormControlLabel
+                      value="company"
+                      control={<Radio color="primary" />}
+                      label="Business"
+                      labelPlacement="end"
+                    />
+                  </RadioGroup>
+                  <FormHelperText>Individual Accounts are for users that will post ad space. Business Accounts are for users that will look for spaces to place ads.</FormHelperText>
+                </FormControl>
                 <FormSpy subscription={{ submitError: true }}>
                   {({ submitError }) =>
                     submitError ? (
