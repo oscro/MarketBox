@@ -20,7 +20,11 @@ const styles = {
   menuButton: {
     marginLeft: -12,
     marginRight: 20
-  }
+  },
+  logo: {
+    height: "1%",
+    width: "1%"
+  },
 };
 
 function Navbar(props) {
@@ -35,6 +39,7 @@ function Navbar(props) {
           variant="h6"
           underline="none"
           color="inherit">
+          <img className={classes.logo} src="./assets/MarketBoxLogo/MarketBoxIconPNG.png" alt="golf"/>
             MarketBox
           </Link>
           </Typography>
