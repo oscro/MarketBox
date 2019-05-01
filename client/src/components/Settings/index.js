@@ -1,4 +1,4 @@
 import SettingsMain from "./SettingsMain/SettingsMain";
-import SettingsUnit from "./SettingsUnit/SettingsUnit";
+// import SettingsUnit from "./SettingsUnit/SettingsUnit";
 
-export { SettingsMain, SettingsUnit };
+export { SettingsMain };
