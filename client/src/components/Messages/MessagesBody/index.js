@@ -125,7 +125,7 @@ function BottomAppBar(props) {
           ))}
         </List>
       </Paper>
-      <AppBar position="fixed" color="primary" className={classes.appBar}>
+      {/* <AppBar position="fixed" color="primary" className={classes.appBar}>
         <Toolbar className={classes.toolbar}>
           <IconButton color="inherit" aria-label="Open drawer">
             <MenuIcon />
@@ -142,7 +142,7 @@ function BottomAppBar(props) {
             </IconButton>
           </div>
         </Toolbar>
-      </AppBar>
+      </AppBar> */}
     </React.Fragment>
   );
 }

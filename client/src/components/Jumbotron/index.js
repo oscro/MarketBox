@@ -8,7 +8,8 @@ import ProductHeroLayout from "./ProductHeroLayout";
 
 const backgroundImage =
   // "https://images.pexels.com/photos/1024613/pexels-photo-1024613.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940";
-  "https://images.pexels.com/photos/374016/pexels-photo-374016.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940";
+  // "https://images.pexels.com/photos/374016/pexels-photo-374016.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940";
+  "http://www.redkeyomaha.com/wp-content/uploads/2016/10/City-skyscape.jpg";
 
 const styles = theme => ({
   background: {
@@ -20,12 +21,16 @@ const styles = theme => ({
     minWidth: 200,
     margin: theme.spacing.unit
   },
-  h5: {
-    marginBottom: theme.spacing.unit * 4,
-    marginTop: theme.spacing.unit * 4,
-    [theme.breakpoints.up("sm")]: {
-      marginTop: theme.spacing.unit * 10
-    }
+  // h5: {
+  //   marginBottom: theme.spacing.unit * 4,
+  //   marginTop: theme.spacing.unit * 3,
+  //   [theme.breakpoints.up("sm")]: {
+  //     marginTop: theme.spacing.unit * 10
+  //   }
+  // },
+  logo: {
+    width: "30rem",
+    marginBottom: "-5%"
   },
   more: {
     marginTop: theme.spacing.unit * 2
@@ -40,19 +45,19 @@ function Jumbotron(props) {
     <ProductHeroLayout backgroundClassName={classes.background}>
       {/* Increase the network loading priority of the background image. */}
       <img style={{ display: "none" }} src={backgroundImage} alt="" />
-      
-      <Typography color="inherit" align="center" variant="h2" marked="center">
-        {/* <img src="./assets/MarketBoxLogo/MarketBoxLogoPNG.png" alt="Logo" /> */}
-        MarketBox
-      </Typography>
-      <Typography
+      <img className={classes.logo} src="./assets/MarketBoxLogo/MarketBoxLogoPNG.png" alt="Logo" />
+
+      {/* <Typography color="inherit" align="center" variant="h2" marked="center">
+         MarketBox 
+      </Typography> */}
+      {/* <Typography
         color="inherit"
         align="center"
         variant="h5"
         className={classes.h5}
       >
         Connecting Ad-Space to Ad-Content
-      </Typography>
+      </Typography> */}
       <Button
         color="secondary"
         variant="contained"
