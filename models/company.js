@@ -4,12 +4,11 @@ const Schema = mongoose.Schema;
 const companySchema = new Schema({
   name: { type: String, required: true },
   phone: Number,
-  email: {type: String, unique: true, required: true, },
-  password: {type: String, required: true, minlenght: [6, 'Password is to short']},
   address: String,
   picture: String,
   rating: Number,
   discription: String,
+  paid: { type: Boolean, default: false },
   adSpaceInterested: [{
     type: Schema.Types.ObjectId,
     ref: "AdSpace"

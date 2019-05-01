@@ -4,6 +4,7 @@ import { withStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { PermNav, VysHeader, VysContent, UserProfile, RatingsPage, Subscriptions } from "../../components/index";
 import { SettingsMain } from "../../components/Settings";
+import API from "../../utils/API";
 
 
 const drawerWidth = 240;
@@ -73,7 +74,12 @@ const styles = theme => ({
 class LoggedContainer extends React.Component {
 
   state = {
-    current: ""
+    current: "",
+    user: []
+  };
+
+  componentDidMount() {
+    this.getUser();
   };
 
   handleSideNavClick = (event) => {
@@ -81,6 +87,18 @@ class LoggedContainer extends React.Component {
     this.setState({ current: pagecontent });
   };
 
+  getUser() {
+    API.signedIn().then(response => {
+      if (response.data) {
+        this.setState({
+          user: response.data.user
+        })
+        console.log(this.state.user);
+      } else {
+        console.log('Get user: no user');
+      }
+    })
+  };
 
   render() {
     const { classes } = this.props;
