@@ -118,9 +118,12 @@ function SettingsHeader(props) {
       >
       </AppBar>
 
-        <SettingsUnit />
-        <SettingsUnit />
-        <SettingsUnit />
+        <SettingsUnit settingslabel="Full Name" settingsdescription="Enter Your Full Name"/>
+        <SettingsUnit settingslabel="Email" settingsdescription="Enter Your Email"/>
+        <SettingsUnit settingslabel="Password" settingsdescription="Enter Your New Password"/>
+        <SettingsUnit settingslabel="Phone Number" settingsdescription="Enter Your Phone Number"/>
+        <SettingsUnit settingslabel="Address" settingsdescription="Enter Your Address"/>
+        <SettingsUnit settingslabel="Company Description" settingsdescription="Enter Your Description"/>
 
     </React.Fragment>
   );

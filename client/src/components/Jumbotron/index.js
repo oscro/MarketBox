@@ -30,6 +30,7 @@ const styles = theme => ({
   more: {
     marginTop: theme.spacing.unit * 2
   }
+
 });
 
 function Jumbotron(props) {
@@ -41,6 +42,7 @@ function Jumbotron(props) {
       <img style={{ display: "none" }} src={backgroundImage} alt="" />
       
       <Typography color="inherit" align="center" variant="h2" marked="center">
+        {/* <img src="./assets/MarketBoxLogo/MarketBoxLogoPNG.png" alt="Logo" /> */}
         MarketBox
       </Typography>
       <Typography
