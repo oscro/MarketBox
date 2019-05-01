@@ -3,8 +3,6 @@ import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Toolbar from "@material-ui/core/Toolbar";
-import IconButton from "@material-ui/core/IconButton";
-import SearchIcon from "@material-ui/icons/Search";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
@@ -75,18 +73,6 @@ const styles = theme => ({
   }
 });
 
-// const sections = [
-//   "Technology",
-//   "Design",
-//   "Culture",
-//   "Business",
-//   "Politics",
-//   "Opinion",
-//   "Science",
-//   "Health",
-//   "Style",
-//   "Travel"
-// ];
 
 const featuredPosts = [
   {
@@ -102,8 +88,6 @@ const featuredPosts = [
       "This is a wider card with supporting text below as a natural lead-in to additional content."
   }
 ];
-
-const social = ["GitHub", "Twitter", "Facebook"];
 
 function UserProfile(props) {
   const { classes } = props;
