@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { PermNav, VysHeader, VysContent, UserProfile, RatingsPage, Subscriptions } from "../../components/index";
+import { SettingsMain } from "../../components/Settings";
 import API from "../../utils/API";
 
 
@@ -113,6 +114,8 @@ class LoggedContainer extends React.Component {
           return <UserProfile key={this.state.current} />;
         case "Subscriptions":
           return <Subscriptions key={this.state.current} />;
+        case "Settings":
+          return <SettingsMain key={this.state.current}/>
         default:
           return <UserProfile key={this.state.current} />;
       }
