@@ -1,4 +1,5 @@
 import React from "react";
+import { Redirect } from 'react-router-dom'
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
@@ -26,6 +27,7 @@ import Grade from "@material-ui/icons/Grade";
 import Payment from "@material-ui/icons/Payment";
 import Autorenew from "@material-ui/icons/Autorenew";
 import SettingsIcon from "@material-ui/icons/Settings";
+import API from "../../utils/API";
 
 const drawerWidth = 240;
 
@@ -124,7 +126,8 @@ const categories = [
 
 class SideBarNav extends React.Component {
   state = {
-    open: false
+    open: false,
+    redirect: false
   };
 
   handleDrawerOpen = () => {
@@ -135,11 +138,31 @@ class SideBarNav extends React.Component {
     this.setState({ open: false });
   };
 
+  handleSignOut = ()=> {
+    API.logout()
+      .then(res => {
+        console.log(res);
+        if (res.data.msg == "logging you out"){
+          this.setState({
+            redirect: true
+          })
+        }
+      })
+      .catch(err => console.log(err));
+  };
+
+  renderRedirect = () => {
+    if (this.state.redirect) {
+      return <Redirect to='/' />
+    }
+  }
+
   render() {
     const { classes, theme } = this.props;
 
     return (
       <div className={classes.root}>
+      {this.renderRedirect()}
         <CssBaseline />
         <AppBar
           position="fixed"
@@ -170,7 +193,7 @@ class SideBarNav extends React.Component {
               View Ad Space
             </Button>
             <Button color="inherit">View Company Listings</Button>
-            <Button color="inherit">Sign Out</Button>
+            <Button onClick={this.handleSignOut} color="inherit">Sign Out</Button>
           </Toolbar>
         </AppBar>
         <Drawer
