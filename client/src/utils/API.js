@@ -10,5 +10,8 @@ export default {
   logout: function(company) {
     return axios.post("/auth/logout/", company);
   },
+  signedIn: function() {
+    return axios.get("/auth/user/")
+  }
   
 };

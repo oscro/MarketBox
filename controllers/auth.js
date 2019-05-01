@@ -5,7 +5,7 @@ const passport = require("../passport")
 
 router.get("/user", (req, res, next) => {
 	console.log("===== user!!======")
-	console.log(req.user)
+	console.log(req)
 	if (req.user) {
 		return res.json({ user: req.user })
 	} else {
@@ -23,8 +23,7 @@ router.post(
     (req, res) => {
         console.log('logged in', req.user);
         var userInfo = {
-			username: req.user.email,
-			id: req.user._id
+			username: req.user.email
         };
         res.send(userInfo);
     }

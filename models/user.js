@@ -7,6 +7,7 @@ const userSchema = new Schema({
   name: { type: String, unique: false },
 	email: { type: String, unique: false, required: false },
 	password: { type: String, unique: false, required: false },
+	group: { type: String },
   profile1: [{
     type: Schema.Types.ObjectId,
     ref: "Provider"
