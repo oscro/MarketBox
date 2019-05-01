@@ -18,8 +18,10 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import Button from "@material-ui/core/Button";
 import Link from "@material-ui/core/Link";
+import BottomAppBar from "./BottomAppBar";
 
 //ICONS
+// import Fab from "../Fab";
 import DnsRoundedIcon from "@material-ui/icons/DnsRounded";
 import PeopleIcon from "@material-ui/icons/People";
 import Chat from "@material-ui/icons/Chat"
@@ -28,6 +30,7 @@ import Payment from "@material-ui/icons/Payment";
 import Autorenew from "@material-ui/icons/Autorenew";
 import SettingsIcon from "@material-ui/icons/Settings";
 import API from "../../utils/API";
+
 
 const drawerWidth = 240;
 
@@ -250,8 +253,18 @@ class SideBarNav extends React.Component {
               ))}
             </React.Fragment>
           ))}
-          {/* <Divider /> */}
+          {/* <BottomAppBar /> */}
+          {/* <div>
+          <Divider />
+          <Divider />
+          <Fab />
+          <Divider />
+          <Divider />
+          </div> */}
+          <BottomAppBar />
+          
         </Drawer>
+        
       </div>
     );
   }
