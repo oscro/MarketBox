@@ -11,6 +11,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import TextField from '@material-ui/core/TextField';
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
+import API from "../../../utils/API";
 
 const styles = theme => ({
   root: {
@@ -49,57 +50,86 @@ const styles = theme => ({
   }
 });
 
-function DetailedExpansionPanel(props) {
-  const { classes } = props;
-  return (
-    <div className={classes.root}>
-      <ExpansionPanel defaultExpanded={false}>
-        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-          <div className={classes.column}>
-            <Typography className={classes.heading}>{props.settingslabel}</Typography>
-          </div>
-          <div className={classes.column}>
-            <Typography className={classes.secondaryHeading}>
-              {props.settingsdescription}
-            </Typography>
-          </div>
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails className={classes.details}>
-        <form  noValidate autoComplete="off">
-        <TextField
-          id="outlined-full-width"
-          label="Enter Your Info Here"
-          style={{ margin: 8 }}
-          placeholder="Click Me to Begin Writing"
-          // helperText="Full width!"
-          fullWidth
-          margin="normal"
-          variant="outlined"
-          InputLabelProps={{
-            shrink: true,
-          }}
-        />
-        </form>
-          {/* <div className={classNames(classes.column, classes.helper)}>
-            <Typography variant="caption">
-              Select your destination of choice
-              <br />
-              <a href="#sub-labels-and-columns" className={classes.link}>
-                Learn more
-              </a>
-            </Typography>
-          </div> */}
-        </ExpansionPanelDetails>
-        <Divider />
-        <ExpansionPanelActions>
-          <Button size="small">Cancel</Button>
-          <Button size="small" color="primary">
-            Save
-          </Button>
-        </ExpansionPanelActions>
-      </ExpansionPanel>
-    </div>
-  );
+class DetailedExpansionPanel extends React.Component {
+  state = {
+    info: ""
+  }
+
+  handleInfo = () => {
+    const name = this.props.name;
+    const value = this.state.info
+    const user = {[name]: value};
+    API.saveUser(user)
+      .then(() => {
+        alert("It was successfully saved!")
+        this.setState({
+          info: ""
+        })
+      })
+      .catch(err => console.log(err));
+  }
+
+  handleChange = event => {
+    this.setState({
+      info: event
+    })
+  }
+
+  render() {
+    const { classes } = this.props;
+    return (
+      <div className={classes.root}>
+        <ExpansionPanel defaultExpanded={false}>
+          <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+            <div className={classes.column}>
+              <Typography className={classes.heading}>{this.props.settingslabel}</Typography>
+            </div>
+            <div className={classes.column}>
+              <Typography className={classes.secondaryHeading}>
+                {this.props.settingsdescription}
+              </Typography>
+            </div>
+          </ExpansionPanelSummary>
+          <ExpansionPanelDetails className={classes.details}>
+            <form noValidate autoComplete="off" >
+            <TextField
+              onChange={event => this.handleChange(event.target.value)}
+              value={this.state.info}
+              id="outlined-full-width"
+              label="Enter Your Info Here"
+              style={{ margin: 8 }}
+              placeholder="Click Me to Begin Writing"
+              name='info'
+              // helperText="Full width!"
+              fullWidth
+              margin="normal"
+              variant="outlined"
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+            </form>
+            {/* <div className={classNames(classes.column, classes.helper)}>
+              <Typography variant="caption">
+                Select your destination of choice
+                <br />
+                <a href="#sub-labels-and-columns" className={classes.link}>
+                  Learn more
+                </a>
+              </Typography>
+            </div> */}
+          </ExpansionPanelDetails>
+          <Divider />
+          <ExpansionPanelActions>
+            <Button size="small">Cancel</Button>
+            <Button size="small" color="primary" onClick={this.handleInfo}>
+              Save
+            </Button>
+          </ExpansionPanelActions>
+        </ExpansionPanel>
+      </div>
+    );
+  }
 }
 
 DetailedExpansionPanel.propTypes = {

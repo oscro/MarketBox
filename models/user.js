@@ -8,13 +8,23 @@ const userSchema = new Schema({
 	email: { type: String, unique: false, required: false },
 	password: { type: String, unique: false, required: false },
 	group: { type: String },
-  profile1: [{
+	phone: Number,
+  address: String,
+  picture: String,
+	rating: Number,
+	discription: String,
+  paid: { type: Boolean, default: false },
+  adSpace: [{
     type: Schema.Types.ObjectId,
-    ref: "Provider"
+    ref: "AdSpace"
+	}],
+	favorites: [{
+    type: Schema.Types.ObjectId,
+    ref: "AdSpace"
   }],
-  profile2: [{
+  used: [{
     type: Schema.Types.ObjectId,
-    ref: "Company"
+    ref: "AdSpace"
   }]
 });
 

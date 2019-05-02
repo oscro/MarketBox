@@ -79,24 +79,31 @@ class LoggedContainer extends React.Component {
   };
 
   componentDidMount() {
-    this.getUser();
+    this.getlogin();
   };
 
   handleSideNavClick = (event) => {
+    this.getUser();
     let pagecontent = event.currentTarget.getAttribute("pagecontent");
     this.setState({ current: pagecontent });
   };
 
-  getUser() {
+  getlogin(){
     API.signedIn().then(response => {
-      if (response.data) {
-        this.setState({
-          user: response.data.user
-        })
-        console.log(this.state.user);
-      } else {
-        console.log('Get user: no user');
-      }
+      console.log(response)
+        if (response.data.user === null) {
+            this.props.history.push('/signin')
+        }else{
+          this.getUser();
+        }
+    })
+  };
+
+  getUser() {
+    API.userInfo().then(response => {
+      this.setState({
+        user: response.data
+      })
     })
   };
 
@@ -104,20 +111,19 @@ class LoggedContainer extends React.Component {
     const { classes } = this.props;
     const componentUse = () => {
       switch(this.state.current){
-
         case "View Your Spaces":
           return [<VysHeader key="VysHeader" />,
           <VysContent key="VysContent" /> ];
         case "Ratings":
-          return <RatingsPage key={this.state.current} />;
+          return <RatingsPage key={this.state.current} user={this.state.user} />;
         case "Profile": 
-          return <UserProfile key={this.state.current} />;
+          return <UserProfile key={this.state.current} user={this.state.user} />;
         case "Subscriptions":
-          return <Subscriptions key={this.state.current} />;
+          return <Subscriptions key={this.state.current} user={this.state.user} />;
         case "Settings":
-          return <SettingsMain key={this.state.current}/>
+          return <SettingsMain key={this.state.current} user={this.state.user} />
         default:
-          return <UserProfile key={this.state.current} />;
+          return <UserProfile key={this.state.current} user={this.state.user} />;
       }
     }
 
