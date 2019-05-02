@@ -10,6 +10,12 @@ export default {
   logout: function(company) {
     return axios.post("/auth/logout/", company);
   },
+  userInfo: function() {
+    return axios.get("/auth/userinfo/")
+  },
+  saveUser: function(user) {
+    return axios.post("/auth/user", user)
+  },
   signedIn: function() {
     return axios.get("/auth/user/")
   }

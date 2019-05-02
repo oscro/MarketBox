@@ -40,8 +40,7 @@ var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/marketBox";
 mongoose.connect(MONGODB_URI, { useCreateIndex: true, useNewUrlParser: true });
 
 // Define API routes here
-app.use("/auth", require("./controllers/auth"));
-app.use("/api", require("./routes"));
+app.use("/auth", require("./routes"));
 
 
 // Send every other request to the React app
