@@ -57,7 +57,7 @@ function BottomAppBar(props) {
       <CssBaseline />
       <AppBar position="absolute" color="primary" className={classes.appBar}>
         <Toolbar className={classes.toolbar}>
-          <Fab color="secondary" aria-label="Add" className={classes.fabButton}>
+          <Fab color="secondary" onClick={props.handleaction} aria-label="Add" className={classes.fabButton}>
             <AddIcon />
             {/* <img className={classes.image} src="../assets/MarketBoxLogo/MarketBoxIconPNG.png" alt="icon" /> */}
           </Fab>

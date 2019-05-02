@@ -6,6 +6,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import BottomAppBar from "../PermNav/BottomAppBar";
 
 export default class FormDialog extends React.Component {
   state = {
@@ -23,13 +24,15 @@ export default class FormDialog extends React.Component {
   render() {
     return (
       <div>
-        <Button
+        {/* <Button
           variant="outlined"
           color="primary"
           onClick={this.handleClickOpen}
         >
           Open form dialog
-        </Button>
+        </Button> */}
+
+        <BottomAppBar handleaction={()=> this.handleClickOpen}/>
         <Dialog
           open={this.state.open}
           onClose={this.handleClose}
