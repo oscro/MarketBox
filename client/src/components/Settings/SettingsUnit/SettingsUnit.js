@@ -86,7 +86,7 @@ class DetailedExpansionPanel extends React.Component {
             </div>
             <div className={classes.column}>
               <Typography className={classes.secondaryHeading}>
-                {this.props.settingsdescription}
+                {this.props.info}
               </Typography>
             </div>
           </ExpansionPanelSummary>

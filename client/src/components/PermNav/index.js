@@ -19,9 +19,6 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Button from "@material-ui/core/Button";
 import Link from "@material-ui/core/Link";
 
-// import BottomAppBar from "./BottomAppBar";
-import AddSpaceModal from "../AddSpaceModal";
-
 //ICONS
 // import Fab from "../Fab";
 import DnsRoundedIcon from "@material-ui/icons/DnsRounded";
@@ -263,13 +260,15 @@ class SideBarNav extends React.Component {
               ))}
             </React.Fragment>
           ))}
-          {/* <BottomAppBar
-          variant="outlined"
-          color="primary"
-          onClick={this.handleClickOpen} /> */}
-
-          <AddSpaceModal />
-
+          {/* <BottomAppBar /> */}
+          {/* <div>
+          <Divider />
+          <Divider />
+          <Fab />
+          <Divider />
+          <Divider />
+          </div> */}
+          <BottomAppBar />
         </Drawer>
         
       </div>
