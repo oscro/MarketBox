@@ -92,7 +92,6 @@ class LoggedContainer extends React.Component {
 
   getlogin(){
     API.signedIn().then(response => {
-      console.log(response)
         if (response.data.user === null) {
             this.props.history.push('/signin')
         }else{
@@ -106,6 +105,7 @@ class LoggedContainer extends React.Component {
       this.setState({
         user: response.data
       })
+      console.log(this.state.user)
     })
   };
 
