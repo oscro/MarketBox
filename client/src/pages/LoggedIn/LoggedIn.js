@@ -5,6 +5,8 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import { PermNav, VysHeader, VysContent, UserProfile, RatingsPage, Subscriptions } from "../../components/index";
 import { SettingsMain } from "../../components/Settings";
 import API from "../../utils/API";
+import MessagesBody from "../../components/Messages/MessagesBody";
+import Checkout from "../../components/Payments";
 
 
 const drawerWidth = 240;
@@ -120,8 +122,12 @@ class LoggedContainer extends React.Component {
           return <UserProfile key={this.state.current} user={this.state.user} />;
         case "Subscriptions":
           return <Subscriptions key={this.state.current} user={this.state.user} />;
+        case "Messages":
+          return <MessagesBody key={this.state.current} user={this.state.user} />;
+        case "Payments":
+          return <Checkout key={this.state.current} user={this.state.user} />;
         case "Settings":
-          return <SettingsMain key={this.state.current} user={this.state.user} />
+          return <SettingsMain key={this.state.current} user={this.state.user} />;
         default:
           return <UserProfile key={this.state.current} user={this.state.user} />;
       }

@@ -6,7 +6,6 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import LoginMenuButton from "../LoginMenuButton"; 
 
 
 
@@ -21,10 +20,10 @@ const styles = {
     marginLeft: -12,
     marginRight: 20
   },
-  logo: {
-    height: "1%",
-    width: "1%"
-  },
+  // logo: {
+  //   height: "1%",
+  //   width: "1%"
+  // },
 };
 
 function Navbar(props) {
@@ -39,7 +38,7 @@ function Navbar(props) {
           variant="h6"
           underline="none"
           color="inherit">
-          <img className={classes.logo} src="./assets/MarketBoxLogo/MarketBoxIconPNG.png" alt="golf"/>
+          {/* <img className={classes.logo} src="./assets/MarketBoxLogo/MarketBoxIconPNG.png" alt="golf"/> */}
             MarketBox
           </Link>
           </Typography>
