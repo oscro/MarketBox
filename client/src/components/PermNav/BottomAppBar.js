@@ -105,7 +105,6 @@ class BottomAppBar extends React.Component {
                 Location
               </DialogContentText>
               <TextField
-                autoFocus
                 margin="dense"
                 id="location"
                 label="Location of Your Ad-Space"
@@ -116,7 +115,6 @@ class BottomAppBar extends React.Component {
                 Description
               </DialogContentText>
               <TextField
-                autoFocus
                 margin="dense"
                 id="description"
                 label="Describe Your Ad-Space"
@@ -127,7 +125,6 @@ class BottomAppBar extends React.Component {
                 Picture
               </DialogContentText>
               <TextField
-                autoFocus
                 margin="dense"
                 id="picture"
                 label="Submit a Picture of your Space"
