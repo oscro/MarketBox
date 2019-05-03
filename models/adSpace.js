@@ -6,9 +6,12 @@ const adSpaceSchema = new Schema({
   location: {type: String, required: true},
   description:{type: String, requied: true},
   validated: {type: Boolean, default: false},
-  time: String,
   picture:[{type: String}],
-  available: {type: Boolean, default: false}
+  active: {type: Boolean, default: true},
+  dateAdded: {
+    type: Date,
+    default: Date.now()
+  }
 });
 
 const AdSpace = mongoose.model("AdSpace", adSpaceSchema);
