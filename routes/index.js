@@ -4,6 +4,17 @@ const User = require("../models/user");
 const AdSpace = require("../models/adspace");
 const passport = require("../passport");
 const { ensureAuthenticated } = require('../passport/auth');
+const cloudinary = require('cloudinary-core');
+const multer = require("multer");
+const Datauri = require('datauri');
+const path = require('path');
+
+//Image upload middleware and buffer converter
+const storage = multer.memoryStorage();
+const multerUpload = multer(storage).single("image");
+const dUri = new Datauri();
+const dataUri = req => dUri.format(path.extname(req.file.originalname).toString(), req.file.buffer);
+
 
 router.get("/user", (req, res) => {
 	if (req.user) {
@@ -77,4 +88,27 @@ router.post("/adspace", ensureAuthenticated, (req, res) => {
 		.then(dbModel => res.json(dbModel))
 		.catch(err => res.status(422).json(err));
 })
+
+// POST route for saving a new picture
+router.post("/upload", multerUpload, (req, res) => {
+	if (req.file) {
+	  var file = dataUri(req).content;
+	  let { location, description, title } = req.body;
+	  cloudinary.uploader.upload(file, (result) => {
+		AdSpace
+		  .create({
+			picture: result.secure_url,
+			description: description,
+			title: title,
+			location: location,
+		  })
+		  .then(function(newAd){
+            return User.findOneAndUpdate({_id: req.user._id},{ $push: {adSpace: newAd._id}});
+          })
+		  .then(dbModel => res.json(dbModel))
+		  .catch(err => res.status(422).json(err));
+	  });
+	}
+  });
+
 module.exports = router

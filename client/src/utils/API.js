@@ -10,11 +10,14 @@ export default {
   logout: function(company) {
     return axios.post("/auth/logout/", company);
   },
-  userInfo: function() {
-    return axios.get("/auth/userinfo/")
+  uploadPic: function(picture) {
+    return axios.post("/auth/upload", picture)
   },
   saveUser: function(user) {
     return axios.post("/auth/user", user)
+  },
+  userInfo: function() {
+    return axios.get("/auth/userinfo/")
   },
   signedIn: function() {
     return axios.get("/auth/user/")

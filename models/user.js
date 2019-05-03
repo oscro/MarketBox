@@ -25,7 +25,11 @@ const userSchema = new Schema({
   used: [{
     type: Schema.Types.ObjectId,
     ref: "AdSpace"
-  }]
+	}],
+	dateAdded: {
+		type: Date,
+		default: Date.now()
+	}
 });
 
 userSchema.methods = {
