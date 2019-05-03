@@ -77,15 +77,11 @@ class BottomAppBar extends React.Component {
         <CssBaseline />
         <AppBar position="absolute" color="primary" className={classes.appBar}>
           <Toolbar className={classes.toolbar}>
-            <Fab color="secondary" aria-label="Add" className={classes.fabButton}>
-              
-              <AddIcon 
-                variant="outlined"
-                color="primary"
-                onClick={this.handleClickOpen}
-              >
-              </AddIcon >
-              <Dialog
+            <Fab color="secondary" aria-label="Add" className={classes.fabButton} onClick={this.handleClickOpen}>
+              <AddIcon />
+              {/* <img className={classes.image} src="../assets/MarketBoxLogo/MarketBoxIconPNG.png" alt="icon" /> */}
+            </Fab>
+            <Dialog
             open={this.state.open}
             onClose={this.handleClose}
             aria-labelledby="form-dialog-title"
@@ -114,10 +110,6 @@ class BottomAppBar extends React.Component {
               </Button>
             </DialogActions>
           </Dialog>
-
-
-              {/* <img className={classes.image} src="../assets/MarketBoxLogo/MarketBoxIconPNG.png" alt="icon" /> */}
-            </Fab>
           </Toolbar>
         </AppBar>
       </React.Fragment>
