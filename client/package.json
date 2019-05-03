@@ -15,7 +15,8 @@
     "react-final-form": "^4.1.0",
     "react-router-dom": "^5.0.0",
     "react-scripts": "^2.1.1",
-    "validator": "^10.11.0"
+    "validator": "^10.11.0",
+    "react-select": "2.4.3"
   },
   "scripts": {
     "start": "react-scripts start",

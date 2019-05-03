@@ -201,10 +201,10 @@ class SideBarNav extends React.Component {
                 MarketBox
               </Link>
             </Typography>
-            <Button color="inherit" className={classes.navbuttons}>
+            <Button color="inherit" className={classes.navbuttons} pagecontent="View Ad Space" onClick={this.props.sideNavClick()}>
               View Ad Space
             </Button>
-            <Button color="inherit">View Company Listings</Button>
+            <Button color="inherit" pagecontent="View Co Listings" onClick={this.props.sideNavClick()}>View Company Listings</Button>
             <Button onClick={this.handleSignOut} color="inherit">Sign Out</Button>
           </Toolbar>
         </AppBar>
