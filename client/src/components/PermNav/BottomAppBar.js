@@ -84,20 +84,54 @@ class BottomAppBar extends React.Component {
             <Dialog
             open={this.state.open}
             onClose={this.handleClose}
+            fullWidth={true}
+            maxWidth="xl"
             aria-labelledby="form-dialog-title"
           >
-            <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+            <DialogTitle id="form-dialog-title">Add a Space</DialogTitle>
             <DialogContent>
               <DialogContentText>
-                To subscribe to this website, please enter your email address
-                here. We will send updates occasionally.
+                Title
               </DialogContentText>
               <TextField
                 autoFocus
                 margin="dense"
-                id="name"
-                label="Email Address"
-                type="email"
+                id="title"
+                label="Title of Your Ad-Space"
+                type="title"
+                fullWidth
+              />
+               <DialogContentText>
+                Location
+              </DialogContentText>
+              <TextField
+                autoFocus
+                margin="dense"
+                id="location"
+                label="Location of Your Ad-Space"
+                type="location"
+                fullWidth
+              />
+               <DialogContentText>
+                Description
+              </DialogContentText>
+              <TextField
+                autoFocus
+                margin="dense"
+                id="description"
+                label="Describe Your Ad-Space"
+                type="description"
+                fullWidth
+              />
+               <DialogContentText>
+                Picture
+              </DialogContentText>
+              <TextField
+                autoFocus
+                margin="dense"
+                id="picture"
+                label="Submit a Picture of your Space"
+                type="title"
                 fullWidth
               />
             </DialogContent>
@@ -106,7 +140,7 @@ class BottomAppBar extends React.Component {
                 Cancel
               </Button>
               <Button onClick={this.handleClose} color="primary">
-                Subscribe
+                Save
               </Button>
             </DialogActions>
           </Dialog>

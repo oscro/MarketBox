@@ -7,6 +7,7 @@ import { SettingsMain } from "../../components/Settings";
 import API from "../../utils/API";
 import MessagesBody from "../../components/Messages/MessagesBody";
 import Checkout from "../../components/Payments";
+import { ExploreSearchBar, ExploreCards } from "../../components/Explore";
 
 
 const drawerWidth = 240;
@@ -128,6 +129,12 @@ class LoggedContainer extends React.Component {
           return <Checkout key={this.state.current} user={this.state.user} />;
         case "Settings":
           return <SettingsMain key={this.state.current} user={this.state.user} />;
+        case "View Ad Space":
+          return [<ExploreSearchBar key="ExploreSearchBar" />,
+          <ExploreCards key="ExploreCards" />];
+        case "View Co Listings":
+          return [<ExploreSearchBar key="ExploreSearchBar" />,
+          <ExploreCards key="ExploreCards" />];
         default:
           return <UserProfile key={this.state.current} user={this.state.user} />;
       }
