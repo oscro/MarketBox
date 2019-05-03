@@ -5,7 +5,7 @@ const passport = require("./passport");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const session = require("express-session");
-var cloudinary = require('cloudinary-core');
+var cloudinary = require('cloudinary');
 require("dotenv").config();
 const flash = require('connect-flash');
 
