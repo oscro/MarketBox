@@ -19,7 +19,8 @@ const styles = theme => ({
   },
   button: {
     minWidth: 200,
-    margin: theme.spacing.unit
+    margin: theme.spacing.unit,
+    zIndex: 1000
   },
   // h5: {
   //   marginBottom: theme.spacing.unit * 4,

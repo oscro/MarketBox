@@ -18,10 +18,11 @@ const styles = theme => ({
   },
   layoutBody: {
     marginTop: theme.spacing.unit * 3,
-    marginBottom: theme.spacing.unit * 14,
+    marginBottom: theme.spacing.unit * 30,
     display: "flex",
     flexDirection: "column",
-    alignItems: "center"
+    alignItems: "center",
+    
   },
   backdrop: {
     position: "absolute",
@@ -58,13 +59,13 @@ function ProductHeroLayout(props) {
         {children}
         <div className={classes.backdrop} />
         <div className={classNames(classes.background, backgroundClassName)} />
-        <img
+        {/* <img
           className={classes.arrowDown}
           src="https://material-ui.com/static/themes/onepirate/productHeroArrowDown.png"
           height="16"
           width="12"
           alt="arrow down"
-        />
+        /> */}
       </LayoutBody>
     </section>
   );
