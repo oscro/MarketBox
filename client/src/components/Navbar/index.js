@@ -20,10 +20,9 @@ const styles = {
     marginLeft: -12,
     marginRight: 20
   },
-  // logo: {
-  //   height: "1%",
-  //   width: "1%"
-  // },
+  loginButton: {
+    zIndex: 1000
+  }
 };
 
 function Navbar(props) {
@@ -45,7 +44,7 @@ function Navbar(props) {
           {/* <LoginMenuButton/> */}
           {/* <Button color="inherit">View Ad Space</Button>
           <Button color="inherit">View Company Listings</Button> */}
-          <Button color="inherit" href="/signin">Login</Button>
+          <Button className={classes.loginButton} color="inherit" href="/signin">Login</Button>
         </Toolbar>
       </AppBar>
     </div>
