@@ -10,7 +10,6 @@ import PropTypes from "prop-types";
 import CardActions from "@material-ui/core/CardActions";
 import Button from "@material-ui/core/Button";
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
 const styles = theme => ({
   icon: {
@@ -59,6 +58,9 @@ const styles = theme => ({
 
 function VysContent(props) {
   const { classes } = props;
+
+  // const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+  let cards = props.user.adSpace
 
   return (
     <div className={classNames(classes.layout, classes.cardGrid)}>

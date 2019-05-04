@@ -24,7 +24,7 @@ const styles = theme => ({
   },
   media: {
     height: 0,
-    paddingTop: "56.25%" // 16:9
+    paddingTop: "30.25%" // 16:9
   },
   actions: {
     display: "flex"
@@ -76,7 +76,7 @@ class RecipeReviewCard extends React.Component {
           title="Paella dish"
         />
         <CardContent>
-          <Grid container spacing={20}>
+          <Grid container spacing={16}>
             <Grid item xs={6}>
               <Typography component="p">Username: John.Smith24</Typography>
               <Typography component="p">Location: Orlando, FL</Typography>

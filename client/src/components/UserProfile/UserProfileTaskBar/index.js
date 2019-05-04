@@ -35,7 +35,7 @@ const featuredPosts = [
 
 function TabContainer(props) {
   return (
-    <Typography component="div" style={{ padding: 8 * 3 }}>
+    <Typography component="div" style={{ padding: 8 * 3, justifyContent: "center" }}>
       {props.children}
     </Typography>
   );
@@ -49,7 +49,8 @@ const styles = theme => ({
   root: {
     flexGrow: 1,
     width: "100%",
-    backgroundColor: theme.palette.background.paper
+    backgroundColor: theme.palette.background.paper,
+    boxShadow: "0px 1px 3px 0px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 2px 1px -1px rgba(0,0,0,0.12)"
   }
 });
 
@@ -84,13 +85,13 @@ class ScrollableTabsButtonPrevent extends React.Component {
             <Tab icon={<ThumbUp />} />
           </Tabs>
         </AppBar>
-        {value === 0 && <TabContainer>Item One</TabContainer>}
-        {value === 1 && <TabContainer>Item Two</TabContainer>}
-        {value === 2 && <TabContainer>Item Three</TabContainer>}
-        {value === 3 && <TabContainer>Item Four</TabContainer>}
-        {value === 4 && <TabContainer>Item Five</TabContainer>}
-        {value === 5 && <TabContainer>Item Six</TabContainer>}
-        {value === 6 && <TabContainer>Item Seven</TabContainer>}
+        {value === 0 && <TabContainer><h4>Contact</h4></TabContainer>}
+        {value === 1 && <TabContainer><h5>Favorites</h5></TabContainer>}
+        {value === 2 && <TabContainer><h5>Map Location</h5></TabContainer>}
+        {value === 3 && <TabContainer><h5>Spaces Employed</h5></TabContainer>}
+        {value === 4 && <TabContainer><h5>Spaces Purchased</h5></TabContainer>}
+        {value === 5 && <TabContainer><h5>Dislikes</h5></TabContainer>}
+        {value === 6 && <TabContainer><h5>Likes</h5></TabContainer>}
 
         {/* Featured Posts Beginning */}
         <Grid container spacing={40} className={classes.cardGrid}>

@@ -110,33 +110,87 @@ class LoggedContainer extends React.Component {
     })
   };
 
+
   render() {
     const { classes } = this.props;
     const componentUse = () => {
       switch(this.state.current){
         case "View Your Spaces":
-          return [<VysHeader key="VysHeader" />,
-          <VysContent key="VysContent" /> ];
+          return ([
+          <VysHeader 
+          key="VysHeader" 
+          user={this.state.user}
+          />,
+          <VysContent 
+          user={this.state.user} 
+          key="VysContent" 
+          /> 
+        ]);
         case "Ratings":
-          return <RatingsPage key={this.state.current} user={this.state.user} />;
+          return (
+          <RatingsPage 
+          key={this.state.current} 
+          user={this.state.user} 
+          />
+          );
         case "Profile": 
-          return <UserProfile key={this.state.current} user={this.state.user} />;
+          return (
+          <UserProfile 
+            key={this.state.current} 
+            user={this.state.user} 
+            />);
         case "Subscriptions":
-          return <Subscriptions key={this.state.current} user={this.state.user} />;
+          return (
+          <Subscriptions 
+          key={this.state.current} 
+          user={this.state.user} 
+          />
+          );
         case "Messages":
-          return <MessagesBody key={this.state.current} user={this.state.user} />;
+          return (
+          <MessagesBody 
+          key={this.state.current} 
+          user={this.state.user} 
+          />
+          );
         case "Payments":
-          return <Checkout key={this.state.current} user={this.state.user} />;
+          return (
+          <Checkout 
+          key={this.state.current} 
+          user={this.state.user} 
+          />
+          );
         case "Settings":
-          return <SettingsMain key={this.state.current} user={this.state.user} />;
+          return ( 
+          <SettingsMain 
+          key={this.state.current}
+          user={this.state.user} 
+          />
+          );
         case "View Ad Space":
-          return [<ExploreSearchBar key="ExploreSearchBar" />,
-          <ExploreCards key="ExploreCards" />];
+          return (
+            [<ExploreSearchBar 
+              key="ExploreSearchBar" 
+              />,
+          <ExploreCards 
+          key="ExploreCards" 
+          />]);
         case "View Co Listings":
-          return [<ExploreSearchBar key="ExploreSearchBar" />,
-          <ExploreCards key="ExploreCards" />];
+          return (
+            [<ExploreSearchBar 
+              key="ExploreSearchBar" 
+              />,
+          <ExploreCards 
+          key="ExploreCards" 
+          />]
+          );
         default:
-          return <UserProfile key={this.state.current} user={this.state.user} />;
+          return (
+          <UserProfile 
+          key={this.state.current} 
+          user={this.state.user} 
+          />
+          );
       }
     }
 
