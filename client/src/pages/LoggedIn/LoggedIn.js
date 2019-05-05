@@ -126,6 +126,7 @@ class LoggedContainer extends React.Component {
           key="VysContent" 
           /> 
         ]);
+
         case "Ratings":
           return (
           <RatingsPage 

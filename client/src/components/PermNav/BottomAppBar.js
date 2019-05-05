@@ -1,16 +1,12 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
 import Fab from '@material-ui/core/Fab';
-import MenuIcon from '@material-ui/icons/Menu';
 import AddIcon from '@material-ui/icons/Add';
-import SearchIcon from '@material-ui/icons/Search';
-import MoreIcon from '@material-ui/icons/MoreVert';
-
+import Dropzone from 'react-dropzone'
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
@@ -18,6 +14,8 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+// import API from "../../utils/API";
+import axios from "axios";
 
 const styles = theme => ({
   text: {
@@ -51,15 +49,33 @@ const styles = theme => ({
     margin: '0 auto',
   },
   image: {
-      width: '80%',
-      height: "auto"
+    width: '80%',
+    height: "auto"
+  },
+  dropzone: {
+    flex: 1,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    padding: '20px',
+    borderWidth: 2,
+    borderRadius: 2,
+    borderColor: '#eeeeee',
+    borderStyle: 'dashed',
+    backgroundColor: '#fafafa',
+    color: '#bdbdbd',
+    outline: 'none',
+    transition: 'border .24s ease-in-out'
   }
 });
 
-
 class BottomAppBar extends React.Component {
   state = {
-    open: false
+    open: false,
+    file: [],
+    title: "",
+    location: "",
+    description: ""
   };
 
   handleClickOpen = () => {
@@ -68,10 +84,51 @@ class BottomAppBar extends React.Component {
 
   handleClose = () => {
     this.setState({ open: false });
+    this.setState({
+      open: false,
+      file: [],
+      title: "",
+      location: "",
+      description: ""
+    })
   };
+
+  onDrop = file=> {
+  
+    this.setState({file: [...this.state.file, ...file]});
+  }
+
+  handleChange = event => {
+    const { name, value } = event;
+    this.setState({
+      [name]: value
+    })
+  }
+
+  handleInfo = () => {
+    // const config = { headers: { 'Content-Type': 'multipart/form-data' } };
+    const fd = new FormData();
+    for(var i = 0; i < this.state.file.length; i++){
+      fd.append("file", this.state.file[i]);
+    }
+    fd.append("title", this.state.title);
+    fd.append("location", this.state.location);
+    fd.append("description", this.state.description);
+
+    axios.post("/auth/upload", fd, {headers: { 'Content-Type': 'multipart/form-data' }})
+      .then(() => {
+        alert("It was successfully saved!")
+        this.handleClose();
+      })
+      .catch(err => console.log(err));
+  }
 
   render() {
     const { classes } = this.props;
+    const file = this.state.file.map(file => (
+      <li key={file.name}>
+      </li>
+    ));
     return (
       <React.Fragment>
         <CssBaseline />
@@ -81,66 +138,84 @@ class BottomAppBar extends React.Component {
               <AddIcon />
               {/* <img className={classes.image} src="../assets/MarketBoxLogo/MarketBoxIconPNG.png" alt="icon" /> */}
             </Fab>
-            <Dialog
-            open={this.state.open}
-            onClose={this.handleClose}
-            fullWidth={true}
-            maxWidth="xl"
-            aria-labelledby="form-dialog-title"
-          >
-            <DialogTitle id="form-dialog-title">Add a Space</DialogTitle>
-            <DialogContent>
-              <DialogContentText>
-                Title
-              </DialogContentText>
-              <TextField
-                autoFocus
-                margin="dense"
-                id="title"
-                label="Title of Your Ad-Space"
-                type="title"
-                fullWidth
-              />
-               <DialogContentText>
-                Location
-              </DialogContentText>
-              <TextField
-                margin="dense"
-                id="location"
-                label="Location of Your Ad-Space"
-                type="location"
-                fullWidth
-              />
-               <DialogContentText>
-                Description
-              </DialogContentText>
-              <TextField
-                margin="dense"
-                id="description"
-                label="Describe Your Ad-Space"
-                type="description"
-                fullWidth
-              />
-               <DialogContentText>
-                Picture
-              </DialogContentText>
-              <TextField
-                margin="dense"
-                id="picture"
-                label="Submit a Picture of your Space"
-                type="title"
-                fullWidth
-              />
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={this.handleClose} color="primary">
-                Cancel
-              </Button>
-              <Button onClick={this.handleClose} color="primary">
-                Save
-              </Button>
-            </DialogActions>
-          </Dialog>
+            {/* <form action="/profile" method="post" enctype="multipart/form-data"> */}
+              <Dialog
+                open={this.state.open}
+                onClose={this.handleClose}
+                fullWidth={true}
+                maxWidth="xl"
+                aria-labelledby="form-dialog-title"
+              >
+                <DialogTitle id="form-dialog-title">Add a Space</DialogTitle>
+                <DialogContent>
+                  <DialogContentText>
+                    Title
+                </DialogContentText>
+                <TextField
+                  onChange={event => this.handleChange(event.target)}
+                  value={this.state.title}
+                  autoFocus
+                  margin="dense"
+                  id="title"
+                  name="title"
+                  label="Title of Your Ad-Space"
+                  type="title"
+                  fullWidth
+                />
+                <DialogContentText>
+                  Location
+                </DialogContentText>
+                <TextField
+                  onChange={event => this.handleChange(event.target)}
+                  value={this.state.location}
+                  margin="dense"
+                  name="location"
+                  id="location"
+                  label="Location of Your Ad-Space"
+                  type="location"
+                  fullWidth
+                />
+                <DialogContentText>
+                  Description
+                </DialogContentText>
+                <TextField
+                  onChange={event => this.handleChange(event.target)}
+                  value={this.state.description}
+                  margin="dense"
+                  name="description"
+                  id="description"
+                  label="Describe Your Ad-Space"
+                  type="description"
+                  fullWidth
+                />
+                <DialogContentText>
+                  Picture
+                </DialogContentText>
+                <Dropzone multiple accept="image/*"  onDrop={this.onDrop} className={classes.dropzone}>
+                  {({ getRootProps, getInputProps }) => (
+                    <section className="container">
+                      <div {...getRootProps({ className: 'dropzone' })}  className={classes.dropzone}>
+                        <input {...getInputProps()} />
+                        <p>Drag 'n' drop pictures here, or click to select files</p>
+                      </div>
+                      <aside>
+                        <h4>Files</h4>
+                        <ul>{file}</ul>
+                      </aside>
+                    </section>
+                  )}
+                </Dropzone>
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={this.handleClose} color="primary">
+                      Cancel
+                  </Button>
+                  <Button onClick={this.handleInfo} color="primary">
+                      Save
+                  </Button>
+                </DialogActions>
+              </Dialog>
+            {/* </form> */}
           </Toolbar>
         </AppBar>
       </React.Fragment>

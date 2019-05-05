@@ -1,5 +1,7 @@
 import axios from "axios";
 
+
+const config = { headers: { 'Content-Type': 'multipart/form-data' } };
 export default {
   newUser: function(user) {
     return axios.post("/auth/signup", user);
@@ -11,7 +13,7 @@ export default {
     return axios.post("/auth/logout/", company);
   },
   uploadPic: function(picture) {
-    return axios.post("/auth/upload", picture)
+    return axios.post("/auth/upload", picture, config)
   },
   saveUser: function(user) {
     return axios.post("/auth/user", user)

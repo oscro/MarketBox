@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import RatingsBox from "./RatingsBox/RatingsBox";
 import RatingsHeader from "./RatingsHeader/RatingsHeader";
 // import Star from "@material-ui/icons/StarRate";

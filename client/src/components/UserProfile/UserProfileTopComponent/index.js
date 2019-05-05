@@ -77,6 +77,7 @@ class RecipeReviewCard extends React.Component {
         />
         <CardContent>
           <Grid container spacing={16}>
+
             <Grid item xs={6}>
               <Typography component="p">Username: John.Smith24</Typography>
               <Typography component="p">Location: Orlando, FL</Typography>

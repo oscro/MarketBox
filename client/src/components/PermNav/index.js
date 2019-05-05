@@ -154,7 +154,7 @@ class SideBarNav extends React.Component {
     API.logout()
       .then(res => {
         console.log(res);
-        if (res.data.msg == "logging you out"){
+        if (res.data.msg === "logging you out"){
           this.setState({
             redirect: true
           })
