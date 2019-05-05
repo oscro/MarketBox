@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import classNames from "classnames";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
@@ -109,15 +108,6 @@ class DetailedExpansionPanel extends React.Component {
               }}
             />
             </form>
-            {/* <div className={classNames(classes.column, classes.helper)}>
-              <Typography variant="caption">
-                Select your destination of choice
-                <br />
-                <a href="#sub-labels-and-columns" className={classes.link}>
-                  Learn more
-                </a>
-              </Typography>
-            </div> */}
           </ExpansionPanelDetails>
           <Divider />
           <ExpansionPanelActions>

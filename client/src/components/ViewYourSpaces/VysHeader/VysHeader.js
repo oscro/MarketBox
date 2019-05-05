@@ -62,8 +62,8 @@ function VysHeader(props) {
             </Hidden>
             <Grid item xs />
             <Grid item>
-              <Typography className={classes.link} component="a" href="#">
-                John.Smith24
+              <Typography className={classes.link}>
+                {props.user.name}
               </Typography>
             </Grid>
             <Grid item>

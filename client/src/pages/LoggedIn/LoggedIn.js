@@ -115,8 +115,8 @@ class LoggedContainer extends React.Component {
     const componentUse = () => {
       switch(this.state.current){
         case "View Your Spaces":
-          return [<VysHeader key="VysHeader" />,
-          <VysContent key="VysContent" /> ];
+          return [<VysHeader key="VysHeader" user={this.state.user}/>,
+          <VysContent key="VysContent" user={this.state.user} /> ];
         case "Ratings":
           return <RatingsPage key={this.state.current} user={this.state.user} />;
         case "Profile": 
