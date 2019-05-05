@@ -11,9 +11,9 @@ const path = require('path');
 
 //Image upload middleware and buffer converter
 const storage = multer.memoryStorage();
-const multerUpload = multer(storage).single("image");
+const multerUpload = multer(storage).array("file");
 const dUri = new Datauri();
-const dataUri = req => dUri.format(path.extname(req.file.originalname).toString(), req.file.buffer);
+const dataUri = req => dUri.format(path.extname(req.files[0].originalname).toString(), req.files[0].buffer);
 
 
 router.get("/user", (req, res) => {
@@ -91,23 +91,27 @@ router.post("/adspace", ensureAuthenticated, (req, res) => {
 
 // POST route for saving a new picture
 router.post("/upload", multerUpload, (req, res) => {
-	if (req.file) {
-	  var file = dataUri(req).content;
-	  let { location, description, title } = req.body;
+	console.log(req.body)
+	if (req.files) {
+		var file = dataUri(req).content;
+		let { location, description, title } = req.body;
+		console.log(location)
 	  cloudinary.uploader.upload(file, (result) => {
-		AdSpace
-		  .create({
-			picture: result.secure_url,
-			description: description,
-			title: title,
-			location: location,
-		  })
-		  .then(function(newAd){
-            return User.findOneAndUpdate({_id: req.user._id},{ $push: {adSpace: newAd._id}});
-          })
-		  .then(dbModel => res.json(dbModel))
-		  .catch(err => res.status(422).json(err));
-	  });
+			AdSpace
+				.create({
+				picture: result.secure_url,
+				description: description,
+				title: title,
+				location: location,
+				})
+				.then(function(newAd){
+							return User.findOneAndUpdate({_id: req.user._id},{ $push: {adSpace: newAd._id}});
+						})
+				.then(dbModel => res.json(dbModel))
+				.catch(err => res.status(422).json(err));
+			});
+	}else{
+		res.status(404).json({msg: "No File"})
 	}
   });
 
