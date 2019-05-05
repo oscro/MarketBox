@@ -39,9 +39,19 @@ const styles = theme => ({
   }
 });
 
-function RatingsHeader(props) {
+class RatingsHeader extends React.Component {
   // const { classes, onDrawerToggle } = props;
-  const { classes } = props;
+
+  state = {
+    value: 0
+  };
+
+  handleChange = (event, value) => {
+    this.setState({ value });
+  };
+
+  render(){
+  const { classes } = this.props;
 
   return (
     <React.Fragment>
@@ -98,16 +108,7 @@ function RatingsHeader(props) {
                 Ratings And Reviews
               </Typography>
             </Grid>
-            {/* <Grid item>
-              <Button
-                className={classes.button}
-                variant="outlined"
-                color="inherit"
-                size="small"
-              >
-                Web setup
-              </Button>
-            </Grid> */}
+            
             <Grid item>
               <Tooltip title="Help">
                 <IconButton color="inherit">
@@ -125,7 +126,7 @@ function RatingsHeader(props) {
         position="static"
         elevation={0}
       >
-        <Tabs value={0} textColor="inherit">
+        <Tabs value={0} value={this.state.value} onChange={this.handleChange} textColor="inherit">
           <Tab textColor="inherit" label="5 Star" />
           <Tab textColor="inherit" label="4 Star" />
           <Tab textColor="inherit" label="3 Star" />
@@ -135,6 +136,7 @@ function RatingsHeader(props) {
       </AppBar>
     </React.Fragment>
   );
+}
 }
 
 RatingsHeader.propTypes = {

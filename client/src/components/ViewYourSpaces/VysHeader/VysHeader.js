@@ -39,9 +39,21 @@ const styles = theme => ({
   }
 });
 
-function VysHeader(props) {
-  // const { classes, onDrawerToggle } = props;
-  const { classes } = props;
+class VysHeader extends React.Component {
+
+  // const { classes } = props;
+
+  state = {
+    value: 0
+  };
+
+  handleChange = (event, value) => {
+    this.setState({ value });
+  };
+
+  render (){ 
+
+  const { classes } = this.props;
 
   return (
     <React.Fragment>
@@ -62,8 +74,8 @@ function VysHeader(props) {
             </Hidden>
             <Grid item xs />
             <Grid item>
-              <Typography className={classes.link}>
-                {props.user.name}
+              <Typography className={classes.link} component="a" href="#">
+                {this.props.user.name}
               </Typography>
             </Grid>
             <Grid item>
@@ -98,16 +110,7 @@ function VysHeader(props) {
                 Stored Spaces
               </Typography>
             </Grid>
-            {/* <Grid item>
-              <Button
-                className={classes.button}
-                variant="outlined"
-                color="inherit"
-                size="small"
-              >
-                Web setup
-              </Button>
-            </Grid> */}
+        
             <Grid item>
               <Tooltip title="Help">
                 <IconButton color="inherit">
@@ -125,16 +128,17 @@ function VysHeader(props) {
         position="static"
         elevation={0}
       >
-        <Tabs value={0} textColor="inherit">
+        <Tabs value={this.state.value} onChange={this.handleChange} textColor="inherit">
           <Tab textColor="inherit" label="Active" />
           <Tab textColor="inherit" label="Inactive" />
-          {/* <Tab textColor="inherit" label="Templates" />
-          <Tab textColor="inherit" label="Usage" /> */}
+          
         </Tabs>
       </AppBar>
     </React.Fragment>
   );
 }
+}
+
 
 VysHeader.propTypes = {
   classes: PropTypes.object.isRequired
