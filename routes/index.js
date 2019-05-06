@@ -24,6 +24,12 @@ router.get("/user", (req, res) => {
 	}
 })
 
+router.get("/user/adspaces", (req, res) => {
+	AdSpace.find({ })
+	.then(dbModel => res.json(dbModel))
+	.catch(err => res.status(422).json(err));
+})
+
 router.get("/userinfo", ensureAuthenticated,  (req, res) => {
 	User.findOne({ _id: req.user._id })
 		.select("-password")

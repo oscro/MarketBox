@@ -78,11 +78,13 @@ class LoggedContainer extends React.Component {
 
   state = {
     current: "",
-    user: []
+    user: [],
+    adSpaces: []
   };
 
   componentDidMount() {
     this.getlogin();
+    this.getAdSpaces();
   };
 
   handleSideNavClick = (event) => {
@@ -107,8 +109,18 @@ class LoggedContainer extends React.Component {
         user: response.data
       })
       console.log(this.state.user)
+      console.log(this.state.adSpaces)
     })
   };
+
+  getAdSpaces() {
+    API.userAdSpaces().then(response => {
+      this.setState({
+        adSpaces: response.data
+      })
+      console.log(this.state.adSpaces)
+    })
+  }
 
 
   render() {
@@ -122,8 +134,9 @@ class LoggedContainer extends React.Component {
           user={this.state.user}
           />,
           <VysContent 
-          user={this.state.user} 
-          key="VysContent" 
+          user={this.state.user}
+          adspaces={this.state.adSpaces} 
+          key={this.state.adSpaces._id} 
           /> 
         ]);
 
