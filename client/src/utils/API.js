@@ -13,16 +13,19 @@ export default {
     return axios.post("/auth/logout/", company);
   },
   uploadPic: function(picture) {
-    return axios.post("/auth/upload", picture, config)
+    return axios.post("/auth/upload", picture, config);
   },
   saveUser: function(user) {
-    return axios.post("/auth/user", user)
+    return axios.post("/auth/user", user);
   },
   userInfo: function() {
-    return axios.get("/auth/userinfo/")
+    return axios.get("/auth/userinfo/");
   },
   signedIn: function() {
-    return axios.get("/auth/user/")
+    return axios.get("/auth/user/");
+  },
+  userAdSpaces: function () {
+    return axios.get("/auth/user/adspaces");
   }
   
 };
