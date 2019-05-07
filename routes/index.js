@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/user");
-const AdSpace = require("../models/adspace");
+const AdSpace = require("../models/adSpace");
 const passport = require("../passport");
 const { ensureAuthenticated } = require('../passport/auth');
 const cloudinary = require('cloudinary');
