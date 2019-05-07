@@ -67,7 +67,7 @@ function UserProfile(props) {
         <main>
 
           <ProfileTopComponent 
-          imagesource={"../assets/AvatarPlaceHolder/avatarPlaceHolder.jpg"} 
+          info={props.user}
           />
 
           <ProfileTaskBar />
