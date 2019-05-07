@@ -15,6 +15,7 @@ import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 import SettingsUnit from "../SettingsUnit/SettingsUnit";
+import SettingsUnitPicture from "../SettingsUnitPicture/SettingsUnitPicture";
 
 
 const lightColor = "rgba(255, 255, 255, 0.7)";
@@ -113,7 +114,7 @@ class SettingsHeader extends React.Component {
 
           <SettingsUnit name="name" info={this.props.user.name} settingslabel="Full Name" settingsdescription="Enter Your Full Name" />
           <SettingsUnit name="email" info={this.props.user.email} settingslabel="Email" settingsdescription="Enter Your Email" />
-          <SettingsUnit name="password" settingslabel="Password" settingsdescription="Enter Your New Password" />
+          <SettingsUnitPicture name="picture" settingslabel="Profile Picture" settingsdescription="Upload Your Profile Picture" />
           <SettingsUnit name="phone" info={this.props.user.phone} settingslabel="Phone Number" settingsdescription="Enter Your Phone Number" />
           <SettingsUnit name="address" info={this.props.user.address} settingslabel="Address" settingsdescription="Enter Your Address" />
           <SettingsUnit name="description" info={this.props.user.description} settingslabel="Company Description" settingsdescription="Enter Your Description" />

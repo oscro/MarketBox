@@ -12,7 +12,7 @@ const userSchema = new Schema({
   address: String,
   picture: String,
 	rating: Number,
-	discription: String,
+	description: String,
   paid: { type: Boolean, default: false },
   adSpace: [{
     type: Schema.Types.ObjectId,

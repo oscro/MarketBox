@@ -15,7 +15,6 @@ const multerUpload = multer(storage).array("file");
 const dUri = new Datauri();
 const dataUri = req => dUri.format(path.extname(req.files[0].originalname).toString(), req.files[0].buffer);
 
-
 router.get("/user", (req, res) => {
 	if (req.user) {
 		return res.json({ user: req.user })
@@ -24,15 +23,16 @@ router.get("/user", (req, res) => {
 	}
 })
 
-router.get("/user/adspaces", (req, res) => {
-	AdSpace.find({ })
-	.then(dbModel => res.json(dbModel))
-	.catch(err => res.status(422).json(err));
-})
+// router.get("/user/adspaces", (req, res) => {
+// 	AdSpace.find({ })
+// 	.then(dbModel => res.json(dbModel))
+// 	.catch(err => res.status(422).json(err));
+// })
 
 router.get("/userinfo", ensureAuthenticated,  (req, res) => {
 	User.findOne({ _id: req.user._id })
-		.select("-password")
+		// .select("-password")
+		.populate("adSpace")
 		.then(dbModel => res.json(dbModel))
 		.catch(err => res.status(422).json(err));
 })
@@ -119,6 +119,23 @@ router.post("/upload", multerUpload, (req, res) => {
 	}else{
 		res.status(404).json({msg: "No File"})
 	}
-  });
+	});
+	
+	router.post("/profilePic", multerUpload, (req, res) => {
+		if (req.files) {
+			var file = dataUri(req).content;
+			cloudinary.uploader.upload(file, (result) => {
+				User.findOneAndUpdate({
+					 _id: req.user._id 
+					},{
+					picture: result.secure_url,
+					})
+					.then(dbModel => res.json(dbModel))
+					.catch(err => res.status(422).json(err));
+				});
+		}else{
+			res.status(404).json({msg: "No File"})
+		}
+		});
 
 module.exports = router
