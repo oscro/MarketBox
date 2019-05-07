@@ -8,20 +8,24 @@ function RatingsPage(props) {
 
   return (
     <div>
-      <RatingsHeader />
+      <RatingsHeader info={props.user} />
       <RatingsBox
+        info={props.user}
         reviewTitle="Title"
         reviewContent="This is my review of #Username#. They were absolutely amazing! I give them 5 stars"
       />
       <RatingsBox
+        info={props.user}
         reviewTitle="Title"
         reviewContent="This is my review of #Username#. They were absolutely amazing! I give them 5 stars"
       />
       <RatingsBox
+        info={props.user}
         reviewTitle="Title"
         reviewContent="This is my review of #Username#. They were absolutely amazing! I give them 5 stars"
       />
       <RatingsBox
+        info={props.user}
         reviewTitle="Title"
         reviewContent="This is my review of #Username#. They were absolutely amazing! I give them 5 stars"
       />

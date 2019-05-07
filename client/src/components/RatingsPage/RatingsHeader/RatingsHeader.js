@@ -73,7 +73,7 @@ class RatingsHeader extends React.Component {
             <Grid item xs />
             <Grid item>
               <Typography className={classes.link} component="a" href="#">
-                John.Smith24
+                {this.props.info.name}
               </Typography>
             </Grid>
             <Grid item>
@@ -87,7 +87,7 @@ class RatingsHeader extends React.Component {
               <IconButton color="inherit" className={classes.iconButtonAvatar}>
                 <Avatar
                   className={classes.avatar}
-                  src="../assets/AvatarPlaceHolder/avatarPlaceHolder.jpg"
+                  src={this.props.info.picture}
                 />
               </IconButton>
             </Grid>
