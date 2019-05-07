@@ -24,8 +24,8 @@ export default {
   signedIn: function() {
     return axios.get("/auth/user/");
   },
-  userAdSpaces: function () {
-    return axios.get("/auth/user/adspaces");
-  }
+  // userAdSpaces: function () {
+  //   return axios.get("/auth/user/adspaces");
+  // }
   
 };

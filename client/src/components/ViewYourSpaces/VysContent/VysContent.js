@@ -60,7 +60,7 @@ function VysContent(props) {
   const { classes } = props;
 
   // const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-  let cards = props.adspaces
+  let cards = props.user.adSpace
 
   return (
     <div className={classNames(classes.layout, classes.cardGrid)}>
