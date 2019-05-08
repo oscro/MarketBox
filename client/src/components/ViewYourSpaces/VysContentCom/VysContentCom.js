@@ -8,7 +8,7 @@ import classNames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 import CardActions from "@material-ui/core/CardActions";
-import ImageModal from "../../ImageModal";
+import Button from "@material-ui/core/Button";
 
 
 const styles = theme => ({
@@ -60,13 +60,13 @@ function VysContent(props) {
   const { classes } = props;
 
   // const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-  let cards = props.user.adSpace
+  // let cards = props.user.favorites
 
   return (
     <div className={classNames(classes.layout, classes.cardGrid)}>
       {/* End hero unit */}
       <Grid container spacing={40}>
-        {cards.map(card => (
+        {props.value.map(card => (
           <Grid item key={card} sm={6} md={4} lg={3}>
             <Card className={classes.card}>
               <CardMedia
@@ -84,18 +84,18 @@ function VysContent(props) {
                 </Typography>
               </CardContent>
               <CardActions>
-                <ImageModal />
-                {/* <Button size="small" color="primary">
+                <Button size="small" color="primary">
                   View
-                </Button> */}
-                {/* <Button size="small" color="primary">
+                </Button>
+                <Button size="small" color="primary">
                   Edit
-                </Button> */}
+                </Button>
               </CardActions>
             </Card>
           </Grid>
         ))}
       </Grid>
+      
     </div>
   );
 }

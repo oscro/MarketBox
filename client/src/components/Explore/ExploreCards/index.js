@@ -8,7 +8,6 @@ import classNames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 import CardActions from "@material-ui/core/CardActions";
-import Button from "@material-ui/core/Button";
 import API from "../../../utils/API";
 import ImageModal from "../../ImageModal";
 

@@ -3,8 +3,8 @@ import Jumbotron from "./Jumbotron";
 import PermNav from "./PermNav";
 import RatingsPage from "./RatingsPage";
 import UserProfile from "./UserProfile";
-import { VysHeader, VysContent } from "./ViewYourSpaces";
+import { VysHeader, VysContent, VysHeaderCom, VysContentCom } from "./ViewYourSpaces";
 import Subscriptions from "./Subscriptions";
 import ImageModal from "./ImageModal";
 
-export { Navbar, Jumbotron, PermNav, VysHeader, VysContent, RatingsPage, UserProfile, Subscriptions, ImageModal };
+export { Navbar, Jumbotron, PermNav, VysHeader, VysContent, VysHeaderCom, VysContentCom, RatingsPage, UserProfile, Subscriptions, ImageModal };

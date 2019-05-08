@@ -64,7 +64,7 @@ class DetailedExpansionPanel extends React.Component {
     axios.post("/auth/profilePic", fd, {headers: { 'Content-Type': 'multipart/form-data' }})
       .then(() => {
         alert("It was successfully saved!")
-        this.handleClose();
+        this.props.changer();
       })
       .catch(err => console.log(err));
   }
@@ -101,7 +101,9 @@ class DetailedExpansionPanel extends React.Component {
           <Divider />
           <ExpansionPanelActions>
             <Button size="small">Cancel</Button>
-            <Button size="small" color="primary" onClick={this.handleInfo}>
+            <Button size="small" color="primary" onClick= {() => {
+              this.handleInfo();
+            }}>
               Save
             </Button>
           </ExpansionPanelActions>
