@@ -14,7 +14,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
-
+import VysContentCom from "../VysContentCom/VysContentCom";
 const lightColor = "rgba(255, 255, 255, 0.7)";
 
 const styles = theme => ({
@@ -39,21 +39,28 @@ const styles = theme => ({
   }
 });
 
-class RatingsHeader extends React.Component {
-  // const { classes, onDrawerToggle } = props;
+class VysHeader extends React.Component {
+
+  // const { classes } = props;
 
   state = {
-    value: 0
+    value: []
   };
 
-  handleChange = (event, value) => {
-    this.setState({ value });
+  handleClick = (event) => {
+    if(event === "favorites"){
+      this.setState({value: this.props.user.favorites})
+    }else{
+      this.setState({value: this.props.user.used})
+    }
   };
 
-  render(){
+  render (){ 
+
   const { classes } = this.props;
 
   return (
+    <div>
     <React.Fragment>
       <AppBar color="primary" position="sticky" elevation={0}>
         <Toolbar>
@@ -73,7 +80,7 @@ class RatingsHeader extends React.Component {
             <Grid item xs />
             <Grid item>
               <Typography className={classes.link} component="a" href="#">
-                {this.props.info.username}
+                {this.props.user.username}
               </Typography>
             </Grid>
             <Grid item>
@@ -87,7 +94,7 @@ class RatingsHeader extends React.Component {
               <IconButton color="inherit" className={classes.iconButtonAvatar}>
                 <Avatar
                   className={classes.avatar}
-                  src={this.props.info.picture}
+                  src={this.props.user.picture}
                 />
               </IconButton>
             </Grid>
@@ -105,10 +112,10 @@ class RatingsHeader extends React.Component {
           <Grid container alignItems="center" spacing={8}>
             <Grid item xs>
               <Typography color="inherit" variant="h5">
-                Ratings And Reviews
+                Stored Spaces
               </Typography>
             </Grid>
-            
+        
             <Grid item>
               <Tooltip title="Help">
                 <IconButton color="inherit">
@@ -126,22 +133,28 @@ class RatingsHeader extends React.Component {
         position="static"
         elevation={0}
       >
-        <Tabs value={this.state.value} onChange={this.handleChange} textColor="inherit">
-          <Tab textColor="inherit" label="5 Star" />
-          <Tab textColor="inherit" label="4 Star" />
-          <Tab textColor="inherit" label="3 Star" />
-          <Tab textColor="inherit" label="2 Star" />
-          <Tab textColor="inherit" label="1 Star" />
+        <Tabs   textColor="inherit">
+          <Tab textColor="inherit" label="Favorite" onClick={() => this.handleClick("favorite")}/>
+          <Tab textColor="inherit" label="Purchased" onClick={() => this.handleClick("used")}/>
+          
         </Tabs>
       </AppBar>
     </React.Fragment>
+    
+      <VysContentCom
+        user={this.props.user}
+        value={this.state.value}
+        key={this.props.user._id} 
+      /> 
+    </div>
   );
 }
 }
 
-RatingsHeader.propTypes = {
+
+VysHeader.propTypes = {
   classes: PropTypes.object.isRequired
   // onDrawerToggle: PropTypes.func.isRequired
 };
 
-export default withStyles(styles)(RatingsHeader);
+export default withStyles(styles)(VysHeader);

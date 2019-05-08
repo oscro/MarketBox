@@ -265,15 +265,9 @@ class SideBarNav extends React.Component {
               ))}
             </React.Fragment>
           ))}
-          {/* <BottomAppBar /> */}
-          {/* <div>
-          <Divider />
-          <Divider />
-          <Fab />
-          <Divider />
-          <Divider />
-          </div> */}
+          {this.props.user.group === "provider" ? 
           <BottomAppBar />
+          : "" }
         </Drawer>
         
       </div>

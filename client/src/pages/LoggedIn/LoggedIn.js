@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import { PermNav, VysHeader, VysContent, UserProfile, RatingsPage, Subscriptions, ImageModal } from "../../components/index";
+import { PermNav, VysHeader, VysHeaderCom, UserProfile, RatingsPage, Subscriptions, ImageModal } from "../../components/index";
 import { SettingsMain } from "../../components/Settings";
 import API from "../../utils/API";
 import MessagesBody from "../../components/Messages/MessagesBody";
@@ -78,8 +78,7 @@ class LoggedContainer extends React.Component {
 
   state = {
     current: "",
-    user: [],
-    adSpaces: []
+    user: []
   };
 
   componentDidMount() {
@@ -87,7 +86,6 @@ class LoggedContainer extends React.Component {
   };
 
   handleSideNavClick = (event) => {
-    this.getUser();
     let pagecontent = event.currentTarget.getAttribute("pagecontent");
     this.setState({ current: pagecontent });
   };
@@ -111,101 +109,102 @@ class LoggedContainer extends React.Component {
     })
   };
 
-  // getAdSpaces() {
-  //   API.userAdSpaces().then(response => {
-  //     this.setState({
-  //       adSpaces: response.data
-  //     })
-  //     console.log(this.state.adSpaces)
-  //   })
-  // }
-
+  handleUpdate(user) {
+    this.setState({
+      user: user
+    })
+  }
 
   render() {
     const { classes } = this.props;
     const componentUse = () => {
       switch(this.state.current){
-        case "View Your Spaces":
-          return ([
-          <VysHeader 
-          key="VysHeader" 
-          user={this.state.user}
-          />,
-          <VysContent 
-          user={this.state.user}
-          // adspaces={this.state.adSpaces} 
-          key={this.state.user.adSpace._id} 
-          /> 
-        ]);
+        case "View Your Spaces": 
+          if (this.state.user.group === "company"){
+            return (
+              <VysHeaderCom
+                key="VysHeadercom" 
+                user={this.state.user}
+              />
+            )
+          }else{
+            return (
+              <VysHeader
+                key="VysHeader" 
+                user={this.state.user}
+              />
+            )
+          };
 
         case "Ratings":
           return (
-          <RatingsPage 
-          key={this.state.current} 
-          user={this.state.user} 
-          />
+            <RatingsPage 
+              key={this.state.current} 
+              user={this.state.user} 
+            />
           );
         case "Profile": 
           return (
-            <React.Fragment>
-              <ImageModal />
-          <UserProfile 
-            key={this.state.current} 
-            user={this.state.user} 
+          <React.Fragment>
+            <ImageModal />
+            <UserProfile 
+              key={this.state.current} 
+              user={this.state.user} 
             />
-            
-            </React.Fragment>);
+          </React.Fragment>);
         case "Subscriptions":
           return (
-          <Subscriptions 
-          key={this.state.current} 
-          user={this.state.user} 
-          />
+            <Subscriptions 
+              key={this.state.current} 
+              user={this.state.user} 
+            />
           );
         case "Messages":
           return (
-          <MessagesBody 
-          key={this.state.current} 
-          user={this.state.user} 
-          />
+            <MessagesBody 
+              key={this.state.current} 
+              user={this.state.user} 
+            />
           );
         case "Payments":
           return (
-          <Checkout 
-          key={this.state.current} 
-          user={this.state.user} 
-          />
+            <Checkout 
+              key={this.state.current} 
+              user={this.state.user} 
+            />
           );
         case "Settings":
           return ( 
-          <SettingsMain 
-          key={this.state.current}
-          user={this.state.user} 
-          />
+            <SettingsMain 
+              key={this.state.current}
+              user={this.state.user} 
+              userUpdate={() => this.getUser()}
+            />
           );
         case "View Ad Space":
-          return (
-            [<ExploreSearchBar 
+          return ([
+            <ExploreSearchBar 
               key="ExploreSearchBar" 
-              />,
-          <ExploreCards 
-          key="ExploreCards" 
-          />]);
+            />,
+            <ExploreCards 
+              key="ExploreCards" 
+            />
+          ]);
         case "View Co Listings":
-          return (
-            [<ExploreSearchBar 
+          return ([
+            <ExploreSearchBar 
               key="ExploreSearchBar" 
-              />,
-          <ExploreCards 
-          key="ExploreCards" 
-          />]
-          );
+            />,
+            <ExploreCards 
+              key="ExploreCards" 
+            />
+        ]);
         default:
           return (
-          <UserProfile 
-          key={this.state.current} 
-          user={this.state.user} 
-          />
+            <UserProfile 
+              key={this.state.current} 
+              user={this.state.user} 
+            />
           );
       }
     }
@@ -214,13 +213,14 @@ class LoggedContainer extends React.Component {
       <div className={classes.root}>
         <CssBaseline />
         <PermNav 
-        sideNavClick={()=>this.handleSideNavClick}/>
+          sideNavClick={()=>this.handleSideNavClick}
+          user={this.state.user}
+        />
         <main className={classes.content}>
           <div className={classes.toolbar} />
-        <div>
-          {componentUse()}
-        </div>
-
+          <div>
+            {componentUse()}
+          </div>
         </main>
       </div>
     );
