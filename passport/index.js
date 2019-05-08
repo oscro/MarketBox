@@ -9,7 +9,7 @@ passport.serializeUser((user, done) => {
 passport.deserializeUser((id, done) => {
 	User.findOne(
 		{ _id: id },
-		'email',
+		'username',
 		(err, user) => {
 			done(null, user)
 		}
