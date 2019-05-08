@@ -43,7 +43,7 @@ router.post('/login', function (req, res, next) {
     passport.authenticate('local'),
     (req, res) => {
         var userInfo = {
-			username: req.user.email
+			username: req.user.username
         };
         res.send(userInfo);
     }
@@ -60,18 +60,19 @@ router.post("/logout", (req, res) => {
 })
 
 router.post("/signup", (req, res) => {
-	const { email, password, name, group } = req.body;
-	User.findOne({ email: email }, (err, userMatch) => {
+	const { email, username, password, name, group } = req.body;
+	User.findOne({ username: username }, (err, userMatch) => {
 		if (userMatch) {
 			return res.json({
-				error: `Sorry, already a user with the Email: ${email}`
+				error: `Sorry, already a user with the User Name: ${username}`
 			})
 		}
 		const newUser = new User({
 			email: email,
+			username: username,
 			password: password,
 			name: name,
-			group, group
+			group: group
 		})
 		newUser.save((err, savedUser) => {
 			if (err) return res.json(err)

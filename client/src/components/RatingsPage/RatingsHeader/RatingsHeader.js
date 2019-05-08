@@ -73,7 +73,7 @@ class RatingsHeader extends React.Component {
             <Grid item xs />
             <Grid item>
               <Typography className={classes.link} component="a" href="#">
-                {this.props.info.name}
+                {this.props.info.username}
               </Typography>
             </Grid>
             <Grid item>
