@@ -21,11 +21,18 @@ import Moment from 'react-moment';
 
 const styles = theme => ({
   card: {
-    maxWidth: "100%"
+    // maxWidth: "100%"
+    maxWidth: "100%",
+    
+
   },
   media: {
-    height: 0,
-    paddingTop: "30.25%" // 16:9
+    // height: 0,
+    // paddingTop: "30.25%" // 16:9
+    width: "50%",
+    padding: 200,
+    marginLeft: "auto",
+    marginRight: "auto"
   },
   actions: {
     display: "flex"
@@ -75,7 +82,7 @@ class RecipeReviewCard extends React.Component {
         <CardMedia
           className={classes.media}
           image={this.props.info.picture}
-          title="Paella dish"
+          title="Profile Image"
         />
         <CardContent>
           <Grid container spacing={16}>

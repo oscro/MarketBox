@@ -116,8 +116,8 @@ class SettingsHeader extends React.Component {
           <SettingsUnit name="email" info={this.props.user.email} settingslabel="Email" settingsdescription="Enter Your Email" />
           <SettingsUnitPicture name="picture" settingslabel="Profile Picture" settingsdescription="Upload Your Profile Picture" />
           <SettingsUnit name="phone" info={this.props.user.phone} settingslabel="Phone Number" settingsdescription="Enter Your Phone Number" />
-          <SettingsUnit name="address" info={this.props.user.address} settingslabel="Address" settingsdescription="Enter Your Address" />
-          <SettingsUnit name="description" info={this.props.user.description} settingslabel="Company Description" settingsdescription="Enter Your Description" />
+          <SettingsUnit name="address" info={this.props.user.address} settingslabel="City, State" settingsdescription="Enter Your City and State" />
+          <SettingsUnit name="description" info={this.props.user.description} settingslabel="Description" settingsdescription="Enter Your Description" />
 
       </React.Fragment>
     );
