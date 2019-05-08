@@ -10,7 +10,6 @@ import { Field, Form, FormSpy } from 'react-final-form';
 import Typography from '../../components/Material/modules/components/Typography';
 import AppFooter from '../../components/Material/modules/views/AppFooter';
 import AppForm from '../../components/Material/modules/views/AppForm';
-import { email, required } from '../../components/Material/modules/form/validation';
 import RFTextField from '../../components/Material/modules/form/RFTextField';
 import FormButton from '../../components/Material/modules/form/FormButton';
 import FormFeedback from '../../components/Material/modules/form/FormFeedback';
@@ -35,21 +34,8 @@ class SignIn extends React.Component {
     sent: false,
   };
 
-  validate = values => {
-    const errors = required(['email', 'password'], values, this.props);
-
-    if (!errors.email) {
-      const emailError = email(values.email, values, this.props);
-      if (emailError) {
-        errors.email = email(values.email, values, this.props);
-      }
-    }
-
-    return errors;
-  };
-
   handleSubmit = values => {
-    const user = {email: values.email, password: values.password};
+    const user = {username: values.username, password: values.password};
     API.login(user)
       .then(res => this.props.history.push('/dashboard/user'))
       .catch(err => console.log(err));
@@ -82,14 +68,14 @@ class SignIn extends React.Component {
             {({ handleSubmit, submitting }) => (
               <form onSubmit={handleSubmit} className={classes.form} noValidate>
                 <Field
-                  autoComplete="email"
+                  autoComplete="username"
                   autoFocus
                   component={RFTextField}
                   disabled={submitting || sent}
                   fullWidth
-                  label="Email"
+                  label="User Name"
                   margin="normal"
-                  name="email"
+                  name="username"
                   required
                   size="large"
                 />

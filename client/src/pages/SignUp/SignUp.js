@@ -71,7 +71,7 @@ class SignUp extends React.Component {
   }
 
   handleSubmit = (values) => {
-    const user = { name: values.name, email: values.email, password: values.password, group: this.state.group };
+    const user = { name: values.name, email: values.email, username: values.username, password: values.password, group: this.state.group };
     API.newUser(user)
       .then(res => this.props.history.push('/signin'))
       .catch(err => console.log(err));
@@ -109,6 +109,15 @@ class SignUp extends React.Component {
                   fullWidth
                   label="Full Name or Business"
                   name="name"
+                  required
+                />
+                 <Field
+                  autoFocus
+                  component={RFTextField}
+                  autoComplete="fname"
+                  fullWidth
+                  label="User Name"
+                  name="username"
                   required
                 />
                 <Field

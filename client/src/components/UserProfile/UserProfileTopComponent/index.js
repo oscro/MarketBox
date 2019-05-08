@@ -21,11 +21,18 @@ import Moment from 'react-moment';
 
 const styles = theme => ({
   card: {
-    maxWidth: "100%"
+    height: "100%",
+    display: "flex",
+    flexDirection: "column"
   },
-  media: {
-    height: 0,
-    paddingTop: "30.25%" // 16:9
+  cardMedia: {
+    width: "50%",
+    padding: 200,
+    marginLeft: "auto",
+    marginRight: "auto"
+  },
+  cardContent: {
+    flexGrow: 1
   },
   actions: {
     display: "flex"
@@ -69,15 +76,16 @@ class RecipeReviewCard extends React.Component {
               <MoreVertIcon />
             </IconButton>
           }
-          title={this.props.info.name}
+          title={this.props.info.username}
           subheader={ <Moment format="MMM YYYY" >{dateToFormat}</Moment> }
         />
         <CardMedia
-          className={classes.media}
+          style={{resizeMode: 'contain'}}
+          className={classes.cardMedia}
           image={this.props.info.picture}
           title="Paella dish"
         />
-        <CardContent>
+        <CardContent className={classes.cardContent}>
           <Grid container spacing={16}>
 
             <Grid item xs={6}>
