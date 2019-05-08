@@ -29,7 +29,8 @@ const styles = theme => ({
     width: "50%",
     padding: 200,
     marginLeft: "auto",
-    marginRight: "auto"
+    marginRight: "auto",
+    boxShadow: "0px 1px 3px 0px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 2px 1px -1px rgba(0,0,0,0.12)"
   },
   cardContent: {
     flexGrow: 1
@@ -83,7 +84,7 @@ class RecipeReviewCard extends React.Component {
           style={{resizeMode: 'contain'}}
           className={classes.cardMedia}
           image={this.props.info.picture}
-          title="Paella dish"
+          title="Profile Image"
         />
         <CardContent className={classes.cardContent}>
           <Grid container spacing={16}>

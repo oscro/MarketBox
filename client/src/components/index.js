@@ -5,5 +5,6 @@ import RatingsPage from "./RatingsPage";
 import UserProfile from "./UserProfile";
 import { VysHeader, VysContent } from "./ViewYourSpaces";
 import Subscriptions from "./Subscriptions";
+import ImageModal from "./ImageModal";
 
-export { Navbar, Jumbotron, PermNav, VysHeader, VysContent, RatingsPage, UserProfile, Subscriptions };
+export { Navbar, Jumbotron, PermNav, VysHeader, VysContent, RatingsPage, UserProfile, Subscriptions, ImageModal };

@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import { PermNav, VysHeader, VysContent, UserProfile, RatingsPage, Subscriptions } from "../../components/index";
+import { PermNav, VysHeader, VysContent, UserProfile, RatingsPage, Subscriptions, ImageModal } from "../../components/index";
 import { SettingsMain } from "../../components/Settings";
 import API from "../../utils/API";
 import MessagesBody from "../../components/Messages/MessagesBody";
@@ -147,10 +147,14 @@ class LoggedContainer extends React.Component {
           );
         case "Profile": 
           return (
+            <React.Fragment>
+              <ImageModal />
           <UserProfile 
             key={this.state.current} 
             user={this.state.user} 
-            />);
+            />
+            
+            </React.Fragment>);
         case "Subscriptions":
           return (
           <Subscriptions 

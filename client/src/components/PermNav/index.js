@@ -202,9 +202,12 @@ class SideBarNav extends React.Component {
               </Link>
             </Typography>
             <Button color="inherit" className={classes.navbuttons} pagecontent="View Ad Space" onClick={this.props.sideNavClick()}>
-              View Ad Space
+              View Ad Spaces
             </Button>
-            <Button color="inherit" pagecontent="View Co Listings" onClick={this.props.sideNavClick()}>View Company Listings</Button>
+
+            {/* COMPANY LISTINGS TAKING IT OUT FOR PROJECT PRESENTATION */}
+            {/* <Button color="inherit" pagecontent="View Co Listings" onClick={this.props.sideNavClick()}>View Company Listings</Button> */}
+
             <Button onClick={this.handleSignOut} color="inherit">Sign Out</Button>
           </Toolbar>
         </AppBar>
