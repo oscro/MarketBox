@@ -53,7 +53,7 @@ const styles = theme => ({
     // height: 255,
     height: "auto",
     // maxWidth: 400,
-    maxWidth: 800,
+    maxWidth: 1200,
     overflow: 'hidden',
     display: 'block',
     width: '100%',

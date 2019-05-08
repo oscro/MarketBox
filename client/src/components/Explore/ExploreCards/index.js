@@ -10,6 +10,7 @@ import PropTypes from "prop-types";
 import CardActions from "@material-ui/core/CardActions";
 import Button from "@material-ui/core/Button";
 import API from "../../../utils/API";
+import ImageModal from "../../ImageModal";
 
 const cards = [];
 // 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12
@@ -109,9 +110,7 @@ class ExploreCards extends React.Component {
                   </Typography>
                 </CardContent>
                 <CardActions>
-                  <Button size="small" color="primary">
-                    View
-                  </Button>
+                  <ImageModal />
                 </CardActions>
               </Card>
             </Grid>
