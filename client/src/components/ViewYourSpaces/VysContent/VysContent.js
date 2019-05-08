@@ -9,6 +9,7 @@ import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 import CardActions from "@material-ui/core/CardActions";
 import Button from "@material-ui/core/Button";
+import ImageModal from "../../ImageModal";
 
 
 const styles = theme => ({
@@ -84,12 +85,13 @@ function VysContent(props) {
                 </Typography>
               </CardContent>
               <CardActions>
-                <Button size="small" color="primary">
+                <ImageModal />
+                {/* <Button size="small" color="primary">
                   View
-                </Button>
-                <Button size="small" color="primary">
+                </Button> */}
+                {/* <Button size="small" color="primary">
                   Edit
-                </Button>
+                </Button> */}
               </CardActions>
             </Card>
           </Grid>

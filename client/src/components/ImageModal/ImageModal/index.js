@@ -11,8 +11,11 @@ function rand() {
 }
 
 function getModalStyle() {
-  const top = 50 + rand();
-  const left = 50 + rand();
+  // const top = 50 + rand();
+  // const left = 50 + rand();
+
+  const top = 50;
+  const left = 50;
 
   return {
     top: `${top}%`,
@@ -24,7 +27,7 @@ function getModalStyle() {
 const styles = theme => ({
   paper: {
     position: 'absolute',
-    // width: theme.spacing.unit * 50,
+    // width: theme.spacing.unit * 80,
     width: "auto",
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
@@ -51,7 +54,7 @@ class SimpleModal extends React.Component {
 
     return (
       <div>
-        <Button onClick={this.handleOpen}>Open Modal</Button>
+        <Button onClick={this.handleOpen} size="small" color="primary">View</Button>
         <Modal
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"
