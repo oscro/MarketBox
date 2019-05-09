@@ -37,7 +37,6 @@ const styles = theme => ({
 
 function UserProfile(props) {
   const { classes } = props;
-
   return (
     <React.Fragment>
       <CssBaseline />
@@ -67,7 +66,9 @@ function UserProfile(props) {
         <main>
 
           <ProfileTopComponent 
-          info={props.user}
+            info={props.user}
+            act={props.active}
+            inac={props.inactive}
           />
 
           <ProfileTaskBar />

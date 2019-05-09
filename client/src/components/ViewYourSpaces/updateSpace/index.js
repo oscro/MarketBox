@@ -13,9 +13,7 @@ import Tabs from "@material-ui/core/Tabs";
 import Toolbar from "@material-ui/core/Toolbar";
 import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
-import { withStyles } from "@material-ui/core/styles";
-import RatingsBox from "./RatingsBox/RatingsBox";
-import Star from "react-star-ratings";
+
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -49,9 +47,7 @@ const styles = theme => ({
   }
 });
 
-class RatingsHeader extends React.Component {
-  // const { classes, onDrawerToggle } = props;
-
+class SpaceUpdate extends React.Component {
   state = {
     open: false,
     value: 0,
@@ -198,84 +194,27 @@ class RatingsHeader extends React.Component {
   }
 
   render(){
-  const { classes } = this.props;
+    const { classes } = this.props;
 
-  return (
-    <div>
-    <React.Fragment>
-      <AppBar color="primary" position="sticky" elevation={0}>
-        <Toolbar>
-          <Grid container spacing={8} alignItems="center">
-            <Hidden smUp>
-              <Grid item>
-                <IconButton
-                  color="inherit"
-                  aria-label="Open drawer"
-                  className={classes.menuButton}
-                >
-                  <MenuIcon />
-                </IconButton>
-              </Grid>
-            </Hidden>
-            <Grid item xs />
-            <Grid item>
-              <Typography className={classes.link} component="a" href="#">
-                {this.props.user.username}
-              </Typography>
-            </Grid>
-            <Grid item>
-              <Tooltip title="Alerts • No alters">
-                <IconButton color="inherit">
-                  <NotificationsIcon />
-                </IconButton>
-              </Tooltip>
-            </Grid>
-            <Grid item>
-              <IconButton color="inherit" className={classes.iconButtonAvatar}>
-                <Avatar
-                  className={classes.avatar}
-                  src={this.props.user.picture}
-                />
-              </IconButton>
-            </Grid>
-          </Grid>
-        </Toolbar>
-      </AppBar>
-      <AppBar
-        component="div"
-        className={classes.secondaryBar}
-        color="primary"
-        position="static"
-        elevation={0}
-      >
-        <Toolbar>
-          <Grid container alignItems="center" spacing={8}>
-            <Grid item xs>
-              <Typography color="inherit" variant="h5">
-                Ratings and Reviews  
-              </Typography>
-              <Star
-                rating={this.state.overAll}
-                starDimension="40px"
-                starSpacing="5px"
-              />  
-              <Typography color="inherit" variant="h5">
+    return (
+        <div>
+            <Typography color="inherit" variant="h5">
                 <Button color="inherit" onClick={this.handleClickOpen}>Leave a Review</Button>
-              </Typography>
+            </Typography>
 
-              <Dialog
-                  open={this.state.open}
-                  onClose={this.handleClose}
-                  fullWidth={true}
-                  maxWidth="xl"
-                  aria-labelledby="form-dialog-title"
-                >
-                  <DialogTitle id="form-dialog-title">Leave a Review</DialogTitle>
-                  <DialogContent>
-                    <DialogContentText>
-                      Headline
-                  </DialogContentText>
-                  <TextField
+            <Dialog
+                open={this.state.open}
+                onClose={this.handleClose}
+                fullWidth={true}
+                maxWidth="xl"
+                aria-labelledby="form-dialog-title"
+            >
+                <DialogTitle id="form-dialog-title">Leave a Review</DialogTitle>
+                <DialogContent>
+                <DialogContentText>
+                    Headline
+                </DialogContentText>
+                <TextField
                     onChange={event => this.handleChange(event.target)}
                     value={this.state.title}
                     autoFocus
@@ -285,11 +224,11 @@ class RatingsHeader extends React.Component {
                     label="Headline"
                     type="title"
                     fullWidth
-                  />
-                  <DialogContentText>
+                />
+                <DialogContentText>
                     Comments
-                  </DialogContentText>
-                  <TextField
+                </DialogContentText>
+                <TextField
                     onChange={event => this.handleChange(event.target)}
                     value={this.state.msg}
                     margin="dense"
@@ -298,11 +237,11 @@ class RatingsHeader extends React.Component {
                     label="Your Comments"
                     type="msg"
                     fullWidth
-                  />
-                  <DialogContentText>
+                />
+                <DialogContentText>
                     How would you Rate your experience 1 to 5
-                  </DialogContentText>
-                  <TextField
+                </DialogContentText>
+                <TextField
                     onChange={event => this.handleChange(event.target)}
                     value={this.state.score}
                     margin="dense"
@@ -311,64 +250,26 @@ class RatingsHeader extends React.Component {
                     label="1-5"
                     type="score"
                     fullWidth
-                  />
-                  </DialogContent>
-                  <DialogActions>
+                />
+                </DialogContent>
+                <DialogActions>
                     <Button onClick={this.handleClose} color="primary">
                         Cancel
                     </Button>
                     <Button onClick={this.handleInfo} color="primary">
                         Save
                     </Button>
-                  </DialogActions>
-                </Dialog>
-
-
-              
-            </Grid>
-            <Grid item>
-              <Tooltip title="Help">
-                <IconButton color="inherit">
-                  <HelpIcon />
-                </IconButton>
-              </Tooltip>
-            </Grid>
-          </Grid>
-        </Toolbar>
-      </AppBar>
-      <AppBar
-        component="div"
-        className={classes.secondaryBar}
-        color="primary"
-        position="static"
-        elevation={0}
-      >
-        <Tabs value={this.state.value} onChange={this.handleTabs} textColor="inherit">
-          <Tab textColor="inherit" label="all" onClick={() => this.handleClick("all")}/>
-          <Tab textColor="inherit" label="5 Star" onClick={() => this.handleClick("five")}/>
-          <Tab textColor="inherit" label="4 Star" onClick={() => this.handleClick("four")}/>
-          <Tab textColor="inherit" label="3 Star" onClick={() => this.handleClick("three")}/>
-          <Tab textColor="inherit" label="2 Star" onClick={() => this.handleClick("two")}/>
-          <Tab textColor="inherit" label="1 Star" onClick={() => this.handleClick("one")}/>
-        </Tabs>
-      </AppBar>
-    </React.Fragment>
-    {[...this.state.show].reverse().map(rate => (
-        <RatingsBox
-          key={rate._id}
-          info={rate.score}
-          reviewTitle={rate.title}
-          reviewContent={rate.msg}
-        />
-    ))}
-  </div>
-  );
-}
+                </DialogActions>
+            </Dialog>
+        </div>
+    )
+  }
 }
 
-RatingsHeader.propTypes = {
+
+SpaceUpdate.propTypes = {
   classes: PropTypes.object.isRequired
   // onDrawerToggle: PropTypes.func.isRequired
 };
 
-export default withStyles(styles)(RatingsHeader);
+export default SpaceUpdate;

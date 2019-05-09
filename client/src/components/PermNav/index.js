@@ -204,6 +204,9 @@ class SideBarNav extends React.Component {
             <Button color="inherit" className={classes.navbuttons} pagecontent="View Ad Space" onClick={this.props.sideNavClick()}>
               View Ad Spaces
             </Button>
+            <Button color="inherit" pagecontent="View Co Listings" onClick={this.props.sideNavClick()}>
+              View Companies
+            </Button>
 
             {/* COMPANY LISTINGS TAKING IT OUT FOR PROJECT PRESENTATION */}
             {/* <Button color="inherit" pagecontent="View Co Listings" onClick={this.props.sideNavClick()}>View Company Listings</Button> */}

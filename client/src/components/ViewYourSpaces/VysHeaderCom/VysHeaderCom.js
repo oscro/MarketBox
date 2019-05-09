@@ -15,6 +15,7 @@ import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 import VysContentCom from "../VysContentCom/VysContentCom";
+
 const lightColor = "rgba(255, 255, 255, 0.7)";
 
 const styles = theme => ({
@@ -44,14 +45,19 @@ class VysHeader extends React.Component {
   // const { classes } = props;
 
   state = {
-    value: []
+    value: 0,
+    show: [...this.props.user.favorites]
+  };
+
+  handleChange = (event, value) => {
+    this.setState({ value });
   };
 
   handleClick = (event) => {
     if(event === "favorites"){
-      this.setState({value: this.props.user.favorites})
+      this.setState({show: this.props.user.favorites})
     }else{
-      this.setState({value: this.props.user.used})
+      this.setState({show: this.props.user.used})
     }
   };
 
@@ -133,17 +139,16 @@ class VysHeader extends React.Component {
         position="static"
         elevation={0}
       >
-        <Tabs   textColor="inherit">
-          <Tab textColor="inherit" label="Favorite" onClick={() => this.handleClick("favorite")}/>
-          <Tab textColor="inherit" label="Purchased" onClick={() => this.handleClick("used")}/>
-          
-        </Tabs>
-      </AppBar>
+        <Tabs  value={this.state.value} textColor="inherit" onChange={this.handleChange}>
+              <Tab textColor="inherit" label="favorites" onClick={() => this.handleClick("favorites")}/>
+              <Tab textColor="inherit" label="purchased" onClick={() => this.handleClick("purchased")}/>
+            </Tabs>
+          </AppBar>
     </React.Fragment>
     
       <VysContentCom
         user={this.props.user}
-        value={this.state.value}
+        value={this.state.show}
         key={this.props.user._id} 
       /> 
     </div>

@@ -73,10 +73,15 @@ class ExploreCards extends React.Component {
 
   getAdSpaces() {
     API.userAdSpaces().then(response => {
-      this.setState({
-        adSpaces: response.data
+      const active = []
+      response.data.forEach(adSpace => {
+        if (adSpace.active) {
+          active.push(adSpace)
+        }
+        this.setState({
+          adSpaces: active
+        })
       })
-      console.log(this.state.adSpaces)
     })
   }
   

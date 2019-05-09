@@ -14,7 +14,6 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
-// import API from "../../utils/API";
 import axios from "axios";
 
 const styles = theme => ({
@@ -94,7 +93,6 @@ class BottomAppBar extends React.Component {
   };
 
   onDrop = file=> {
-  
     this.setState({file: [...this.state.file, ...file]});
   }
 
@@ -193,7 +191,7 @@ class BottomAppBar extends React.Component {
                   <DialogContentText>
                     Picture
                   </DialogContentText>
-                  <Dropzone multiple accept="image/*"  onDrop={this.onDrop} className={classes.dropzone}>
+                  <Dropzone accept="image/*"  onDrop={this.onDrop} className={classes.dropzone}>
                     {({ getRootProps, getInputProps }) => (
                       <section className="container">
                         <div {...getRootProps({ className: 'dropzone' })}  className={classes.dropzone}>
