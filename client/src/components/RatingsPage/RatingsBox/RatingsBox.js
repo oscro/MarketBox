@@ -6,7 +6,7 @@ import Typography from "@material-ui/core/Typography";
 // import Avatar from "@material-ui/core/Avatar";
 // import Grid from "@material-ui/core/Grid";
 import Divider from "@material-ui/core/Divider";
-import Star from "@material-ui/icons/StarRate";
+import Star from "react-star-ratings";
 
 const styles = theme => ({
   root: {
@@ -29,11 +29,11 @@ function PaperSheet(props) {
         <Typography variant="h5" component="h3">
           {props.reviewTitle}
         </Typography>
-        <Star />
-        <Star />
-        <Star />
-        <Star />
-        <Star />
+        <Star
+          rating={props.info}
+          starDimension="20px"
+          starSpacing="5px"
+        />
         <Divider />
         <Typography component="p">{props.reviewContent}</Typography>
       </Paper>

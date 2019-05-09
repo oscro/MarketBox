@@ -49,7 +49,7 @@ if (process.env.NODE_ENV === "production") {
 
 // Connect to the Mongo DB
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/marketBox";
-mongoose.connect(MONGODB_URI, { useCreateIndex: true, useNewUrlParser: true });
+mongoose.connect(MONGODB_URI, { useCreateIndex: true, useNewUrlParser: true, useFindAndModify: false });
 
 // Define API routes here
 app.use("/auth", require("./routes"));

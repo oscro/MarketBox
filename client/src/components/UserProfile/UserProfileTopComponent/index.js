@@ -54,7 +54,9 @@ const styles = theme => ({
 });
 
 class RecipeReviewCard extends React.Component {
-  state = { expanded: false };
+  state = { 
+    expanded: false
+  };
 
   handleExpandClick = () => {
     this.setState(state => ({ expanded: !state.expanded }));
@@ -89,13 +91,22 @@ class RecipeReviewCard extends React.Component {
         <CardContent className={classes.cardContent}>
           <Grid container spacing={16}>
 
-            <Grid item xs={6}>
-              <Typography component="p">Username: {this.props.info.name}</Typography>
+            <Grid item xs={9}>
+              <Typography component="p">Name: {this.props.info.name}</Typography>
               <Typography component="p">Location: {this.props.info.address}</Typography>
             </Grid>
-            <Grid item xs={6}>
-              <Typography component="p">Active Ad-Spaces: 10</Typography>
-              <Typography component="p">Inactive Ad-Spaces: 0</Typography>
+            <Grid item xs={3}>
+              {this.props.info.group === "provider" ? (
+                  <div>
+                      <Typography component="p">Active Ad-Spaces: {this.props.act}</Typography>
+                      <Typography component="p">Inactive Ad-Spaces: {this.props.inac}</Typography>
+                  </div>
+              ):(
+                  <div>
+                    <Typography component="p">Favorited Ad-Spaces: {this.props.info.favorites > 0 ? this.props.info.favorites.length : 0}</Typography>
+                    <Typography component="p">Purchased Ad-Spaces: {this.props.info.used > 0 ? this.props.info.used.length : 0}</Typography>
+                  </div>
+              )}
             </Grid>
           </Grid>
         </CardContent>

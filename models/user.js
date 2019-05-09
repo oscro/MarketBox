@@ -12,7 +12,16 @@ const userSchema = new Schema({
 	phone: Number,
   address: String,
   picture: String,
-	rating: Number,
+	ratings: [{
+		score: Number,
+		msg: String,
+		from: String,
+		title: String,
+		dateAdded: {
+			type: Date,
+			default: Date.now()
+		}
+	}],
 	description: String,
   paid: { type: Boolean, default: false },
   adSpace: [{

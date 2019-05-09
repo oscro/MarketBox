@@ -2,12 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import { PermNav, VysHeader, VysHeaderCom, UserProfile, RatingsPage, Subscriptions, ImageModal } from "../../components/index";
+import { PermNav, VysHeader, VysHeaderCom, UserProfile, RatingsHeader, Subscriptions, ImageModal } from "../../components/index";
 import { SettingsMain } from "../../components/Settings";
 import API from "../../utils/API";
 import MessagesBody from "../../components/Messages/MessagesBody";
 import Checkout from "../../components/Payments";
-import { ExploreSearchBar, ExploreCards } from "../../components/Explore";
+import { ExploreSearchBar, ExploreCards, ExploreCardsCom, ExploreSearchBarCom  } from "../../components/Explore";
 
 
 const drawerWidth = 240;
@@ -78,7 +78,9 @@ class LoggedContainer extends React.Component {
 
   state = {
     current: "",
-    user: []
+    user: [],
+    active: 0,
+    inactive: 0
   };
 
   componentDidMount() {
@@ -103,17 +105,24 @@ class LoggedContainer extends React.Component {
   getUser() {
     API.userInfo().then(response => {
       this.setState({
-        user: response.data
+        user: response.data,
+        active: 0,
+        inactive: 0
       })
-      console.log(this.state.user)
+      response.data.adSpace.forEach(adSpace => {
+        if(adSpace.active) {
+          this.setState({
+            active: this.state.active + 1
+          })
+        }else{
+          this.setState({
+            inactive: this.state.inactive +1
+          })
+        }
+      })
+      // this.forceUpdate()
     })
   };
-
-  handleUpdate(user) {
-    this.setState({
-      user: user
-    })
-  }
 
   render() {
     const { classes } = this.props;
@@ -138,7 +147,7 @@ class LoggedContainer extends React.Component {
 
         case "Ratings":
           return (
-            <RatingsPage 
+            <RatingsHeader 
               key={this.state.current} 
               user={this.state.user} 
             />
@@ -150,6 +159,8 @@ class LoggedContainer extends React.Component {
             <UserProfile 
               key={this.state.current} 
               user={this.state.user} 
+              active={this.state.active}
+              inactive={this.state.inactive}
             />
           </React.Fragment>);
         case "Subscriptions":
@@ -192,10 +203,10 @@ class LoggedContainer extends React.Component {
           ]);
         case "View Co Listings":
           return ([
-            <ExploreSearchBar 
+            <ExploreSearchBarCom
               key="ExploreSearchBar" 
             />,
-            <ExploreCards 
+            <ExploreCardsCom
               key="ExploreCards" 
             />
         ]);
@@ -204,6 +215,9 @@ class LoggedContainer extends React.Component {
             <UserProfile 
               key={this.state.current} 
               user={this.state.user} 
+              active={this.state.active}
+              inactive={this.state.inactive}
+              
             />
           );
       }

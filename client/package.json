@@ -19,6 +19,7 @@
     "react-router-dom": "^5.0.0",
     "react-scripts": "^3.0.0",
     "react-select": "2.4.3",
+    "react-star-ratings": "^2.3.0",
     "styled-components": "^4.2.0",
     "validator": "^10.11.0"
   },

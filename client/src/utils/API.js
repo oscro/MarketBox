@@ -18,14 +18,20 @@ export default {
   saveUser: function(user) {
     return axios.post("/auth/user", user);
   },
+  saveReview: function (review) {
+    return axios.post("/auth/savereview/", review);
+  },
   userInfo: function() {
     return axios.get("/auth/userinfo/");
   },
   signedIn: function() {
     return axios.get("/auth/user/");
   },
-  userAdSpaces: function () {
-    return axios.get("/auth/user/adspaces");
+  userAdSpaces: function() {
+    return axios.get("/auth/user/adspaces/");
+  },
+  getCompanies: function() {
+    return axios.get("/auth/companies/");
   }
   
 };

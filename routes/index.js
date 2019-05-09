@@ -25,13 +25,24 @@ router.get("/user", (req, res) => {
 
 router.get("/user/adspaces", (req, res) => {
 	AdSpace.find({ })
+	.sort({ dateAdded: -1 })
+	.then(dbModel => res.json(dbModel))
+	.catch(err => res.status(422).json(err));
+})
+
+router.get("/companies", (req, res) => {
+	User.find({group: "company" })
+	.select("name")
+	.select("picture")
+	.select("description")
+	.select("_id")
 	.then(dbModel => res.json(dbModel))
 	.catch(err => res.status(422).json(err));
 })
 
 router.get("/userinfo", ensureAuthenticated,  (req, res) => {
 	User.findOne({ _id: req.user._id })
-		// .select("-password")
+		.select("-password")
 		.populate("adSpace")
 		.then(dbModel => res.json(dbModel))
 		.catch(err => res.status(422).json(err));
@@ -98,29 +109,28 @@ router.post("/adspace", ensureAuthenticated, (req, res) => {
 
 // POST route for saving a new picture
 router.post("/upload", multerUpload, (req, res) => {
-	console.log(req.body)
+	console.log(req.files)
 	if (req.files) {
 		var file = dataUri(req).content;
 		let { location, description, title } = req.body;
-		console.log(location)
-	  cloudinary.uploader.upload(file, (result) => {
+	  	cloudinary.uploader.upload(file, (result) => {
 			AdSpace
 				.create({
-				picture: result.secure_url,
-				description: description,
-				title: title,
-				location: location,
+					picture: result.secure_url,
+					description: description,
+					title: title,
+					location: location,
 				})
 				.then(function(newAd){
 							return User.findOneAndUpdate({_id: req.user._id},{ $push: {adSpace: newAd._id}});
 						})
 				.then(dbModel => res.json(dbModel))
 				.catch(err => res.status(422).json(err));
-			});
+		});
 	}else{
 		res.status(404).json({msg: "No File"})
 	}
-	});
+});
 	
 	router.post("/profilePic", multerUpload, (req, res) => {
 		if (req.files) {
@@ -137,6 +147,12 @@ router.post("/upload", multerUpload, (req, res) => {
 		}else{
 			res.status(404).json({msg: "No File"})
 		}
-		});
+	});
+
+	router.post("/savereview", ensureAuthenticated, (req, res) => {
+		User.findOneAndUpdate({ _id: req.user._id },{ $push: {ratings: req.body}})
+		.then(dbModel => res.json(dbModel))
+		.catch(err => res.status(422).json(err));
+	})
 
 module.exports = router
