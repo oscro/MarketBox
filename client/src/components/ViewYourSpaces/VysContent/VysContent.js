@@ -9,7 +9,7 @@ import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 import CardActions from "@material-ui/core/CardActions";
 import ImageModal from "../../ImageModal";
-
+import SpaceModal from "../updateSpace/index"
 
 const styles = theme => ({
   icon: {
@@ -82,7 +82,12 @@ function VysContent(props) {
                 </CardContent>
                 <CardActions>
                   <ImageModal 
-                  info={card}/>
+                    info={card}
+                  />
+                  <SpaceModal 
+                    key={card._id}
+                    _id={card._id}
+                  />
                   {/* <Button size="small" color="primary">
                     View
                   </Button> */}

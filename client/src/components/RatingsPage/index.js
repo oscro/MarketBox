@@ -24,6 +24,7 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import TextField from "@material-ui/core/TextField";
 import API from "../../utils/API";
+import validator from 'validator';
 
 const lightColor = "rgba(255, 255, 255, 0.7)";
 

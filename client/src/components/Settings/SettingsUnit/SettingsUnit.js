@@ -11,6 +11,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
 import API from "../../../utils/API";
+import validator from 'validator';
 
 const styles = theme => ({
   root: {
