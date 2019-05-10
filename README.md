@@ -1,16 +1,14 @@
 # MarketBox
 Connecting Ad Space to Ad Content
 
-## About / Synopsis
-
-* Abstract
-* Project status: working/prototype
-
-![alt text](https://market-box.herokuapp.com/assets/MarketBoxLogo/MarketBoxLogoPNG.png)
-
 ## Getting Started
 
-### Users
+Users sign up and begin adding ad spaces by clicking on the bottom left bottom on the navigation bar and specifying a title, location, and description of your ad space.
+
+Companies sign up and begin searching through out database of stored ad spaces and search based on keywords or geographic location.
+
+## Users
+
 - List available space to place Ads
 
 Users sign up and begin by adding ad spaces. Click on the bottom left button on the navigation bar and specify a title, location, and description of your ad space.
