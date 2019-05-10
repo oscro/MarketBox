@@ -127,6 +127,31 @@ const categories = [
   }
 ];
 
+const categories1 = [
+  {
+    id: "# USER NAME",
+    children: [
+      { id: "Profile", icon: <PeopleIcon />, active: true },
+      { id: "Messages", icon: <Chat /> },
+      { id: "Ratings", icon: <Grade /> }
+      // ,
+      // { id: "Functions", icon: <SettingsEthernetIcon /> },
+      // { id: "ML Kit", icon: <SettingsInputComponentIcon /> }
+    ]
+  },
+  {
+    id: "Account",
+    children: [
+      { id: "Payments", icon: <Payment /> },
+      { id: "Subscriptions", icon: <Autorenew /> },
+      { id: "Settings", icon: <SettingsIcon /> }
+      // ,
+      // { id: "Performance", icon: <TimerIcon /> },
+      // { id: "Test Lab", icon: <PhonelinkSetupIcon /> }
+    ]
+  }
+];
+
 class SideBarNav extends React.Component {
   state = {
     open: false,
@@ -238,7 +263,8 @@ class SideBarNav extends React.Component {
             </IconButton>
           </div>
           <Divider />
-          {categories.map(({ id, children }) => (
+          {this.props.user.group === "provider" ? 
+            categories.map(({ id, children }) => (
             <React.Fragment key={id}>
               {children.map(({ id: childId, icon, active }) => (
                 <ListItem
@@ -267,7 +293,39 @@ class SideBarNav extends React.Component {
                 </ListItem>
               ))}
             </React.Fragment>
-          ))}
+            ))
+          :
+          categories1.map(({ id, children }) => (
+            <React.Fragment key={id}>
+              {children.map(({ id: childId, icon, active }) => (
+                <ListItem
+                  button
+                  dense
+                  key={childId}
+                  pagecontent={childId}
+                  onClick={this.props.sideNavClick()}
+                  className={classNames(
+                    classes.item,
+                    classes.itemActionable,
+                    active && classes.itemActiveItem
+                  )}
+                >
+                  <ListItemIcon
+                  pagecontent={childId}
+                  >{icon}</ListItemIcon>
+                  <ListItemText
+                    classes={{
+                      primary: classes.itemPrimary,
+                      textDense: classes.textDense
+                    }}
+                  >
+                    {childId}
+                  </ListItemText>
+                </ListItem>
+              ))}
+            </React.Fragment>
+            ))
+          }
           {this.props.user.group === "provider" ? 
             <BottomAppBar 
               changer={() => this.props.userUpdate()}
