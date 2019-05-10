@@ -1,12 +1,11 @@
 # MarketBox
 Connecting Ad Space to Ad Content
 
-## About / Synopsis
+![alt text](https://market-box.herokuapp.com/assets/MarketBoxLogo/MarketBoxLogoPNG.png)
 
+## About / Synopsis
 * Abstract
 * Project status: working/prototype
-
-![alt text](https://market-box.herokuapp.com/assets/MarketBoxLogo/MarketBoxLogoPNG.png)
 
 ## Getting Started
 
