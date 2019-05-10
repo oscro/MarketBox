@@ -98,6 +98,12 @@ router.post("/user", ensureAuthenticated, (req, res) => {
 		.catch(err => res.status(422).json(err));
 })
 
+router.post("/adspaceupdate/:id", ensureAuthenticated, (req, res) => {
+	AdSpace.findOneAndUpdate({ _id: req.params.id }, req.body)
+		.then(dbModel => res.json(dbModel))
+		.catch(err => res.status(422).json(err));
+})
+
 router.post("/adspace", ensureAuthenticated, (req, res) => {
 	AdSpace.create(req.body)
 		.then(function(newAdSpace){
@@ -109,7 +115,6 @@ router.post("/adspace", ensureAuthenticated, (req, res) => {
 
 // POST route for saving a new picture
 router.post("/upload", multerUpload, (req, res) => {
-	console.log(req.files)
 	if (req.files) {
 		var file = dataUri(req).content;
 		let { location, description, title } = req.body;
@@ -131,23 +136,38 @@ router.post("/upload", multerUpload, (req, res) => {
 		res.status(404).json({msg: "No File"})
 	}
 });
-	
-	router.post("/profilePic", multerUpload, (req, res) => {
-		if (req.files) {
-			var file = dataUri(req).content;
-			cloudinary.uploader.upload(file, (result) => {
-				User.findOneAndUpdate({
-					 _id: req.user._id 
-					},{
-					picture: result.secure_url,
-					})
-					.then(dbModel => res.json(dbModel))
-					.catch(err => res.status(422).json(err));
-				});
-		}else{
-			res.status(404).json({msg: "No File"})
-		}
-	});
+
+router.post("/adPictureAdd", multerUpload, (req, res) => {
+	if (req.files) {
+		var file = dataUri(req).content;
+		let { _id } = req.body;
+	  	cloudinary.uploader.upload(file, (result) => {
+			AdSpace
+				.findOneAndUpdate({ _id: _id },{$push: {picture: result.secure_url}})
+				.then(dbModel => res.json(dbModel))
+				.catch(err => res.status(422).json(err));
+		});
+	}else{
+		res.status(404).json({msg: "No File"})
+	}
+});
+
+router.post("/profilePic", multerUpload, (req, res) => {
+	if (req.files) {
+		var file = dataUri(req).content;
+		cloudinary.uploader.upload(file, (result) => {
+			User.findOneAndUpdate({
+					_id: req.user._id 
+				},{
+				picture: result.secure_url,
+				})
+				.then(dbModel => res.json(dbModel))
+				.catch(err => res.status(422).json(err));
+			});
+	}else{
+		res.status(404).json({msg: "No File"})
+	}
+});
 
 	router.post("/savereview", ensureAuthenticated, (req, res) => {
 		User.findOneAndUpdate({ _id: req.user._id },{ $push: {ratings: req.body}})
