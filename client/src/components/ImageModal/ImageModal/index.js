@@ -22,6 +22,8 @@ const styles = theme => ({
     position: 'absolute',
     // width: theme.spacing.unit * 80,
     width: "auto",
+    display: "inline-block",
+    maxWidth: "80vw",
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     padding: theme.spacing.unit * 4,
@@ -55,8 +57,9 @@ class SimpleModal extends React.Component {
           onClose={this.handleClose}
         >
           <div style={getModalStyle()} className={classes.paper}>
-            <ImageCard />
-            <SimpleModalWrapped />
+            <ImageCard 
+            info={this.props.info}/>
+            {/* <SimpleModalWrapped /> */}
           </div>
         </Modal>
       </div>

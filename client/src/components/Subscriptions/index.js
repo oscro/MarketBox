@@ -62,7 +62,7 @@ const styles = theme => ({
 const tiers = [
   {
     title: 'Free',
-    price: '0',
+    price: '$0/mo',
     description: ['Search and explore ad spaces', 'Contact up to one individual to promote your ad content', 'Help center access', 'Email support'],
     buttonText: 'Sign up for free',
     buttonVariant: 'outlined',
@@ -70,7 +70,7 @@ const tiers = [
   {
     title: 'Pro',
     subheader: 'Most popular',
-    price: '60',
+    price: '$60/mo',
     description: [
       'Search and  Explore Ad Spaces',
       'Unlimited messaging between individual and business',
@@ -83,12 +83,8 @@ const tiers = [
   },
   {
     title: 'Enterprise',
-    price: '500',
+    // price: 'Contact Us for a Price Quote',
     description: [
-        'Search and  Explore Ad Spaces',
-        'Unlimited messaging between individual and business',
-        'Help center access',
-        'Priority email support',
         'Hire an unlimited amount of ad spaces',
         'Have us handle it for you. We will operate your entire marketing campaign from point A to point B.'
     ],
@@ -114,11 +110,11 @@ function Pricing(props) {
           </Typography>
         </div>
         {/* End hero unit */}
-        <Grid container spacing={40} alignItems="flex-end">
+        <Grid container spacing={40} alignItems="stretch">
           {tiers.map(tier => (
             // Enterprise card is full width at sm breakpoint
             <Grid item key={tier.title} xs={12} sm={tier.title === 'Enterprise' ? 12 : 6} md={4}>
-              <Card>
+              <Card className={classes.entireCard}>
                 <CardHeader
                   title={tier.title}
                   subheader={tier.subheader}
@@ -130,10 +126,10 @@ function Pricing(props) {
                 <CardContent>
                   <div className={classes.cardPricing}>
                     <Typography component="h2" variant="h3" color="textPrimary">
-                      ${tier.price}
+                      {tier.price}
                     </Typography>
                     <Typography variant="h6" color="textSecondary">
-                      /mo
+                      {/* /mo */}
                     </Typography>
                   </div>
                   {tier.description.map(line => (

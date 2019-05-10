@@ -8,33 +8,33 @@ import Button from '@material-ui/core/Button';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 
-const tutorialSteps = [
-  {
-    label: 'San Francisco – Oakland Bay Bridge, United States',
-    imgPath:
-      'https://images.unsplash.com/photo-1537944434965-cf4679d1a598?auto=format&fit=crop&w=900&h=650&q=60',
-  },
-  {
-    label: 'Bird',
-    imgPath:
-      'https://images.unsplash.com/photo-1538032746644-0212e812a9e7?auto=format&fit=crop&w=900&h=650&q=60',
-  },
-  {
-    label: 'Bali, Indonesia',
-    imgPath:
-      'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=900&h=650&q=80',
-  },
-  {
-    label: 'NeONBRAND Digital Marketing, Las Vegas, United States',
-    imgPath:
-      'https://images.unsplash.com/photo-1518732714860-b62714ce0c59?auto=format&fit=crop&w=900&h=650&q=60',
-  },
-  {
-    label: 'Goč, Serbia',
-    imgPath:
-      'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=900&h=650&q=60',
-  },
-];
+// const tutorialSteps = [
+//   {
+//     label: 'San Francisco – Oakland Bay Bridge, United States',
+//     imgPath:
+//       'https://images.unsplash.com/photo-1537944434965-cf4679d1a598?auto=format&fit=crop&w=900&h=650&q=60',
+//   },
+//   {
+//     label: 'Bird',
+//     imgPath:
+//       'https://images.unsplash.com/photo-1538032746644-0212e812a9e7?auto=format&fit=crop&w=900&h=650&q=60',
+//   },
+//   {
+//     label: 'Bali, Indonesia',
+//     imgPath:
+//       'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=900&h=650&q=80',
+//   },
+//   {
+//     label: 'NeONBRAND Digital Marketing, Las Vegas, United States',
+//     imgPath:
+//       'https://images.unsplash.com/photo-1518732714860-b62714ce0c59?auto=format&fit=crop&w=900&h=650&q=60',
+//   },
+//   {
+//     label: 'Goč, Serbia',
+//     imgPath:
+//       'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=900&h=650&q=60',
+//   },
+// ];
 
 const styles = theme => ({
   root: {
@@ -52,11 +52,11 @@ const styles = theme => ({
   img: {
     // height: 255,
     height: "auto",
-    // maxWidth: 400,
-    maxWidth: 1200,
+    maxWidth: "50vw",
+    maxHeight: "80vh",
+    width: 'auto',
     overflow: 'hidden',
     display: 'block',
-    width: '100%',
   },
 });
 
@@ -80,18 +80,25 @@ class TextMobileStepper extends React.Component {
   render() {
     const { classes, theme } = this.props;
     const { activeStep } = this.state;
-    const maxSteps = tutorialSteps.length;
+    // const maxSteps = tutorialSteps.length;
+    const maxSteps = this.props.info.picture.length
 
     return (
       <div className={classes.root}>
         <Paper square elevation={0} className={classes.header}>
-          <Typography>{tutorialSteps[activeStep].label}</Typography>
+          {/* <Typography>{tutorialSteps[activeStep].label}</Typography>*/}
+          <Typography>{this.props.info.title}</Typography>
         </Paper>
         <img
           className={classes.img}
-          src={tutorialSteps[activeStep].imgPath}
-          alt={tutorialSteps[activeStep].label}
+          // src={tutorialSteps[activeStep].imgPath}
+          src={this.props.info.picture}
+          alt={this.props.info.title}
         />
+        <Paper square elevation={0} className={classes.header}>
+          {/* <Typography>{tutorialSteps[activeStep].label}</Typography>*/}
+          <Typography>{this.props.info.description}</Typography>
+        </Paper>
         <MobileStepper
           steps={maxSteps}
           position="static"
