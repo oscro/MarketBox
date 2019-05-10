@@ -186,9 +186,7 @@ router.post("/profilePic", multerUpload, (req, res) => {
 			User.findOneAndUpdate({
 					_id: req.user._id 
 				},{
-					$push: { 
-						picture: result.secure_url 
-					}
+					picture: result.secure_url 
 				})
 				.then(dbModel => res.json(dbModel))
 				.catch(err => res.status(422).json(err));
