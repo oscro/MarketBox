@@ -165,15 +165,13 @@ class LoggedContainer extends React.Component {
           );
         case "Profile": 
           return (
-          <React.Fragment>
-            <ImageModal />
             <UserProfile 
               key={this.state.current} 
               user={this.state.user} 
               active={this.state.active}
               inactive={this.state.inactive}
             />
-          </React.Fragment>);
+          );
         case "Subscriptions":
           return (
             <Subscriptions 
