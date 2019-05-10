@@ -105,7 +105,9 @@ class ExploreCardsCom extends React.Component {
                   </Typography>
                 </CardContent>
                 <CardActions>
-                  <ImageModal />
+                  <ImageModal 
+                  info={company}
+                  />
                 </CardActions>
               </Card>
             </Grid>
