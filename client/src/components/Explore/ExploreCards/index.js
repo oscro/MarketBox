@@ -114,7 +114,9 @@ class ExploreCards extends React.Component {
                   </Typography>
                 </CardContent>
                 <CardActions>
-                  <ImageModal />
+                  <ImageModal 
+                  info={adSpace}
+                  />
                 </CardActions>
               </Card>
             </Grid>

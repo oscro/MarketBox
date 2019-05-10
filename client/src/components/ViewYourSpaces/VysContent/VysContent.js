@@ -81,7 +81,9 @@ function VysContent(props) {
                   </Typography>
                 </CardContent>
                 <CardActions>
-                  <ImageModal />
+                  <ImageModal 
+                    info={card}
+                  />
                   <SpaceModal 
                     key={card._id}
                     _id={card._id}
