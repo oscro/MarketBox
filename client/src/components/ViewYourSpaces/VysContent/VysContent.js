@@ -81,7 +81,8 @@ function VysContent(props) {
                   </Typography>
                 </CardContent>
                 <CardActions>
-                  <ImageModal />
+                  <ImageModal 
+                  info={card}/>
                   {/* <Button size="small" color="primary">
                     View
                   </Button> */}
