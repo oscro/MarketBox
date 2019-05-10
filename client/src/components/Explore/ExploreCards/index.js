@@ -7,6 +7,7 @@ import CardContent from "@material-ui/core/CardContent";
 import classNames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
+import Divider from "@material-ui/core/Divider";
 import CardActions from "@material-ui/core/CardActions";
 import API from "../../../utils/API";
 import ImageModal from "../../ImageModal";
@@ -113,9 +114,10 @@ class ExploreCards extends React.Component {
                     Location: {adSpace.location}
                   </Typography>
                 </CardContent>
+                <Divider />
                 <CardActions>
                   <ImageModal 
-                  info={adSpace}
+                   info={adSpace}
                   />
                 </CardActions>
               </Card>

@@ -116,6 +116,7 @@ class BottomAppBar extends React.Component {
     axios.post("/auth/upload", fd, {headers: { 'Content-Type': 'multipart/form-data' }})
       .then(() => {
         alert("It was successfully saved!")
+        this.props.changer();
         this.handleClose();
       })
       .catch(err => console.log(err));

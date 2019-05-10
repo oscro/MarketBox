@@ -15,6 +15,7 @@ import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 import VysContent from "../VysContent/VysContent"
+import API from "../../../utils/API";
 
 const lightColor = "rgba(255, 255, 255, 0.7)";
 
@@ -41,60 +42,23 @@ const styles = theme => ({
 });
 
 class VysHeader extends React.Component {
-
-  // const { classes } = props;
-
   state = {
-    active: [],
-    inactive: [],
-    show: [],
+    show: "active",
     value: 0
-  };
-
-  componentDidMount() {
-    this.handleClick("active");
   };
 
   handleChange = (event, value) => {
     this.setState({ value });
-    console.log(this.state.value)
   };
 
-  handleClick = event => {
-    let active = [];
-    let inactive = [];
-    this.props.user.adSpace.forEach(adSpace => {
-      if (adSpace.active){
-        active.push(adSpace)
-      }else{
-        inactive.push(adSpace)
-      }
-      this.setState({
-        active: active,
-        inactive: inactive
-      })
+  handleInactive = id => {
+    API.makeInactive(id)
+    .then(res => {
+      console.log(res)
+      alert("This ad is now inactive!")
+      this.props.userUpdate()
     })
-    if ( event === "used"){
-      if (inactive.length === 0){
-        this.setState({show: [{ 
-          active: "",
-          dateAdded: "",
-          description: "",
-          location: "",
-          picture: [""],
-          validated: false,
-          __v: 0,
-          _id: "",
-          title: "You do not have any inactive AdSpaces"}]
-        })
-      }else{
-        this.setState({show: [...this.state.inactive]})
-      }
-    }else if( event === "active"){
-      this.setState({show: [...this.state.active]})
-    }else{
-      this.setState({show: [...this.props.user.adSpace]})
-    }
+    .catch(err => console.log(err));
   }
 
   render (){ 
@@ -176,19 +140,17 @@ class VysHeader extends React.Component {
             elevation={0}
           >
             <Tabs  value={this.state.value} textColor="inherit" onChange={this.handleChange}>
-              <Tab textColor="inherit" label="all" onClick={() => this.handleClick("all")}/>
-              <Tab textColor="inherit" label="active" onClick={() => this.handleClick("active")}/>
-              <Tab textColor="inherit" label="inactive" onClick={() => this.handleClick("used")}/>
+              <Tab textColor="inherit" label="active" onClick={() => this.setState({show: "active"})}/>
+              <Tab textColor="inherit" label="inactive" onClick={() => this.setState({show: "inactive"})}/>
             </Tabs>
           </AppBar>
         </React.Fragment>
         <VysContent
           user={this.props.user}
-          value={this.state.show < 1 ? this.props.user.adSpace : this.state.show}
-          key={this.state.show._id} 
-          changer={() => {
-            this.props.userUpdate()
-          }}
+          value={this.state.show === "active" ? this.props.user.active : this.props.user.inactive}
+          other={this.state.show}
+          changer={() => this.props.userUpdate()}
+          onClick={id => this.handleInactive(id)}
         /> 
       </div>
     );

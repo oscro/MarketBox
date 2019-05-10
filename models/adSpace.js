@@ -6,8 +6,9 @@ const adSpaceSchema = new Schema({
   location: {type: String, required: true},
   description:{type: String, requied: true},
   validated: {type: Boolean, default: false},
-  picture:[{type: String}],
   active: {type: Boolean, default: true},
+  picture:[{type: String}],
+  user: String,
   dateAdded: {
     type: Date,
     default: Date.now()

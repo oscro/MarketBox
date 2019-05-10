@@ -43,7 +43,22 @@ router.get("/companies", (req, res) => {
 router.get("/userinfo", ensureAuthenticated,  (req, res) => {
 	User.findOne({ _id: req.user._id })
 		.select("-password")
-		.populate("adSpace")
+		.populate("active")
+		.populate("inactive")
+		.then(dbModel => res.json(dbModel))
+		.catch(err => res.status(422).json(err));
+})
+
+router.get("/otheruser/:username", ensureAuthenticated,  (req, res) => {
+	User.findOne({ username: req.params.username })
+		.select("username")
+		.select("dateAdded")
+		.select("ratings")
+		.select("picture")
+		.select("description")
+		.select("active")
+		.select("inactive")
+		.populate("active")
 		.then(dbModel => res.json(dbModel))
 		.catch(err => res.status(422).json(err));
 })
@@ -104,6 +119,17 @@ router.post("/adspaceupdate/:id", ensureAuthenticated, (req, res) => {
 		.catch(err => res.status(422).json(err));
 })
 
+router.post("/inactive/:id", ensureAuthenticated, (req, res) => {
+	console.log(req.params.id)
+	console.log(req.user._id)
+	User.findOneAndUpdate({ _id: req.user._id },{$push: {inactive: req.params.id},$pull: {active: req.params.id}})
+		.then(function() {
+			return AdSpace.findOneAndUpdate({_id: req.params.id},{active: false});
+		})
+		.then(dbModel => res.json(dbModel))
+		.catch(err => res.status(422).json(err));
+})
+
 router.post("/adspace", ensureAuthenticated, (req, res) => {
 	AdSpace.create(req.body)
 		.then(function(newAdSpace){
@@ -125,9 +151,10 @@ router.post("/upload", multerUpload, (req, res) => {
 					description: description,
 					title: title,
 					location: location,
+					user: req.user.username
 				})
 				.then(function(newAd){
-							return User.findOneAndUpdate({_id: req.user._id},{ $push: {adSpace: newAd._id}});
+							return User.findOneAndUpdate({_id: req.user._id},{ $push: {active: newAd._id}});
 						})
 				.then(dbModel => res.json(dbModel))
 				.catch(err => res.status(422).json(err));
@@ -159,7 +186,9 @@ router.post("/profilePic", multerUpload, (req, res) => {
 			User.findOneAndUpdate({
 					_id: req.user._id 
 				},{
-				picture: result.secure_url,
+					$push: { 
+						picture: result.secure_url 
+					}
 				})
 				.then(dbModel => res.json(dbModel))
 				.catch(err => res.status(422).json(err));

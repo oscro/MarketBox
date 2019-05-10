@@ -24,15 +24,11 @@ const userSchema = new Schema({
 	}],
 	description: String,
   paid: { type: Boolean, default: false },
-  adSpace: [{
+  active: [{
     type: Schema.Types.ObjectId,
     ref: "AdSpace"
 	}],
-	favorites: [{
-    type: Schema.Types.ObjectId,
-    ref: "AdSpace"
-  }],
-  used: [{
+	inactive: [{
     type: Schema.Types.ObjectId,
     ref: "AdSpace"
 	}],

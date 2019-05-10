@@ -24,6 +24,9 @@ export default {
   saveReview: function (review) {
     return axios.post("/auth/savereview/", review);
   },
+  makeInactive: function (id) {
+    return axios.post("/auth/inactive/" + id);
+  },
   userInfo: function() {
     return axios.get("/auth/userinfo/");
   },
@@ -35,6 +38,9 @@ export default {
   },
   getCompanies: function() {
     return axios.get("/auth/companies/");
+  },
+  getOther: function(username) {
+    return axios.get("/auth/otheruser/" + username);
   }
   
 };

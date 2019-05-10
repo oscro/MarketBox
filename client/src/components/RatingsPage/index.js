@@ -24,7 +24,6 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import TextField from "@material-ui/core/TextField";
 import API from "../../utils/API";
-import validator from 'validator';
 
 const lightColor = "rgba(255, 255, 255, 0.7)";
 
@@ -56,7 +55,7 @@ class RatingsHeader extends React.Component {
   state = {
     open: false,
     value: 0,
-    show: [...this.props.user.ratings],
+    show: this.props.user.ratings,
     one: [],
     two: [],
     three: [],
@@ -69,6 +68,10 @@ class RatingsHeader extends React.Component {
   };
 
   componentDidMount() {
+   this.handleUpdate()
+  }
+
+  handleUpdate = () => {
     const one = [];
     const two = [];
     const three = [];
@@ -78,7 +81,7 @@ class RatingsHeader extends React.Component {
     let sum = 0;
 
     if (this.props.user.ratings.length >= 1){
-    this.props.user.ratings.forEach(rate => {
+      this.props.user.ratings.forEach(rate => {
         sum = rate.score + sum;
         count = count + 1;
 
@@ -93,10 +96,11 @@ class RatingsHeader extends React.Component {
         }else{
           five.push(rate)
         }
-        
+          
       })
       let overAll = sum/count;
       this.setState({
+        show: this.props.user.ratings,
         overAll: overAll,
         one: one,
         two: two,
@@ -128,7 +132,6 @@ class RatingsHeader extends React.Component {
   }
 
   handleClose = () => {
-    this.setState({ open: false });
     this.setState({
       open: false,
       title: "",
@@ -140,27 +143,27 @@ class RatingsHeader extends React.Component {
   handleClick = event => {
     if (event === "one"){
       this.setState({
-        show: [...this.state.one]
+        show: this.state.one
       })
     }else if(event === "two"){
       this.setState({
-        show: [...this.state.two]
+        show: this.state.two
       })
     }else if(event === "three"){
       this.setState({
-        show: [...this.state.three]
+        show: this.state.three
       })
     }else if(event === "four"){
       this.setState({
-        show: [...this.state.four]
+        show: this.state.four
       })
     }else if(event === "all"){
       this.setState({
-        show: [...this.props.user.ratings]
+        show: this.props.user.ratings
       })
     }else{
       this.setState({
-        show: [...this.state.five]
+        show: this.state.five
       })
     }
     if (this.props.user.ratings < 1){
@@ -183,10 +186,12 @@ class RatingsHeader extends React.Component {
     const review = {
       title: this.state.title,
       msg: this.state.msg,
-      score: this.state.score
+      score: this.state.score,
+      from: this.props.user.username
     }
     API.saveReview(review)
       .then(() => {
+        this.props.userUpdate()
         alert("It was successfully saved!")
         this.setState({
           title: "",
@@ -194,6 +199,7 @@ class RatingsHeader extends React.Component {
           score: ""
         })
         this.handleClose()
+        setTimeout(function() {this.componentDidMount()}.bind(this),700);
       })
       .catch(err => console.log(err));
   }
@@ -354,12 +360,18 @@ class RatingsHeader extends React.Component {
         </Tabs>
       </AppBar>
     </React.Fragment>
+
+
+
+
+
     {[...this.state.show].reverse().map(rate => (
         <RatingsBox
           key={rate._id}
           info={rate.score}
           reviewTitle={rate.title}
           reviewContent={rate.msg}
+          from={rate.from}
         />
     ))}
   </div>

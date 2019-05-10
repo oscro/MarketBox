@@ -269,7 +269,9 @@ class SideBarNav extends React.Component {
             </React.Fragment>
           ))}
           {this.props.user.group === "provider" ? 
-          <BottomAppBar />
+            <BottomAppBar 
+              changer={() => this.props.userUpdate()}
+            />
           : "" }
         </Drawer>
         

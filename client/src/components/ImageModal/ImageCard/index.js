@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
+import { Link } from "react-router-dom";
 
 // const tutorialSteps = [
 //   {
@@ -77,6 +78,10 @@ class TextMobileStepper extends React.Component {
     }));
   };
 
+  handleLink = () => {
+    return <Link to={"/dashboard/user/" + this.props.info.user} />
+  }
+
   render() {
     const { classes, theme } = this.props;
     const { activeStep } = this.state;
@@ -117,6 +122,11 @@ class TextMobileStepper extends React.Component {
             </Button>
           }
         />
+        <Link to={"/dashboard/user/" + this.props.info.user} >
+          <Button>
+            Veiw User Profile
+          </Button>
+        </ Link>
       </div>
     );
   }
