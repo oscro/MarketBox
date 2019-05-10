@@ -26,7 +26,7 @@ function PaperSheet(props) {
         {/* <Grid container justify="center" alignItems="center">
       <Avatar alt="Remy Sharp" src="./P2.jpg" className={classes.bigAvatar} />
       </Grid> */}
-        <Typography variant="h5" component="h3">
+        <Typography variant="h4" component="h3">
           {props.reviewTitle}
         </Typography>
         <Star
@@ -36,6 +36,7 @@ function PaperSheet(props) {
         />
         <Divider />
         <Typography component="p">{props.reviewContent}</Typography>
+        <Typography variant="h6" component="h6">Review from: {props.from}</Typography>
       </Paper>
     </div>
   );

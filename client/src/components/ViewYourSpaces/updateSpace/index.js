@@ -13,8 +13,6 @@ import API from "../../../utils/API";
 import Dropzone from 'react-dropzone';
 import axios from "axios";
 
-const lightColor = "rgba(255, 255, 255, 0.7)";
-
 const styles = theme => ({
     text: {
       paddingTop: theme.spacing.unit * 2,

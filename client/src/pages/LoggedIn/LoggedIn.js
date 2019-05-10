@@ -109,18 +109,27 @@ class LoggedContainer extends React.Component {
         active: 0,
         inactive: 0
       })
-      response.data.adSpace.forEach(adSpace => {
-        if(adSpace.active) {
+      response.data.active ?
+        response.data.active.forEach(() => {
           this.setState({
             active: this.state.active + 1
           })
-        }else{
+        })
+        :
+        this.setState({
+          active: 0
+        })
+
+        response.data.inactive ?
+        response.data.inactive.forEach(() => {
           this.setState({
-            inactive: this.state.inactive +1
+            active: this.state.inactive + 1
           })
-        }
-      })
-      // this.forceUpdate()
+        })
+        :
+        this.setState({
+          inactive: 0
+        })
     })
   };
 
@@ -230,6 +239,7 @@ class LoggedContainer extends React.Component {
         <PermNav 
           sideNavClick={()=>this.handleSideNavClick}
           user={this.state.user}
+          userUpdate={() => this.getUser()}
         />
         <main className={classes.content}>
           <div className={classes.toolbar} />
