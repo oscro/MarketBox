@@ -141,6 +141,7 @@ class LoggedContainer extends React.Component {
               <VysHeader
                 key="VysHeader" 
                 user={this.state.user}
+                userUpdate={() => this.getUser()}
               />
             )
           };
@@ -150,6 +151,7 @@ class LoggedContainer extends React.Component {
             <RatingsHeader 
               key={this.state.current} 
               user={this.state.user} 
+              userUpdate={() => this.getUser()}
             />
           );
         case "Profile": 
@@ -217,7 +219,6 @@ class LoggedContainer extends React.Component {
               user={this.state.user} 
               active={this.state.active}
               inactive={this.state.inactive}
-              
             />
           );
       }

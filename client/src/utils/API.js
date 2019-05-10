@@ -16,7 +16,7 @@ export default {
     return axios.post("/auth/upload", picture, config);
   },
   updateAd: function(id, update) {
-    return axios.post("/adspaceupdate/" + id, update);
+    return axios.post("/auth/adspaceupdate/" + id, update);
   },
   saveUser: function(user) {
     return axios.post("/auth/user", user);

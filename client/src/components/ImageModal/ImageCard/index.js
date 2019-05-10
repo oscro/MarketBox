@@ -92,7 +92,7 @@ class TextMobileStepper extends React.Component {
         <img
           className={classes.img}
           // src={tutorialSteps[activeStep].imgPath}
-          src={this.props.info.picture}
+          src={this.props.info.picture[activeStep]}
           alt={this.props.info.title}
         />
         <Paper square elevation={0} className={classes.header}>
