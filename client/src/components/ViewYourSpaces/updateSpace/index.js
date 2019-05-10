@@ -82,6 +82,7 @@ class SpaceUpdate extends React.Component {
     
       handleClose = () => {
         this.setState({ open: false });
+        this.props.changer();
         this.setState({
           open: false,
           file: [],
@@ -119,20 +120,43 @@ class SpaceUpdate extends React.Component {
           .catch(err => console.log(err));
       }
 
-    handleInfo = event => {
-        console.log(event)
+    handleDescription = () => {
         const id = this.props._id
-        // const update = {[event]: this.state.}
+        const update = {description: this.state.description}
+        API.updateAd(id,update)
+            .then(() => {
+                alert("It was successfully saved!")
+                this.setState({
+                    description: ""
+                })
+            })
+            .catch(err => console.log(err));
+    }
 
+    handleLocation = () => {
+        const id = this.props._id
+        const update = {location: this.state.location}
+        API.updateAd(id,update)
+            .then(() => {
+                alert("It was successfully saved!")
+                this.setState({
+                    location: ""
+                })
+            })
+            .catch(err => console.log(err));
+    }
 
-        // API.updateAd(id,update)
-        //     .then(() => {
-        //         alert("It was successfully saved!")
-        //         this.setState({
-        //             [name]: ""
-        //         })
-        //     })
-        //     .catch(err => console.log(err));
+    handleTitle = () => {
+        const id = this.props._id
+        const update = {title: this.state.title}
+        API.updateAd(id,update)
+            .then(() => {
+                alert("It was successfully saved!")
+                this.setState({
+                    title: ""
+                })
+            })
+            .catch(err => console.log(err));
     }
 
   render(){
@@ -170,7 +194,7 @@ class SpaceUpdate extends React.Component {
                     fullWidth
                   />
                     <DialogActions>
-                        <Button onClick={() => this.handleInfo("title")} color="primary">
+                        <Button onClick={this.handleTitle} color="primary">
                            Update
                         </Button>
                     </DialogActions>
@@ -189,7 +213,7 @@ class SpaceUpdate extends React.Component {
                     fullWidth
                   />
                     <DialogActions>
-                        <Button onClick={() => this.handleInfo("location")} color="primary">
+                        <Button onClick={this.handleLocation} color="primary">
                            Update
                         </Button>
                     </DialogActions>
@@ -208,7 +232,7 @@ class SpaceUpdate extends React.Component {
                     fullWidth
                   />
                     <DialogActions>
-                        <Button onClick={() => this.handleInfo("description")} color="primary">
+                        <Button onClick={this.handleDescription} color="primary">
                            Update
                         </Button>
                     </DialogActions>

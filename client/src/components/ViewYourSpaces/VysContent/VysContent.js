@@ -87,6 +87,7 @@ function VysContent(props) {
                   <SpaceModal 
                     key={card._id}
                     _id={card._id}
+                    changer={() => props.changer()}
                   />
                   {/* <Button size="small" color="primary">
                     View

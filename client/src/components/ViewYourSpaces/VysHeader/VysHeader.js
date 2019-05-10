@@ -186,6 +186,9 @@ class VysHeader extends React.Component {
           user={this.props.user}
           value={this.state.show < 1 ? this.props.user.adSpace : this.state.show}
           key={this.state.show._id} 
+          changer={() => {
+            this.props.userUpdate()
+          }}
         /> 
       </div>
     );
