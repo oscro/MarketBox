@@ -16,6 +16,7 @@ import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 import SettingsUnit from "../SettingsUnit/SettingsUnit";
 import SettingsUnitPicture from "../SettingsUnitPicture/SettingsUnitPicture";
+import validator from 'validator';
 
 const lightColor = "rgba(255, 255, 255, 0.7)";
 
@@ -114,7 +115,7 @@ class SettingsHeader extends React.Component {
           <SettingsUnit name="name" info={this.props.user.name} settingslabel="Full Name" settingsdescription="Enter Your Full Name" changer={() => this.props.userUpdate()}/>
           <SettingsUnit name="email" info={this.props.user.email} settingslabel="Email" settingsdescription="Enter Your Email" changer={() => this.props.userUpdate()}/>
           <SettingsUnitPicture name="picture" settingslabel="Profile Picture" settingsdescription="Upload Your Profile Picture" changer={() => this.props.userUpdate()}/>
-          <SettingsUnit name="phone" info={this.props.user.phone} settingslabel="Phone Number" settingsdescription="Enter Your Phone Number" changer={() => this.props.userUpdate()}/>
+          <SettingsUnit name="phone" info={this.props.user.phone} settingslabel="Phone Number (No Symbols)" settingsdescription="Enter Your Phone Number no symbols" changer={() => this.props.userUpdate()}/>
           <SettingsUnit name="address" info={this.props.user.address} settingslabel="City, State" settingsdescription="Enter Your City and State" changer={() => this.props.userUpdate()}/>
           <SettingsUnit name="description" info={this.props.user.description} settingslabel="Description" settingsdescription="Enter Your Description" changer={() => this.props.userUpdate()}/>
 

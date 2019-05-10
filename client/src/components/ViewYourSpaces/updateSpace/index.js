@@ -1,19 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import AppBar from "@material-ui/core/AppBar";
-import Avatar from "@material-ui/core/Avatar";
-import Grid from "@material-ui/core/Grid";
-import HelpIcon from "@material-ui/icons/Help";
-import Hidden from "@material-ui/core/Hidden";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-import NotificationsIcon from "@material-ui/icons/Notifications";
-import Tab from "@material-ui/core/Tab";
-import Tabs from "@material-ui/core/Tabs";
-import Toolbar from "@material-ui/core/Toolbar";
-import Tooltip from "@material-ui/core/Tooltip";
+import { withStyles } from '@material-ui/core/styles';
 import Typography from "@material-ui/core/Typography";
-
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -21,246 +9,240 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import TextField from "@material-ui/core/TextField";
-import API from "../../utils/API";
+import API from "../../../utils/API";
+import Dropzone from 'react-dropzone';
+import axios from "axios";
 
 const lightColor = "rgba(255, 255, 255, 0.7)";
 
 const styles = theme => ({
-  secondaryBar: {
-    zIndex: 0
-  },
-  menuButton: {
-    marginLeft: -theme.spacing.unit
-  },
-  iconButtonAvatar: {
-    padding: 4
-  },
-  link: {
-    textDecoration: "none",
-    color: lightColor,
-    "&:hover": {
-      color: theme.palette.common.white
+    text: {
+      paddingTop: theme.spacing.unit * 2,
+      paddingLeft: theme.spacing.unit * 2,
+      paddingRight: theme.spacing.unit * 2,
+    },
+    paper: {
+      paddingBottom: 50,
+    },
+    list: {
+      marginBottom: theme.spacing.unit * 2,
+    },
+    subHeader: {
+      backgroundColor: theme.palette.background.paper,
+    },
+    appBar: {
+      top: 'auto',
+      bottom: 0,
+      width: "100%"
+    },
+    toolbar: {
+      alignItems: 'center',
+      justifyContent: 'space-between',
+    },
+    fabButton: {
+      position: 'absolute',
+      zIndex: 1,
+      left: 0,
+      right: 0,
+      margin: '0 auto',
+    },
+    image: {
+      width: '80%',
+      height: "auto"
+    },
+    dropzone: {
+      flex: 1,
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      padding: '20px',
+      borderWidth: 2,
+      borderRadius: 2,
+      borderColor: '#eeeeee',
+      borderStyle: 'dashed',
+      backgroundColor: '#fafafa',
+      color: '#bdbdbd',
+      outline: 'none',
+      transition: 'border .24s ease-in-out'
     }
-  },
-  button: {
-    borderColor: lightColor
-  }
 });
 
 class SpaceUpdate extends React.Component {
-  state = {
-    open: false,
-    value: 0,
-    show: [...this.props.user.ratings],
-    one: [],
-    two: [],
-    three: [],
-    four: [],
-    five: [],
-    overAll: 0,
-    title: "",
-    msg: "",
-    score: ""
-  };
-
-  componentDidMount() {
-    const one = [];
-    const two = [];
-    const three = [];
-    const four = [];
-    const five = [];
-    let count = 0;
-    let sum = 0;
-
-    if (this.props.user.ratings.length >= 1){
-    this.props.user.ratings.forEach(rate => {
-        sum = rate.score + sum;
-        count = count + 1;
-
-        if (rate.score === 1){
-          one.push(rate)
-        }else if(rate.score === 2){
-          two.push(rate)
-        }else if(rate.score === 3){
-          three.push(rate)
-        }else if(rate.score === 4){
-          four.push(rate)
-        }else{
-          five.push(rate)
-        }
-        
-      })
-      let overAll = sum/count;
-      this.setState({
-        overAll: overAll,
-        one: one,
-        two: two,
-        three: three,
-        four: four,
-        five: five
-      })
-    }else{
-      this.setState({
-        show: [{
-          score: 0,
-          msg: "",
-          title: "This user does not have any ratings yet.",
-          from: ""
-        }]
-      })
-    }
-  }
-
-  handleClickOpen = () => {
-    this.setState({ open: true });
-  };
-
-  handleChange = event => {
-    const { name, value } = event;
-    this.setState({
-      [name]: value
-    })
-  }
-
-  handleClose = () => {
-    this.setState({ open: false });
-    this.setState({
-      open: false,
-      title: "",
-      msg: "",
-      score: ""
-    })
-  };
-
-  handleClick = event => {
-    if (event === "one"){
-      this.setState({
-        show: [...this.state.one]
-      })
-    }else if(event === "two"){
-      this.setState({
-        show: [...this.state.two]
-      })
-    }else if(event === "three"){
-      this.setState({
-        show: [...this.state.three]
-      })
-    }else if(event === "four"){
-      this.setState({
-        show: [...this.state.four]
-      })
-    }else if(event === "all"){
-      this.setState({
-        show: [...this.props.user.ratings]
-      })
-    }else{
-      this.setState({
-        show: [...this.state.five]
-      })
-    }
-    if (this.props.user.ratings < 1){
-      this.setState({
-        show: [{
-          score: 0,
-          msg: "",
-          title: "This user does not have any ratings yet.",
-          from: ""
-        }]
-      })
-    }
-  }
-
-  handleTabs = (event, value) => {
-    this.setState({ value });
-  };
-
-  handleInfo = () => {
-    const review = {
-      title: this.state.title,
-      msg: this.state.msg,
-      score: this.state.score
-    }
-    API.saveReview(review)
-      .then(() => {
-        alert("It was successfully saved!")
+    state = {
+        open: false,
+        file: [],
+        title: "",
+        location: "",
+        description: ""
+      };
+    
+      handleClickOpen = () => {
+        this.setState({ open: true });
+      };
+    
+      handleClose = () => {
+        this.setState({ open: false });
         this.setState({
+          open: false,
+          file: [],
           title: "",
-          msg: "",
-          score: ""
+          location: "",
+          description: ""
         })
-        this.handleClose()
-      })
-      .catch(err => console.log(err));
-  }
+      };
+    
+      onDrop = file=> {
+        this.setState({file: [...this.state.file, ...file]});
+      }
+    
+      handleChange = event => {
+        const { name, value } = event;
+        this.setState({
+          [name]: value
+        })
+      }
+    
+      handlePicture = () => {
+          console.log(this.props._id)
+        // const config = { headers: { 'Content-Type': 'multipart/form-data' } };
+        const fd = new FormData();
+        for(var i = 0; i < this.state.file.length; i++){
+          fd.append("file", this.state.file[i]);
+        }
+        fd.append("_id", this.props._id);
+    
+        axios.post("/auth/adPictureAdd", fd, {headers: { 'Content-Type': 'multipart/form-data' }})
+          .then(() => {
+            alert("It was successfully saved!")
+            this.handleClose();
+          })
+          .catch(err => console.log(err));
+      }
+
+    handleInfo = event => {
+        console.log(event)
+        const id = this.props._id
+        // const update = {[event]: this.state.}
+
+
+        // API.updateAd(id,update)
+        //     .then(() => {
+        //         alert("It was successfully saved!")
+        //         this.setState({
+        //             [name]: ""
+        //         })
+        //     })
+        //     .catch(err => console.log(err));
+    }
 
   render(){
     const { classes } = this.props;
-
+    const file = this.state.file.map(file => (
+      <li key={file.name}></li>
+    ));
     return (
         <div>
-            <Typography color="inherit" variant="h5">
-                <Button color="inherit" onClick={this.handleClickOpen}>Leave a Review</Button>
-            </Typography>
+             <Typography color="inherit" variant="h5">
+                <Button color="inherit" onClick={this.handleClickOpen}>Update Space</Button>
+              </Typography>
 
-            <Dialog
-                open={this.state.open}
-                onClose={this.handleClose}
-                fullWidth={true}
-                maxWidth="xl"
-                aria-labelledby="form-dialog-title"
-            >
-                <DialogTitle id="form-dialog-title">Leave a Review</DialogTitle>
-                <DialogContent>
-                <DialogContentText>
-                    Headline
-                </DialogContentText>
-                <TextField
+              <Dialog
+                  open={this.state.open}
+                  onClose={this.handleClose}
+                  fullWidth={true}
+                  maxWidth="xl"
+                  aria-labelledby="form-dialog-title"
+                >
+                  <DialogTitle id="form-dialog-title">Update your Space</DialogTitle>
+                  <DialogContent>
+                    <DialogContentText>
+                      Title
+                  </DialogContentText>
+                  <TextField
                     onChange={event => this.handleChange(event.target)}
                     value={this.state.title}
                     autoFocus
                     margin="dense"
                     id="title"
                     name="title"
-                    label="Headline"
+                    label="Title of Your Ad-Space"
                     type="title"
                     fullWidth
-                />
-                <DialogContentText>
-                    Comments
-                </DialogContentText>
-                <TextField
+                  />
+                    <DialogActions>
+                        <Button onClick={() => this.handleInfo("title")} color="primary">
+                           Update
+                        </Button>
+                    </DialogActions>
+
+                  <DialogContentText>
+                    Location
+                  </DialogContentText>
+                  <TextField
                     onChange={event => this.handleChange(event.target)}
-                    value={this.state.msg}
+                    value={this.state.location}
                     margin="dense"
-                    name="msg"
-                    id="msg"
-                    label="Your Comments"
-                    type="msg"
+                    name="location"
+                    id="location"
+                    label="Location of Your Ad-Space"
+                    type="location"
                     fullWidth
-                />
-                <DialogContentText>
-                    How would you Rate your experience 1 to 5
-                </DialogContentText>
-                <TextField
+                  />
+                    <DialogActions>
+                        <Button onClick={() => this.handleInfo("location")} color="primary">
+                           Update
+                        </Button>
+                    </DialogActions>
+
+                  <DialogContentText>
+                    Description
+                  </DialogContentText>
+                  <TextField
                     onChange={event => this.handleChange(event.target)}
-                    value={this.state.score}
+                    value={this.state.description}
                     margin="dense"
-                    name="score"
-                    id="score"
-                    label="1-5"
-                    type="score"
+                    name="description"
+                    id="description"
+                    label="Describe Your Ad-Space"
+                    type="description"
                     fullWidth
-                />
-                </DialogContent>
-                <DialogActions>
+                  />
+                    <DialogActions>
+                        <Button onClick={() => this.handleInfo("description")} color="primary">
+                           Update
+                        </Button>
+                    </DialogActions>
+
+                  <DialogContentText>
+                    Picture
+                  </DialogContentText>
+                  <Dropzone accept="image/*"  onDrop={this.onDrop} className={classes.dropzone}>
+                    {({ getRootProps, getInputProps }) => (
+                      <section className="container">
+                        <div {...getRootProps({ className: 'dropzone' })}  className={classes.dropzone}>
+                          <input {...getInputProps()} />
+                          <p>Drag 'n' drop picture here, or click to select files. Only one picture will upload at a time.</p>
+                        </div>
+                        <aside>
+                          <h4>Files</h4>
+                          <ul>{file}</ul>
+                        </aside>
+                      </section>
+                    )}
+                  </Dropzone>
+                  <DialogActions>
                     <Button onClick={this.handleClose} color="primary">
                         Cancel
                     </Button>
-                    <Button onClick={this.handleInfo} color="primary">
-                        Save
+                    <Button onClick={this.handlePicture} color="primary">
+                        Add Picture
                     </Button>
-                </DialogActions>
-            </Dialog>
+                  </DialogActions>
+
+
+                  </DialogContent>
+                </Dialog>
+
         </div>
     )
   }
@@ -272,4 +254,4 @@ SpaceUpdate.propTypes = {
   // onDrawerToggle: PropTypes.func.isRequired
 };
 
-export default SpaceUpdate;
+export default withStyles(styles) (SpaceUpdate);
