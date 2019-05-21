@@ -71,7 +71,7 @@ function UserProfile(props) {
             inac={props.inactive}
           />
 
-          {/* <ProfileTaskBar /> */}
+          <ProfileTaskBar info={props.user}/>
           
         </main>
       </div>
