@@ -41,6 +41,7 @@ router.get("/companies", (req, res) => {
 })
 
 router.get("/userinfo", ensureAuthenticated,  (req, res) => {
+	console.log(req.user);
 	User.findOne({ _id: req.user._id })
 		.select("-password")
 		.populate("active")
