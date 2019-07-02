@@ -17,6 +17,7 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Hidden from "@material-ui/core/Hidden";
 import CardMedia from "@material-ui/core/CardMedia";
+import Contact from "../Contact";
 
 const featuredPosts = [
   {
@@ -85,7 +86,7 @@ class ScrollableTabsButtonPrevent extends React.Component {
             <Tab icon={<ThumbUp />} />
           </Tabs>
         </AppBar>
-        {value === 0 && <TabContainer><h4>Contact</h4></TabContainer>}
+        {value === 0 && <TabContainer><Contact contact={this.props.info}/></TabContainer>}
         {value === 1 && <TabContainer><h5>Favorites</h5></TabContainer>}
         {value === 2 && <TabContainer><h5>Map Location</h5></TabContainer>}
         {value === 3 && <TabContainer><h5>Spaces Employed</h5></TabContainer>}
@@ -94,7 +95,7 @@ class ScrollableTabsButtonPrevent extends React.Component {
         {value === 6 && <TabContainer><h5>Likes</h5></TabContainer>}
 
         {/* Featured Posts Beginning */}
-        <Grid container spacing={40} className={classes.cardGrid}>
+        {/* <Grid container spacing={40} className={classes.cardGrid}>
           {featuredPosts.map(post => (
             <Grid item key={post.title} xs={12} md={6}>
               <Card className={classes.card}>
@@ -124,7 +125,7 @@ class ScrollableTabsButtonPrevent extends React.Component {
               </Card>
             </Grid>
           ))}
-        </Grid>
+        </Grid> */}
         {/* End sub featured posts */}
         <Grid container spacing={40} className={classes.mainGrid} />
       </div>
