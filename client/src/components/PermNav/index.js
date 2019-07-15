@@ -196,7 +196,6 @@ class SideBarNav extends React.Component {
 
   render() {
     const { classes, theme } = this.props;
-    console.log(this.props.user);
     
     return (
       <div className={classes.root}>

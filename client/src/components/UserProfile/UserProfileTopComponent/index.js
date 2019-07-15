@@ -55,12 +55,62 @@ const styles = theme => ({
 
 class RecipeReviewCard extends React.Component {
   state = { 
-    expanded: false
+    expanded: false,
+    open: false,
+    file: [],
+    title: "",
+    location: "",
+    description: ""
   };
 
   handleExpandClick = () => {
     this.setState(state => ({ expanded: !state.expanded }));
   };
+
+  handleClickOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
+    this.setState({
+      open: false,
+      file: [],
+      title: "",
+      location: "",
+      description: ""
+    })
+  };
+
+  onDrop = file=> {
+    this.setState({file: [...this.state.file, ...file]});
+  }
+
+  handleChange = event => {
+    const { name, value } = event;
+    this.setState({
+      [name]: value
+    })
+  }
+
+  handleInfo = () => {
+    // const config = { headers: { 'Content-Type': 'multipart/form-data' } };
+    const fd = new FormData();
+    for(var i = 0; i < this.state.file.length; i++){
+      fd.append("file", this.state.file[i]);
+    }
+    fd.append("title", this.state.title);
+    fd.append("location", this.state.location);
+    fd.append("description", this.state.description);
+
+    axios.post("/auth/upload", fd, {headers: { 'Content-Type': 'multipart/form-data' }})
+      .then(() => {
+        alert("It was successfully saved!")
+        this.props.changer();
+        this.handleClose();
+      })
+      .catch(err => console.log(err));
+  }
 
   render() {
     const { classes } = this.props;
@@ -71,17 +121,96 @@ class RecipeReviewCard extends React.Component {
         <CardHeader
           avatar={
             <Avatar aria-label="Recipe" className={classes.avatar}>
-              O
+              M
             </Avatar>
           }
           action={
             <IconButton>
-              <MoreVertIcon />
+              <MoreVertIcon onClick={this.handleClickOpen}/>
             </IconButton>
           }
           title={this.props.info.username}
           subheader={ <Moment format="MMM YYYY" >{dateToFormat}</Moment> }
         />
+
+<Dialog
+                  open={this.state.open}
+                  onClose={this.handleClose}
+                  fullWidth={true}
+                  maxWidth="xl"
+                  aria-labelledby="form-dialog-title"
+                >
+                  <DialogTitle id="form-dialog-title">Add a Space</DialogTitle>
+                  <DialogContent>
+                    <DialogContentText>
+                      Title
+                  </DialogContentText>
+                  <TextField
+                    onChange={event => this.handleChange(event.target)}
+                    value={this.state.title}
+                    autoFocus
+                    margin="dense"
+                    id="title"
+                    name="title"
+                    label="Title of Your Ad-Space"
+                    type="title"
+                    fullWidth
+                  />
+                  <DialogContentText>
+                    Location
+                  </DialogContentText>
+                  <TextField
+                    onChange={event => this.handleChange(event.target)}
+                    value={this.state.location}
+                    margin="dense"
+                    name="location"
+                    id="location"
+                    label="Location of Your Ad-Space"
+                    type="location"
+                    fullWidth
+                  />
+                  <DialogContentText>
+                    Description
+                  </DialogContentText>
+                  <TextField
+                    onChange={event => this.handleChange(event.target)}
+                    value={this.state.description}
+                    margin="dense"
+                    name="description"
+                    id="description"
+                    label="Describe Your Ad-Space"
+                    type="description"
+                    fullWidth
+                  />
+                  <DialogContentText>
+                    Picture
+                  </DialogContentText>
+                  <Dropzone accept="image/*"  onDrop={this.onDrop} className={classes.dropzone}>
+                    {({ getRootProps, getInputProps }) => (
+                      <section className="container">
+                        <div {...getRootProps({ className: 'dropzone' })}  className={classes.dropzone}>
+                          <input {...getInputProps()} />
+                          <p>Drag 'n' drop pictures here, or click to select files</p>
+                        </div>
+                        <aside>
+                          <h4>Files</h4>
+                          <ul>{file}</ul>
+                        </aside>
+                      </section>
+                    )}
+                  </Dropzone>
+                  </DialogContent>
+                  <DialogActions>
+                    <Button onClick={this.handleClose} color="primary">
+                        Cancel
+                    </Button>
+                    <Button onClick={this.handleInfo} color="primary">
+                        Save
+                    </Button>
+                  </DialogActions>
+                </Dialog>
+
+
         <CardMedia
           style={{resizeMode: 'contain'}}
           className={classes.cardMedia}

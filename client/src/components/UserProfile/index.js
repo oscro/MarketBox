@@ -36,6 +36,7 @@ const styles = theme => ({
 
 
 function UserProfile(props) {
+  console.log(props.user)
   const { classes } = props;
   return (
     <React.Fragment>
@@ -51,14 +52,14 @@ function UserProfile(props) {
             noWrap
             className={classes.toolbarTitle}
           >
-            PROFILE
+            Welcome {props.user.username}
           </Typography>
           {/* <IconButton>
             <SearchIcon />
           </IconButton> */}
-          <Button variant="outlined" size="small">
+          {/* <Button variant="outlined" size="small">
             Message
-          </Button>
+          </Button> */}
         </Toolbar>
         <Toolbar variant="dense" className={classes.toolbarSecondary}>
 
