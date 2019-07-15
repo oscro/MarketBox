@@ -46,6 +46,24 @@ const styles = theme => ({
     "&:hover": {
       textDecoration: "underline"
     }
+  },
+  dropzone: {
+    flex: 1,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    padding: '20px',
+    borderWidth: 2,
+    borderRadius: 2,
+    borderColor: '#eeeeee',
+    borderStyle: 'dashed',
+    backgroundColor: '#fafafa',
+    color: '#bdbdbd',
+    outline: 'none',
+    transition: 'border .24s ease-in-out'
+  },
+  file: {
+    color: 'black'
   }
 });
 
@@ -54,8 +72,9 @@ class DetailedExpansionPanel extends React.Component {
     file: []
   }
 
-  onDrop = file=> {
-    this.setState({file: [...this.state.file, ...file]});
+  onDrop = file => {
+    this.setState({file: [...file]});
+    console.log(this.state.file)
   }
 
   handleInfo = () => {
@@ -71,6 +90,11 @@ class DetailedExpansionPanel extends React.Component {
 
   render() {
     const { classes } = this.props;
+    const file = this.state.file.map(file => (
+      <li key={file.name}>
+        {file.name}
+      </li>
+    ));
     return (
       <div className={classes.root}>
         <ExpansionPanel defaultExpanded={false}>
@@ -91,7 +115,11 @@ class DetailedExpansionPanel extends React.Component {
                     <section className="container">
                       <div {...getRootProps({ className: 'dropzone' })}  className={classes.dropzone}>
                         <input {...getInputProps()} />
-                        <p>Drag 'n' drop Profile Picture here, or click to select file</p>
+                        <p>Drag 'n' drop pictures here, or click in shaded area to select files</p>
+                          <aside className={classes.file}>
+                            <h4>Picture to be Saved</h4>
+                            <ul>{file}</ul>
+                          </aside>
                       </div>
                     </section>
                   )}
@@ -100,7 +128,6 @@ class DetailedExpansionPanel extends React.Component {
           </ExpansionPanelDetails>
           <Divider />
           <ExpansionPanelActions>
-            <Button size="small">Cancel</Button>
             <Button size="small" color="primary" onClick= {() => {
               this.handleInfo();
             }}>

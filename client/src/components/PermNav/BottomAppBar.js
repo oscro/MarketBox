@@ -65,6 +65,9 @@ const styles = theme => ({
     color: '#bdbdbd',
     outline: 'none',
     transition: 'border .24s ease-in-out'
+  },
+  file: {
+    color: 'black'
   }
 });
 
@@ -126,6 +129,7 @@ class BottomAppBar extends React.Component {
     const { classes } = this.props;
     const file = this.state.file.map(file => (
       <li key={file.name}>
+        {file.name}
       </li>
     ));
       return (
@@ -197,12 +201,13 @@ class BottomAppBar extends React.Component {
                       <section className="container">
                         <div {...getRootProps({ className: 'dropzone' })}  className={classes.dropzone}>
                           <input {...getInputProps()} />
-                          <p>Drag 'n' drop pictures here, or click to select files</p>
+                          <p>Drag 'n' drop pictures here, or click in shaded area to select files</p>
+                          <aside className={classes.file}>
+                            <h4>Picture to be Saved</h4>
+                            <ul>{file}</ul>
+                          </aside>
                         </div>
-                        <aside>
-                          <h4>Files</h4>
-                          <ul>{file}</ul>
-                        </aside>
+                        
                       </section>
                     )}
                   </Dropzone>

@@ -18,6 +18,15 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Grid from "@material-ui/core/Grid";
 import Moment from 'react-moment';
+import Dropzone from 'react-dropzone';
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import axios from "axios";
 
 const styles = theme => ({
   card: {
@@ -50,6 +59,24 @@ const styles = theme => ({
   },
   avatar: {
     backgroundColor: red[500]
+  },
+  dropzone: {
+    flex: 1,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    padding: '20px',
+    borderWidth: 2,
+    borderRadius: 2,
+    borderColor: '#eeeeee',
+    borderStyle: 'dashed',
+    backgroundColor: '#fafafa',
+    color: '#bdbdbd',
+    outline: 'none',
+    transition: 'border .24s ease-in-out'
+  },
+  file: {
+    color: 'black'
   }
 });
 
@@ -83,7 +110,7 @@ class RecipeReviewCard extends React.Component {
   };
 
   onDrop = file=> {
-    this.setState({file: [...this.state.file, ...file]});
+    this.setState({file: [...file]});
   }
 
   handleChange = event => {
@@ -115,7 +142,11 @@ class RecipeReviewCard extends React.Component {
   render() {
     const { classes } = this.props;
     const dateToFormat = this.props.info.dateAdded;
-    
+    const file = this.state.file.map(file => (
+      <li key={file.name}>
+        {file.name}
+      </li>
+    ));
     return (
       <Card className={classes.card}>
         <CardHeader
@@ -140,62 +171,19 @@ class RecipeReviewCard extends React.Component {
                   maxWidth="xl"
                   aria-labelledby="form-dialog-title"
                 >
-                  <DialogTitle id="form-dialog-title">Add a Space</DialogTitle>
+                  <DialogTitle id="form-dialog-title">Change Your Profile Picture</DialogTitle>
                   <DialogContent>
-                    <DialogContentText>
-                      Title
-                  </DialogContentText>
-                  <TextField
-                    onChange={event => this.handleChange(event.target)}
-                    value={this.state.title}
-                    autoFocus
-                    margin="dense"
-                    id="title"
-                    name="title"
-                    label="Title of Your Ad-Space"
-                    type="title"
-                    fullWidth
-                  />
-                  <DialogContentText>
-                    Location
-                  </DialogContentText>
-                  <TextField
-                    onChange={event => this.handleChange(event.target)}
-                    value={this.state.location}
-                    margin="dense"
-                    name="location"
-                    id="location"
-                    label="Location of Your Ad-Space"
-                    type="location"
-                    fullWidth
-                  />
-                  <DialogContentText>
-                    Description
-                  </DialogContentText>
-                  <TextField
-                    onChange={event => this.handleChange(event.target)}
-                    value={this.state.description}
-                    margin="dense"
-                    name="description"
-                    id="description"
-                    label="Describe Your Ad-Space"
-                    type="description"
-                    fullWidth
-                  />
-                  <DialogContentText>
-                    Picture
-                  </DialogContentText>
                   <Dropzone accept="image/*"  onDrop={this.onDrop} className={classes.dropzone}>
                     {({ getRootProps, getInputProps }) => (
                       <section className="container">
                         <div {...getRootProps({ className: 'dropzone' })}  className={classes.dropzone}>
                           <input {...getInputProps()} />
-                          <p>Drag 'n' drop pictures here, or click to select files</p>
+                          <p>Drag 'n' drop pictures here, or click in shaded area to select files</p>
+                          <aside className={classes.file}>
+                            <h4>File you have chosen</h4>
+                            <ul>{file}</ul>
+                          </aside>
                         </div>
-                        <aside>
-                          <h4>Files</h4>
-                          <ul>{file}</ul>
-                        </aside>
                       </section>
                     )}
                   </Dropzone>

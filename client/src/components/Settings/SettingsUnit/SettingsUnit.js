@@ -111,7 +111,6 @@ class DetailedExpansionPanel extends React.Component {
           </ExpansionPanelDetails>
           <Divider />
           <ExpansionPanelActions>
-            <Button size="small">Cancel</Button>
             <Button size="small" color="primary" onClick= {() => {
               this.handleInfo();
               this.props.changer();
