@@ -18,6 +18,15 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Grid from "@material-ui/core/Grid";
 import Moment from 'react-moment';
+import Dropzone from 'react-dropzone';
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import axios from "axios";
 
 const styles = theme => ({
   card: {
@@ -50,22 +59,94 @@ const styles = theme => ({
   },
   avatar: {
     backgroundColor: red[500]
+  },
+  dropzone: {
+    flex: 1,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    padding: '20px',
+    borderWidth: 2,
+    borderRadius: 2,
+    borderColor: '#eeeeee',
+    borderStyle: 'dashed',
+    backgroundColor: '#fafafa',
+    color: '#bdbdbd',
+    outline: 'none',
+    transition: 'border .24s ease-in-out'
+  },
+  file: {
+    color: 'black'
   }
 });
 
 class RecipeReviewCard extends React.Component {
   state = { 
-    expanded: false
+    expanded: false,
+    open: false,
+    file: [],
+    title: "",
+    location: "",
+    description: ""
   };
 
   handleExpandClick = () => {
     this.setState(state => ({ expanded: !state.expanded }));
   };
 
+  handleClickOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
+    this.setState({
+      open: false,
+      file: [],
+      title: "",
+      location: "",
+      description: ""
+    })
+  };
+
+  onDrop = file=> {
+    this.setState({file: [...file]});
+  }
+
+  handleChange = event => {
+    const { name, value } = event;
+    this.setState({
+      [name]: value
+    })
+  }
+
+  handleInfo = () => {
+    // const config = { headers: { 'Content-Type': 'multipart/form-data' } };
+    const fd = new FormData();
+    for(var i = 0; i < this.state.file.length; i++){
+      fd.append("file", this.state.file[i]);
+    }
+    fd.append("title", this.state.title);
+    fd.append("location", this.state.location);
+    fd.append("description", this.state.description);
+
+    axios.post("/auth/upload", fd, {headers: { 'Content-Type': 'multipart/form-data' }})
+      .then(() => {
+        alert("It was successfully saved!")
+        this.props.changer();
+        this.handleClose();
+      })
+      .catch(err => console.log(err));
+  }
+
   render() {
     const { classes } = this.props;
     const dateToFormat = this.props.info.dateAdded;
-    
+    const file = this.state.file.map(file => (
+      <li key={file.name}>
+        {file.name}
+      </li>
+    ));
     return (
       <Card className={classes.card}>
         <CardHeader
@@ -76,12 +157,48 @@ class RecipeReviewCard extends React.Component {
           }
           action={
             <IconButton>
-              <MoreVertIcon />
+              <MoreVertIcon onClick={this.handleClickOpen}/>
             </IconButton>
           }
           title={this.props.info.username}
           subheader={ <Moment format="MMM YYYY" >{dateToFormat}</Moment> }
         />
+
+<Dialog
+                  open={this.state.open}
+                  onClose={this.handleClose}
+                  fullWidth={true}
+                  maxWidth="xl"
+                  aria-labelledby="form-dialog-title"
+                >
+                  <DialogTitle id="form-dialog-title">Change Your Profile Picture</DialogTitle>
+                  <DialogContent>
+                  <Dropzone accept="image/*"  onDrop={this.onDrop} className={classes.dropzone}>
+                    {({ getRootProps, getInputProps }) => (
+                      <section className="container">
+                        <div {...getRootProps({ className: 'dropzone' })}  className={classes.dropzone}>
+                          <input {...getInputProps()} />
+                          <p>Drag 'n' drop pictures here, or click in shaded area to select files</p>
+                          <aside className={classes.file}>
+                            <h4>File you have chosen</h4>
+                            <ul>{file}</ul>
+                          </aside>
+                        </div>
+                      </section>
+                    )}
+                  </Dropzone>
+                  </DialogContent>
+                  <DialogActions>
+                    <Button onClick={this.handleClose} color="primary">
+                        Cancel
+                    </Button>
+                    <Button onClick={this.handleInfo} color="primary">
+                        Save
+                    </Button>
+                  </DialogActions>
+                </Dialog>
+
+
         <CardMedia
           style={{resizeMode: 'contain'}}
           className={classes.cardMedia}

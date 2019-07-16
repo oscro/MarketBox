@@ -97,6 +97,7 @@ class LoggedContainer extends React.Component {
         if (response.data.user === null) {
             this.props.history.push('/signin')
         }else{
+          console.log(response)
           this.getUser();
         }
     })
